@@ -1,4 +1,4 @@
-<img align="center" src="./src/assets/images/site-logo.png" />
+<img align="center" src="./src/assets/images/site-logo.png" width="40%"/>
 
 # Fixzitfast public api client
 
@@ -20,3 +20,6 @@ $ npm install
 $ npm run test
 ```
 
+
+## API Reference Documentation
+You can find the api reference documentation [here](./docs/api-reference.md)
