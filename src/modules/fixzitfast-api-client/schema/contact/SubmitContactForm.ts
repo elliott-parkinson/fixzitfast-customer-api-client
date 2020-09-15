@@ -1,5 +1,8 @@
 export namespace SubmitForm
 {
+	export let Url = () => "/contact/form";
+	export let RequestType: string = "POST";
+
 	export class Request
 	{
 		name: string = "";

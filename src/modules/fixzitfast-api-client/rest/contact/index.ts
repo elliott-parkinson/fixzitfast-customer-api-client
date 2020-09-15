@@ -21,7 +21,7 @@ export namespace Contact
 		async SubmitForm(name: string, email: string, phone: string, message: string, acceptTerms: boolean = true): Promise<ApiResponse<Model.SubmitForm.Response>>
 		{
 			let response = new AxiosResponse<Model.SubmitForm.Response>({}),
-				url = "/contact/form",
+				url = Model.SubmitForm.Url(),
 				domain = "Contact", success = "SuccessfulContactFormSubmission", fail = "FailedContactFormSubmission",
 				request = new Model.SubmitForm.Request({
 					name: name,
