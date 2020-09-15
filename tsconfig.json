@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["es5", "es6", "dom"],
+        "types": ["reflect-metadata", "node"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+		"allowJs": true,
+		
+		"baseUrl": ".",
+		"paths": {
+			"/": ["./"],
+			"~*": ["./"]
+		}
+    },
+    "exclude": [
+        "dist/**/**"
+    ]
+}
