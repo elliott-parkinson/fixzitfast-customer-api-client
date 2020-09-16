@@ -218,6 +218,25 @@ export namespace Booking
         }
     }
 
+    class GetUpcomingForm
+    {
+        @observable ResponseData = new ApiResponseData;
+
+        @action async Submit()
+        {
+            this.ResponseData.Reset();
+            this.ResponseData.Loading = true;
+
+            const apiStore =  Dependencies.of("store").get<any>("api");
+            const authStore =  Dependencies.of("store").get<any>("auth");
+            let userId =  authStore.Id;
+
+            this.ResponseData.ProcessFor(
+                i => apiStore.Bookings.GetUpcoming(userId)
+            );
+        }
+    }
+
     @observer
     export class Pane extends React.Component<any>
     {
@@ -228,6 +247,7 @@ export namespace Booking
         @observable Timeslot = new TimeslotForm;
         @observable AddSignature = new SignatureForm;
         @observable Complete = new CompleteForm;
+        @observable Upcoming = new GetUpcomingForm;
 
 
         componentDidMount()
@@ -381,6 +401,12 @@ export namespace Booking
                             <Input placeholder="Users Password" type="password" value={this.Complete.Password} onChange={e => this.Complete.Password = e.target.value} />
                         </FormGroup>
                     </Fragment>}
+                />
+                <NewLine />
+
+                <TestCard.Component
+                    title="Get Upcoming Bookings"
+                    form={this.Upcoming}
                 />
                 <NewLine />
 

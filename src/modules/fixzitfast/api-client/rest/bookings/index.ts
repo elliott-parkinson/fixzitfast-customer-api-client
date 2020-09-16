@@ -215,5 +215,30 @@ export namespace Bookings
 				return response.data;
 			}
 		}
+
+		async GetUpcoming(userId: number): Promise<ApiResponse<Model.GetUpcoming.Response>>
+		{
+			let response = new AxiosResponse<Model.GetUpcoming.Response>({}),
+				url = Model.GetUpcoming.Url(userId),
+				domain = "Bookings", success = "UpcomingBookings", fail = "UpcomingBookingsFailure",
+				request = new Model.GetUpcoming.Request({ });
+			
+			try
+			{
+				response = await AxiosPostRequest<Model.Complete.Response>(this.Endpoint, url, request);
+				response.data.Data = new Model.Complete.Response(response.data.Data);
+			}
+			catch (exception)
+			{
+				response.data.Success = false;
+				response.data.ErrorMessage = exception.message;
+				response.data.Data = new Model.Complete.Response;
+			}
+			finally
+			{
+				this.Dispatcher?.Trigger(domain, response?.data?.Success == true ? success : fail, response.data);
+				return response.data;
+			}
+		}
 	}
 }
