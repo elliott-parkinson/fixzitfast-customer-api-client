@@ -13,8 +13,8 @@ export namespace ListAvailable
 	export class Response
 	{
 		engineers: {
-			id: number,
-			name: string
+			categoryId: number,
+			categoryName: string
 		}[];
 
 		constructor(props?: Response) { Object.assign(this, props); }

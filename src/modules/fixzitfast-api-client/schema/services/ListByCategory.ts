@@ -10,9 +10,11 @@ export namespace ListByCategory
 	export class Response
 	{
 		services: {
-			parentId: number,
-			serviceId: number,
-			name: string
+			id: number,
+			name: string,
+			icon: string,
+			hourlyRate: number,
+			parent: number
 		}[];
 
 		constructor(props?: Response) { Object.assign(this, props); }

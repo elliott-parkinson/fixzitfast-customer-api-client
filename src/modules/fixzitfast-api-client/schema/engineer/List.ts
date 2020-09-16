@@ -8,11 +8,15 @@ export namespace List
 	export class Response
 	{
 		engineers: {
-			id: number,
-			name: string
-		}[];
+			categoryId: number,
+			categoryName: string
+		}[] = [];
 
-		constructor(props?: Response) { Object.assign(this, props); }
+		constructor(props?: Response)
+		{
+			//Object.assign(this, props);
+			this.engineers = props as any;
+		}
 	}
 }
 

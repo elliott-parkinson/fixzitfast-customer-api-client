@@ -3,13 +3,12 @@ export module CreateAccount
 	export let Url = () => "/account/create";
 	export let RequestType: string = "POST";
 
-
 	export class Request
 	{
-		Name: string;
-		Email: string;
-		Password: string;
-		Phone: string;
+		name: string;
+		email: string;
+		password: string;
+		phone: string;
 
 		constructor(props?: Request) { Object.assign(this, props); }
 	}

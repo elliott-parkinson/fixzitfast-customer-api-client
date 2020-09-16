@@ -2,7 +2,7 @@ export namespace Search
 {
 	export class Request
 	{
-		Search: string = "";
+		search: string = "";
 		
 		constructor(props?: Request) { Object.assign(this, props); }
 	}
@@ -11,7 +11,10 @@ export namespace Search
 	{
 		services: {
 			serviceId: number,
-			name: string
+			serviceName: string,
+			serviceIcon: string,
+			serviceHourlyRate: number,
+			serviceParent: number
 		}[];
 
 		constructor(props?: Response) { Object.assign(this, props); }

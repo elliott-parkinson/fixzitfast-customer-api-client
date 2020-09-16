@@ -5,30 +5,30 @@ export module UpdateUserDetails
 
 	export class Request
 	{
-		Name: string;
-		Email: string;
-		Password: string;
-		Phone: string;
+		name: string;
+		email: string;
+		password: string;
+		phone: string;
 
 		constructor(props?: Request) { Object.assign(this, props); }
 	}
 
 	export interface IResponseAccountDetails
 	{
-		ID: number;
-		Name: string;
-		Email: string;
-		Password: string;
-		Permissions: number;
-		CreatedDate: string;
-		UpdatedDate: string;
-		Archived: number;
-		EngineerID: number;
-		CompanyID: number;
-		AcceptedTerms: number;
-		AcceptedMarketingSMS: number;
-		AcceptedMarketingEmail: number;
-		Validated: number;
+		iD: number;
+		name: string;
+		email: string;
+		password: string;
+		permissions: number;
+		createdDate: string;
+		updatedDate: string;
+		archived: number;
+		engineerID: number;
+		companyID: number;
+		acceptedTerms: number;
+		acceptedMarketingSMS: number;
+		acceptedMarketingEmail: number;
+		validated: number;
 	}
 	
 	export class Response

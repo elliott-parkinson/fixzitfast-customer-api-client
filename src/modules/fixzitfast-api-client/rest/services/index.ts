@@ -22,7 +22,7 @@ export namespace Services
 				url = "/services/search",
 				domain = "Services", success = "UpdateServiceSearchResults", fail = "UpdateServiceSearchResultsFailed",
 				request = new Model.Search.Request({
-					Search: term
+					search: term
 				});
 			
 			try

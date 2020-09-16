@@ -1,0 +1,407 @@
+@import "./components";
+
+/* Smooth resizing */
+h1, h2, h3, h4, h5, p, span, div, img, input {
+	transition: all 0.2s ease;
+}
+
+h2 {
+	font-size: 26px;
+	font-weight: 700;
+}
+
+
+.app-sidebar {
+	padding: 0px;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	.logo {
+		margin-top: 40px;
+		margin-bottom: 20px;
+		max-width: 100px;
+		width: 80%;
+
+		@media (max-width: 992px) {
+			width: 60%;
+			margin-left: 3px;
+		}
+	}
+
+	.nav {
+		margin: 0 !important;
+		width: 100% !important;
+
+		.nav-item {
+			border-left: 6px solid transparent;
+			padding-left: 8px;
+			font-size: 1.1em;
+
+			.nav-link {
+				font-weight: 500;
+
+				i {
+					display: inline-block;
+
+					@media (max-width: 992px) {
+						margin-left: -3px;
+						margin-right: 0;
+						font-size: 1.6em;
+						padding-bottom: 6px;
+						padding-top: 6px;
+					}
+				}
+
+				span {
+					display: inline-block;
+					padding-left: 18px;
+
+					@media (max-width: 992px) {
+						display: none;
+					}
+				}
+
+				&.disabled {
+					color: rgb(86, 88, 92) !important;
+				}
+			}
+
+			&:hover {
+				.nav-link &:not(:disabled) {
+					color: white;
+				}
+			}
+
+			&.active {
+				.nav-link {
+					color: white;
+				}
+			}
+		}
+	}
+
+	&.compact {
+		.nav {
+			.nav-item {
+				.nav-link {
+					i {
+						text-align: center;
+						margin-left: -3px;
+						margin-right: 0;
+						font-size: 1.6em;
+						padding-bottom: 6px;
+						padding-top: 6px;
+					}
+					span {
+						display: none;
+					}
+				}
+
+
+				&.active {
+					border-left: 4px solid white;
+
+					.nav-link {
+						text-align: center;
+						color: white;
+					}
+				}
+			}
+		}
+	}
+}
+
+.app-inner-sidearea {
+	padding: 12px 12px;
+
+	.block {
+	}
+}
+
+.app-inner-sidebar {
+	.list-group {
+		.list-group-item {
+			min-height: 66px;
+			padding: 12px 12%;
+			border-top: 1px solid;
+			border-bottom: 1px solid;
+			border-right: 0px;
+			border-left: 0px;
+			overflow-x: hidden;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			strong {
+				text-overflow: ellipsis;
+			}
+
+			text-overflow: ellipsis;
+		}
+	}
+}
+
+.app-layout {
+	&.columns-1 {
+		.app-sidebar {
+			width: 0px;
+		}
+
+		.app-content {
+			left: 0px;
+		}
+	}
+
+	&.columns-2 {
+		.app-sidebar {
+			width: 82px;
+		
+			@media (min-width: 993px) {
+				width: 20%;
+			}
+
+			@media (min-width: 1025px) {
+				width: 220px;
+			}
+
+			&.compact {
+				width: 82px;
+				@media (min-width: 993px) {
+					width: 82px;
+				}
+	
+				@media (min-width: 1025px) {
+					width: 82px;
+				}
+			}
+		}
+
+		.app-content {
+			left: 82px;
+
+			@media (min-width: 993px) {
+				left: 20%;
+			}
+		
+			@media (min-width: 1025px) {
+				left: 220px;
+			}
+
+			&.compact {
+				left: 82px;
+	
+				@media (min-width: 993px) {
+					left: 82px;
+				}
+	
+				@media (min-width: 1025px) {
+					left: 82px;
+				}
+			}
+		}
+	}
+
+	.app-sidebar {
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		bottom: 0px;
+		overflow-y: auto;
+	}
+	
+	.app-content {
+		position: fixed;
+		display: inline-flex;
+		flex-direction: column;
+		justify-items: left;
+		align-items: left;
+		justify-content: left;
+		align-content: left;
+
+		top: 0px;
+		bottom: 0px;
+		right: 0px;
+
+		
+
+		.titlebar {
+			margin-bottom: 0px;
+			min-width: 100%;
+			min-height: 56px;
+			color: #f1edec;
+			padding: 8px 16px;
+			flex-grow: 0;
+
+			.app-split-fill {
+				padding-top: 0.32421875rem;
+				padding-bottom: 0.32421875rem;
+				margin-right: 1rem;
+				font-size: 1.171875rem;
+				line-height: inherit;
+				white-space: nowrap;
+			}
+		}
+
+		.app-area {
+			position: relative;
+			display: inline-flex;
+			flex-grow: 1;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.breadcrumb {
+			.breadcrumb-item {
+				cursor: pointer;
+				font-weight: 500;
+
+				&.active {
+					cursor: default;
+					font-weight: 400;
+				}
+			}
+		}
+
+		.app-header {
+			min-width: 100%;
+			padding: 1em 3em;
+			border-bottom: 1px solid rgb(230, 233, 240);
+			margin-top: 0px;
+
+			flex: 0 0 auto;
+		}
+
+		.app-split {
+			display: inline-flex;
+			flex-direction: row;
+			justify-items: left middle;
+			align-items: left middle;
+			justify-content: left middle;
+			align-content: left middle;
+			max-height: 100%;
+			width: 100%;
+
+			&.fill {
+				height: 100%;
+			}
+
+			.app-split-fill {
+				flex: 1 1 auto;
+			}
+
+			.app-split-exist {
+				flex: 0 1 auto;
+			}
+		}
+
+		.app-inner-content {
+			max-width: 100%;
+			width: 100%;
+			height: 100%;
+			display: inline-flex;
+			flex-direction: column;
+
+			overflow-y: auto;
+
+			flex: 0 1 auto;
+		}
+
+		.app-inner-sidearea {
+			height: 100%;
+
+			display: inline-flex;
+			flex-direction: column;
+			overflow-y: auto;
+
+			flex: 1 1 auto;
+	
+			min-width: 180px;
+			
+			@media (min-width: 992px) {
+				min-width: 20%;
+			}
+	
+			@media (min-width: 1025px) {
+				min-width: 340px;
+			}
+		}
+
+
+		.app-inner-sidebar {
+			height: 100%;
+
+			display: inline-flex;
+			flex-direction: column;
+			overflow-y: auto;
+
+			flex: 0 1 auto;
+			overflow: hidden;
+	
+			min-width: 340px;
+
+			@media (max-width: 575px) {
+				min-width: 100%;
+			}
+			
+			@media (max-width: 992px) {
+				max-width: 20%;
+			}
+	
+			@media (min-width: 1025px) {
+				max-width: 340px;
+			}
+
+			.inner-sidebar-search {
+				flex-grow: 0;
+				border-bottom: 1px solid rgb(230, 233, 240);
+				width: 100%;
+				padding: 1rem 1.2rem;
+
+				select, input {
+					border-radius: 4px;
+					margin-left: 4px;
+					margin-right: 4px;
+				}
+			}
+
+			.inner-sidebar-list {
+				flex-grow: 1;
+				width: 100%;
+				overflow-y:  auto;
+
+				.list-group {
+					.list-group-item {
+						padding: 1rem 1rem;;
+					}
+				}
+			}
+		}
+	}
+}
+
+.list-group {
+	.list-group-item {
+		display: inline-flex;
+		flex-direction: row;
+		flex: 1 0 auto;
+		
+		.list-group-item-image {
+			flex: 0 1 auto;
+			max-width: 48px;
+			min-width: 48px;
+			max-height: 48px;
+			border-radius: 3px transparent;
+			margin-right: 12px;
+		}
+
+		.list-group-item-data {
+			flex: 1 0 auto;
+			min-width: 0;
+			max-width: 100%;
+		}
+	}
+}

@@ -6,8 +6,8 @@ export module Login
 
 	export class Request
 	{
-		Email: string;
-		Password: string;
+		email: string;
+		password: string;
 
 		constructor(props?: Request) { Object.assign(this, props); }
 	}

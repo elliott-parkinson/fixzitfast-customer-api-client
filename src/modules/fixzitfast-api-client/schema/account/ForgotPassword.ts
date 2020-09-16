@@ -6,7 +6,7 @@ export module ForgotPassword
 
 	export class Request
 	{
-		Email: string;
+		email: string;
 
 		constructor(props?: Request) { Object.assign(this, props); }
 	}

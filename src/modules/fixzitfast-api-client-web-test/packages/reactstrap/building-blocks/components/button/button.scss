@@ -1,0 +1,40 @@
+.btn {
+	font-size: 12pt;
+	border-radius: 5px;
+	border: none;
+	max-width: 100%;
+
+	min-width: 2.6em;
+
+	&.btn-md {
+		height: 32pt;
+		min-width: 11em;
+	}
+
+	&.btn-lg {
+		height: 36pt;
+		min-width: 13.2em;
+	}
+
+	&.btn-outline-primary {
+		font-weight: 500;
+		&:hover {
+		}
+	}
+
+	&.btn-primary {
+
+		&:disabled {
+		}
+		&:hover {
+		}
+	}
+
+	&.btn-link {
+
+		&:disabled {
+		}
+		&:hover {
+		}
+	}
+}

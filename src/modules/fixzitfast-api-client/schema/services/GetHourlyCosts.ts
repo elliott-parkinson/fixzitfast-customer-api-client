@@ -7,12 +7,13 @@ export namespace GetHourlyCosts
 	
 	export class Response
 	{
-		services: {
-			serviceId: number,
-			name: string
+		costs: {
+			id: number,
+			dailyRate: number
+			additionalHalfHour: number
 		}[];
 
-		constructor(props?: Response) { Object.assign(this, props); }
+		constructor(props?: Response) { console.log(props); Object.assign(this, props); }
 	}
 }
 

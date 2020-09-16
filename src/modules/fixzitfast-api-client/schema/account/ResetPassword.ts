@@ -6,9 +6,9 @@ export module ResetPassword
 
 	export class Request
 	{
-		Id: string;
+		id: string;
 		oldPassword: string;
-		Password: string;
+		password: string;
 
 		constructor(props?: Request) { Object.assign(this, props); }
 	}

@@ -1,0 +1,25 @@
+.block {
+	padding: 2em;
+
+	
+	@media (min-width: 992px) {
+		padding: 2.2em;
+	}
+
+	@media (min-width: 1025px) {
+		padding: 2.5em;
+	}
+
+	&.block-full {
+		padding: 2em 0em !important;
+	}
+	
+
+	&.block-primary {
+
+	}
+
+	&.block-lg {
+		padding: 8em;
+	}
+}

@@ -2,11 +2,11 @@ import 'mocha';
 import { expect } from 'chai';
 import { step } from 'mocha-steps';
 
-import { apiClient } from "./config";
+import { apiClient, apiClientAuthenticated, testData } from "./config";
 import { generalChecks } from "./util";
 
 
-describe('fixzitfast-customer-api/Contact', () =>
+describe('Contact', () =>
 {
     it('should submit the contact form without error', async () =>
     {

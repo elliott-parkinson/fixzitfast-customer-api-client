@@ -2,18 +2,33 @@ import 'mocha';
 import { expect } from 'chai';
 import { step } from 'mocha-steps';
 
-import { apiClient } from "./config";
+import { apiClient, apiClientAuthenticated, testData } from "./config";
 import { generalChecks } from "./util";
 
-describe('fixzitfast-customer-api/Account', () =>
+describe('Account', () =>
 {
+    
+    let loggedInUserId = -1;
+
     it('should create a new test user', async () =>
     {
         let result = await apiClient.Account.Signup(
             "Test User",
-            "majora31@gmail.com",
-            "testpassword",
+            testData.user,
+            testData.password,
             "079585857347"
+        );
+
+        // generalChecks(result);
+        // expect(result.Data.id, "Account signup should return an account id.").to.not.be.undefined;
+        // expect(result.Data.id, "An account id should be a number.").to.be.a('number');
+    });
+
+    it('should login with the test user', async () =>
+    {
+        let result = await apiClient.Account.Login(
+            testData.user,
+            testData.password,
         );
 
         generalChecks(result);
@@ -22,16 +37,50 @@ describe('fixzitfast-customer-api/Account', () =>
         expect(result.Data.id, "An account id should be a number.").to.be.a('number');
     });
 
-
-    before('Database: connect', async () =>
+    
+    before('Login:', async () =>
     {
-        // await wordpress.Connect();
-        // expect(wordpress.IsConnected()).to.equal(true);
+        let result = await apiClientAuthenticated.Account.Login(
+            testData.user,
+            testData.password,
+        );
+
+        generalChecks(result);
+
+        loggedInUserId = result.Data.id;
     });
-
-    after('should disconnect from the database', async () =>
+    it('should fail to get test user details if not logged in', async () =>
     {
-        // await wordpress.Disconnect();
-        // expect(wordpress.IsConnected()).to.equal(false);
+        let result = await apiClient.Account.GetUserDetails(1);
+
+        generalChecks(result, false);
+    });
+    it('should fail to get user details for a user not logged in', async () =>
+    {
+        let result = await apiClientAuthenticated.Account.GetUserDetails(1);
+
+        generalChecks(result, false);
+    });
+    it('should fail to get user details for a user that doesnt exist', async () =>
+    {
+        let result = await apiClientAuthenticated.Account.GetUserDetails(-999);
+
+        generalChecks(result, false);
+    });
+    it('should get test user details', async () =>
+    {
+        let result = await apiClientAuthenticated.Account.GetUserDetails(loggedInUserId);
+        generalChecks(result);
+
+        expect(result.Data.accountDetails, "Account details object should be present.").to.not.be.undefined;
+
+        expect(result.Data.accountDetails.id, "Account details should have a id.").to.not.be.undefined;
+        expect(result.Data.accountDetails.id, "An id should be a number.").to.be.a('number');
+        
+        expect(result.Data.accountDetails.name, "Account details should have a name.").to.not.be.undefined;
+        expect(result.Data.accountDetails.name, "A name should be a string.").to.be.a('string');
+        
+        expect(result.Data.accountDetails.email, "Account details should have a email.").to.not.be.undefined;
+        expect(result.Data.accountDetails.email, "A email should be a string.").to.be.a('string');
     });
 });

@@ -1,0 +1,166 @@
+@use "sass:map";
+
+
+$colour-orange-default: rgb(255,143,5) !default;
+$colour-orange-lighter: rgb(255, 166, 58) !default;
+$colour-orange-darker: rgb(209, 115, 0) !default;
+
+$colour-yellow-default: rgb(2, 2, 2) !default;
+$colour-yellow-lighter: #FFC971 !default;
+
+$input-text: (
+	"background": white,
+	"background:hover": white,
+	"background:disabled": white,
+	"background:selected": white,
+	"border": transparent,
+	"border:hover": transparent,
+	"border:disabled": default,
+	"border:selected": default,
+	"text": #FFFFFF,
+	"text:hover": #FFFFFF,
+	"text:disabled": default,
+	"text:selected": default,
+	"placeholder": #FFFFFF,
+	"placeholder:hover": #FFFFFF,
+	"placeholder:disabled": default,
+	"placeholder:selected": default
+);
+
+$btn-primary: (
+	"background": rgb(255,143,5),
+	"background:hover": #FF9505,
+	"background:disabled": rgb(211, 21, 228),
+	"background:selected": default,
+	"border": transparent,
+	"border:hover": transparent,
+	"border:disabled": default,
+	"border:selected": default,
+	"text": #FFFFFF,
+	"text:hover": #FFFFFF,
+	"text:disabled": default,
+	"text:selected": default
+);
+
+$btn-primary-outline: (
+	"background": transparent,
+	"background:hover": white,
+	"background:disabled": default,
+	"background:selected": default,
+	"border": rgb(230, 93, 76),
+	"border:hover": transparent,
+	"border:disabled": default,
+	"border:selected": default,
+	"text": rgb(230, 93, 76),
+	"text:hover": rgb(230, 93, 76),
+	"text:disabled": default,
+	"text:selected": default
+);
+
+$btn-link: (
+	"background": rgb(255,143,5),
+	"background:hover": #FF9505,
+	"background:disabled": default,
+	"background:selected": default,
+	"border": transparent,
+	"border:hover": transparent,
+	"border:disabled": default,
+	"border:selected": default,
+	"text": #FFFFFF,
+	"text:hover": #FFFFFF,
+	"text:disabled": default,
+	"text:selected": default
+);
+
+$colour-btn-primary-background: $colour-orange-default;
+$colour-btn-primary-hover: $colour-orange-lighter;
+$colour-btn-primary-disabled: rgb(211, 21, 228);
+$colour-btn-primary-text: white;
+
+$colour-btn-primary-outline-background: transparent;
+$colour-btn-primary-outline-hover-text: white;
+$colour-btn-primary-outline-hover: $colour-orange-lighter;
+$colour-btn-primary-outline-disabled: grey;
+$colour-btn-primary-outline-text: $colour-orange-lighter;
+$colour-btn-primary-outline-border: 1px solid $colour-orange-lighter;
+
+$colour-btn-link-background: transparent;
+$colour-btn-link-hover: white;
+$colour-btn-link-disabled: grey;
+$colour-btn-link-text: $colour-orange-default;
+
+.block {
+	&.block-primary {
+		background-color: colours.$colour-orange-lighter;
+		color: colours.$colour-btn-primary-text;
+	}
+}
+
+.btn {
+	&.btn-outline-primary {
+		background-color: $colour-btn-primary-outline-background;
+		color: $colour-btn-primary-outline-text;
+		border: $colour-btn-primary-outline-border;
+
+		&:hover {
+			background-color: $colour-btn-primary-outline-hover;
+			color: $colour-btn-primary-outline-hover-text;
+		}
+	}
+
+	&.btn-primary {
+		background-color: $colour-btn-primary-background;
+		color: $colour-btn-primary-text;
+
+		&:disabled {
+			background-color: $colour-btn-primary-disabled;
+		}
+		&:hover {
+			background-color: $colour-btn-primary-hover;
+		}
+	}
+
+	&.btn-link {
+		background-color: $colour-btn-link-background;
+		color: $colour-btn-link-text;
+
+		&:disabled {
+			background-color: $colour-btn-link-disabled;
+		}
+		&:hover {
+			background-color: $colour-btn-link-hover;
+		}
+	}
+}
+
+.titlebar {
+	background-color: #f7f7f7;
+	color: rgb(51, 51, 51) !important;
+	border-bottom: 1px solid rgb(182, 182, 182) !important;
+}
+
+.app-sidebar {
+	background-color: $colour-orange-default;
+
+	.logo {
+		visibility: hidden;
+		height: 0px;
+		max-width: 32px !important;
+	}
+
+	a {
+		color: white; //rgb(51, 51, 51);
+	}
+}
+
+.app-inner-sidebar {
+	background-color: #f5f5f5;
+	border-right: 1px solid rgb(220, 221, 223);
+}
+
+.app-content {
+	background-image: url("../../assets/images/background-symbol.png");
+	background-position: 95% 95% !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}

@@ -23,10 +23,10 @@ export namespace Account
 				url = Model.CreateAccount.Url(),
 				domain = "Account", success = "SuccessfulSignup", fail = "FailedSignup",
 				request = new Model.CreateAccount.Request({
-					Name: name,
-					Email: email,
-					Password: password,
-					Phone: phone
+					name: name,
+					email: email,
+					password: password,
+					phone: phone
 				});
 			
 			try
@@ -47,54 +47,148 @@ export namespace Account
 			}
 		}
 
-		/*
-		async GetGeneralDetails(): Promise<Model.GetUserDetails.Response>
+		async Login(email: string, password: string): Promise<ApiResponse<Model.Login.Response>>
 		{
-			const url = "/account/user/general",
-				result = await AxiosGetRequest(this.Endpoint, url),
-				response = new Model.GetUserDetails.Response(result.data.Data);
-
-			if (result.data.Success == true)
-			{
-				this.Dispatcher.Trigger("Account", "UpdateGeneral", response);
-			}
+			let response = new AxiosResponse<Model.Login.Response>({}),
+				url = Model.Login.Url(),
+				domain = "Account", success = "RequestUserDetails", fail = "RequestUserDetailsFailed",
+				request = new Model.Login.Request({
+					email: email,
+					password: password,
+				});
 			
-			return response;
-		}
-
-		async GetAddressDetails(): Promise<Model.GetAddressDetails.Response>
-		{
-			const url = "/account/user/address",
-				result = await AxiosGetRequest(this.Endpoint, url),
-				response = new Model.GetAddressDetails.Response(result.data.Data);
-
-			if (result.data.Success == true)
+			try
 			{
-				this.Dispatcher.Trigger("Account", "UpdateAddress", response);
+				response = await AxiosPostRequest<Model.Login.Response>(this.Endpoint, url, request);
+				response.data.Data = new Model.Login.Response(response.data.Data);
 			}
-
-			return response;
+			catch (exception)
+			{
+				response.data.Success = false;
+				response.data.ErrorMessage = exception.message;
+				response.data.Data = new Model.Login.Response;
+			}
+			finally
+			{
+				this.Dispatcher?.Trigger(domain, response?.data?.Success == true ? success : fail, response.data);
+				return response.data;
+			}
 		}
 
-		async UpdateGeneralDetails(name: string, email: string, password: string): Promise<Model.UpdateGeneralDetails.Response>
+		async GetUserDetails(id: number): Promise<ApiResponse<Model.GetUserDetails.Response>>
 		{
-			const url = "/account/user/general",
-				request = new Model.UpdateGeneralDetails.Request({
+			let response = new AxiosResponse<Model.GetUserDetails.Response>({}),
+				url = Model.GetUserDetails.Url(id),
+				domain = "Account", success = "AuthenticatedUserDetails", fail = "FailedAuthenticatedUserDetailsFetch",
+				request = new Model.GetUserDetails.Request({
+					id: id
+				});
+			
+			try
+			{
+				response = await AxiosPostRequest<Model.GetUserDetails.Response>(this.Endpoint, url, request);
+				response.data.Data = new Model.GetUserDetails.Response(response.data.Data);
+			}
+			catch (exception)
+			{
+				response.data.Success = false;
+				response.data.ErrorMessage = exception.message;
+				response.data.Data = new Model.GetUserDetails.Response;
+			}
+			finally
+			{
+				this.Dispatcher?.Trigger(domain, response?.data?.Success == true ? success : fail, response.data);
+				return response.data;
+			}
+		}
+		
+		async UpdateUserDetails(id: number, name: string, email: string, password: string, phone: string): Promise<ApiResponse<Model.UpdateUserDetails.Response>>
+		{
+			let response = new AxiosResponse<Model.UpdateUserDetails.Response>({}),
+				url = Model.UpdateUserDetails.Url(id),
+				domain = "Account", success = "SuccessfulUpdateUserDetails", fail = "FailedUpdateUserDetails",
+				request = new Model.UpdateUserDetails.Request({
 					name: name,
 					email: email,
-					password: password
-				}), 
-				result = await AxiosPostRequest(this.Endpoint, url, request),
-				response = new Model.UpdateGeneralDetails.Response(result.data.Data);
-
-			if (result.data.Success == true)
-			{
-				this.Dispatcher.Trigger("Account", "UpdateGeneral", response);
-			}
+					password: password,
+					phone: phone
+				});
 			
-			return response;
+			try
+			{
+				response = await AxiosPostRequest<Model.UpdateUserDetails.Response>(this.Endpoint, url, request);
+				response.data.Data = new Model.UpdateUserDetails.Response(response.data.Data);
+			}
+			catch (exception)
+			{
+				response.data.Success = false;
+				response.data.ErrorMessage = exception.message;
+				response.data.Data = new Model.UpdateUserDetails.Response;
+			}
+			finally
+			{
+				this.Dispatcher?.Trigger(domain, response?.data?.Success == true ? success : fail, response.data);
+				return response.data;
+			}
 		}
 
+		async ResetPassword(id: number, password: string, oldPassword: string): Promise<ApiResponse<Model.ResetPassword.Response>>
+		{
+			let response = new AxiosResponse<Model.ResetPassword.Response>({}),
+				url = Model.ResetPassword.Url(),
+				domain = "Account", success = "SuccessfulResetPassword", fail = "FailedResetPassword",
+				request = new Model.ResetPassword.Request({
+					id: id,
+					password: password,
+					oldPassword: oldPassword,
+				});
+			
+			try
+			{
+				response = await AxiosPostRequest<Model.ResetPassword.Response>(this.Endpoint, url, request);
+				response.data.Data = new Model.ResetPassword.Response(response.data.Data);
+			}
+			catch (exception)
+			{
+				response.data.Success = false;
+				response.data.ErrorMessage = exception.message;
+				response.data.Data = new Model.ResetPassword.Response;
+			}
+			finally
+			{
+				this.Dispatcher?.Trigger(domain, response?.data?.Success == true ? success : fail, response.data);
+				return response.data;
+			}
+		}
+
+		async ForgotPassword(email: string): Promise<ApiResponse<Model.ForgotPassword.Response>>
+		{
+			let response = new AxiosResponse<Model.ForgotPassword.Response>({}),
+				url = Model.ForgotPassword.Url(),
+				domain = "Account", success = "SuccessfulForgotPassword", fail = "FailedForgotPassword",
+				request = new Model.ForgotPassword.Request({
+					email: email,
+				});
+			
+			try
+			{
+				response = await AxiosPostRequest<Model.ForgotPassword.Response>(this.Endpoint, url, request);
+				response.data.Data = new Model.ForgotPassword.Response(response.data.Data);
+			}
+			catch (exception)
+			{
+				response.data.Success = false;
+				response.data.ErrorMessage = exception.message;
+				response.data.Data = new Model.ForgotPassword.Response;
+			}
+			finally
+			{
+				this.Dispatcher?.Trigger(domain, response?.data?.Success == true ? success : fail, response.data);
+				return response.data;
+			}
+		}
+
+		/*
 		async UpdateAddressDetails(name: string, email: string, password: string): Promise<Model.UpdateAddressDetails.Response>
 		{
 			const url = "/account/user/address",
@@ -123,32 +217,6 @@ export namespace Account
 			
 			return response;
 		}
-
-		
-		
-		async Login(email: string, password: string): Promise<Model.Login.Response>
-		{
-			const url = "/account/login",
-			request = new Model.Login.Request({
-				email: email,
-				password: password
-			}), 
-			result = await AxiosPostRequest(this.Endpoint, url, request),
-			response = new Model.Login.Response(result.data.Data);
-			
-			if (result.data.Success == true)
-			{
-				this.Dispatcher.Trigger("Account", "SuccessfulLogin", response);
-			}
-			else
-			{
-				this.Dispatcher.Trigger("Account", "FailedLogin", result.data.Message);
-			}
-			
-			return response;
-		}
 		*/
-
-		
 	}
 }

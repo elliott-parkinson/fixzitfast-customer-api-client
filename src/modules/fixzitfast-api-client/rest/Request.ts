@@ -14,7 +14,7 @@ export const AxiosGetRequest = async <T> (endpoint: AxiosInstance, url: string):
 export const AxiosPostRequest = async <T> (endpoint: AxiosInstance, url: string, data: any): Promise<AxiosResponse<T>> =>
 {
 	const request = new ApiRequest({ Data: data }),
-		result = await endpoint.post(url, request),
+		result = await endpoint.post(url, request.Data),
 		response = new AxiosResponse<T>(result);
 
 	return response;

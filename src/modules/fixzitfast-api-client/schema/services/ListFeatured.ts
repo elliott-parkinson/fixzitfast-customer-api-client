@@ -8,8 +8,11 @@ export namespace ListFeatured
 	export class Response
 	{
 		services: {
-			serviceId: number,
-			name: string
+			id: number,
+			name: string,
+			icon: string,
+			hourlyRate: number,
+			parent: number
 		}[];
 
 		constructor(props?: Response) { Object.assign(this, props); }
