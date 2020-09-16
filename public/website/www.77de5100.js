@@ -63589,6 +63589,66 @@ var Engineer;
     return ListAvailableForm;
   }();
 
+  var LocationForm =
+  /** @class */
+  function () {
+    function LocationForm() {
+      this.ResponseData = new ApiResponseData_1.ApiResponseData();
+      this.EngineerId = -1;
+    }
+
+    LocationForm.prototype.Submit = function () {
+      var _this = this;
+
+      this.ResponseData.Reset();
+      this.ResponseData.Loading = true;
+      var apiStore = typedi_1.default.of("store").get("api");
+      var authStore = typedi_1.default.of("store").get("auth");
+      var userId = authStore.Id;
+      this.ResponseData.ProcessFor(function (i) {
+        return apiStore.Engineer.GetLocation(_this.EngineerId);
+      });
+    };
+
+    __decorate([mobx_1.observable, __metadata("design:type", Object)], LocationForm.prototype, "ResponseData", void 0);
+
+    __decorate([mobx_1.observable, __metadata("design:type", Object)], LocationForm.prototype, "EngineerId", void 0);
+
+    __decorate([mobx_1.action, __metadata("design:type", Function), __metadata("design:paramtypes", []), __metadata("design:returntype", void 0)], LocationForm.prototype, "Submit", null);
+
+    return LocationForm;
+  }();
+
+  var JobCountForm =
+  /** @class */
+  function () {
+    function JobCountForm() {
+      this.ResponseData = new ApiResponseData_1.ApiResponseData();
+      this.EngineerId = -1;
+    }
+
+    JobCountForm.prototype.Submit = function () {
+      var _this = this;
+
+      this.ResponseData.Reset();
+      this.ResponseData.Loading = true;
+      var apiStore = typedi_1.default.of("store").get("api");
+      var authStore = typedi_1.default.of("store").get("auth");
+      var userId = authStore.Id;
+      this.ResponseData.ProcessFor(function (i) {
+        return apiStore.Engineer.GetJobCount(_this.EngineerId);
+      });
+    };
+
+    __decorate([mobx_1.observable, __metadata("design:type", Object)], JobCountForm.prototype, "ResponseData", void 0);
+
+    __decorate([mobx_1.observable, __metadata("design:type", Object)], JobCountForm.prototype, "EngineerId", void 0);
+
+    __decorate([mobx_1.action, __metadata("design:type", Function), __metadata("design:paramtypes", []), __metadata("design:returntype", void 0)], JobCountForm.prototype, "Submit", null);
+
+    return JobCountForm;
+  }();
+
   var Pane =
   /** @class */
   function (_super) {
@@ -63599,6 +63659,8 @@ var Engineer;
 
       _this.List = new ListForm();
       _this.ListAvailable = new ListAvailableForm();
+      _this.Location = new LocationForm();
+      _this.JobCount = new JobCountForm();
       return _this;
     }
 
@@ -63637,12 +63699,38 @@ var Engineer;
             return _this.ListAvailable.FinishTime = e.target.value;
           }
         })))
+      }), React.createElement(Theme_1.NewLine, null), React.createElement(TestCard_1.TestCard.Component, {
+        title: "Get Engineers Location",
+        form: this.Location,
+        formElements: React.createElement(Theme_1.Fragment, null, React.createElement(Theme_1.FormGroup, null, React.createElement(Theme_1.Input, {
+          placeholder: "Engineer ID",
+          type: "number",
+          value: this.Location.EngineerId,
+          onChange: function onChange(e) {
+            return _this.Location.EngineerId = parseInt(e.target.value);
+          }
+        })))
+      }), React.createElement(Theme_1.NewLine, null), React.createElement(TestCard_1.TestCard.Component, {
+        title: "Get Engineers Job Count",
+        form: this.JobCount,
+        formElements: React.createElement(Theme_1.Fragment, null, React.createElement(Theme_1.FormGroup, null, React.createElement(Theme_1.Input, {
+          placeholder: "Engineer ID",
+          type: "number",
+          value: this.JobCount.EngineerId,
+          onChange: function onChange(e) {
+            return _this.JobCount.EngineerId = parseInt(e.target.value);
+          }
+        })))
       }), React.createElement(Theme_1.NewLine, null));
     };
 
     __decorate([mobx_1.observable, __metadata("design:type", Object)], Pane.prototype, "List", void 0);
 
     __decorate([mobx_1.observable, __metadata("design:type", Object)], Pane.prototype, "ListAvailable", void 0);
+
+    __decorate([mobx_1.observable, __metadata("design:type", Object)], Pane.prototype, "Location", void 0);
+
+    __decorate([mobx_1.observable, __metadata("design:type", Object)], Pane.prototype, "JobCount", void 0);
 
     Pane = __decorate([mobx_react_1.observer], Pane);
     return Pane;
@@ -66776,6 +66864,87 @@ var ListAvailable;
 
   ListAvailable.Response = Response;
 })(ListAvailable = exports.ListAvailable || (exports.ListAvailable = {}));
+},{}],"../../../fixzitfast-api-client/schema/engineer/GetLocation.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GetLocation = void 0;
+var GetLocation;
+
+(function (GetLocation) {
+  GetLocation.Url = function () {
+    return "/engineer/location";
+  };
+
+  GetLocation.RequestType = "POST";
+
+  var Request =
+  /** @class */
+  function () {
+    function Request(props) {
+      Object.assign(this, props);
+    }
+
+    return Request;
+  }();
+
+  GetLocation.Request = Request;
+
+  var Response =
+  /** @class */
+  function () {
+    function Response(props) {
+      Object.assign(this, props);
+    }
+
+    return Response;
+  }();
+
+  GetLocation.Response = Response;
+})(GetLocation = exports.GetLocation || (exports.GetLocation = {}));
+},{}],"../../../fixzitfast-api-client/schema/engineer/GetJobCount.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GetJobCount = void 0;
+var GetJobCount;
+
+(function (GetJobCount) {
+  GetJobCount.Url = function () {
+    return "/engineer/jobcount";
+  };
+
+  GetJobCount.RequestType = "POST";
+
+  var Request =
+  /** @class */
+  function () {
+    function Request(props) {
+      Object.assign(this, props);
+    }
+
+    return Request;
+  }();
+
+  GetJobCount.Request = Request;
+
+  var Response =
+  /** @class */
+  function () {
+    function Response(props) {
+      this.jobCount = 0;
+      Object.assign(this, props);
+    }
+
+    return Response;
+  }();
+
+  GetJobCount.Response = Response;
+})(GetJobCount = exports.GetJobCount || (exports.GetJobCount = {}));
 },{}],"../../../fixzitfast-api-client/schema/engineer/index.ts":[function(require,module,exports) {
 "use strict";
 
@@ -66807,7 +66976,11 @@ __exportStar(require("./IEngineerHandler"), exports);
 __exportStar(require("./List"), exports);
 
 __exportStar(require("./ListAvailable"), exports);
-},{"./IEngineerHandler":"../../../fixzitfast-api-client/schema/engineer/IEngineerHandler.ts","./List":"../../../fixzitfast-api-client/schema/engineer/List.ts","./ListAvailable":"../../../fixzitfast-api-client/schema/engineer/ListAvailable.ts"}],"../../../fixzitfast-api-client/schema/notifications/INotificationHandler.ts":[function(require,module,exports) {
+
+__exportStar(require("./GetLocation"), exports);
+
+__exportStar(require("./GetJobCount"), exports);
+},{"./IEngineerHandler":"../../../fixzitfast-api-client/schema/engineer/IEngineerHandler.ts","./List":"../../../fixzitfast-api-client/schema/engineer/List.ts","./ListAvailable":"../../../fixzitfast-api-client/schema/engineer/ListAvailable.ts","./GetLocation":"../../../fixzitfast-api-client/schema/engineer/GetLocation.ts","./GetJobCount":"../../../fixzitfast-api-client/schema/engineer/GetJobCount.ts"}],"../../../fixzitfast-api-client/schema/notifications/INotificationHandler.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -68709,6 +68882,108 @@ var Engineer;
               response.data.Success = false;
               response.data.ErrorMessage = exception_2.message;
               response.data.Data = new Schema_1.Engineer.ListAvailable.Response();
+              return [3
+              /*break*/
+              , 5];
+
+            case 4:
+              (_a = this.Dispatcher) === null || _a === void 0 ? void 0 : _a.Trigger(domain, ((_b = response === null || response === void 0 ? void 0 : response.data) === null || _b === void 0 ? void 0 : _b.Success) == true ? success : fail, response.data);
+              return [2
+              /*return*/
+              , response.data];
+
+            case 5:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
+    Handler.prototype.GetLocation = function (engineerId) {
+      var _a, _b;
+
+      return __awaiter(this, void 0, Promise, function () {
+        var response, url, domain, success, fail, request, exception_3;
+        return __generator(this, function (_c) {
+          switch (_c.label) {
+            case 0:
+              response = new Response_1.AxiosResponse({}), url = Schema_1.Engineer.GetLocation.Url(), domain = "Engineer", success = "EngineerLocation", fail = "EngineerLocationFailed", request = new Schema_1.Engineer.GetLocation.Request({
+                id: engineerId
+              });
+              _c.label = 1;
+
+            case 1:
+              _c.trys.push([1, 3, 4, 5]);
+
+              return [4
+              /*yield*/
+              , Request_1.AxiosPostRequest(this.Endpoint, url, request)];
+
+            case 2:
+              response = _c.sent();
+              response.data.Data = new Schema_1.Engineer.GetLocation.Response(response.data.Data);
+              return [3
+              /*break*/
+              , 5];
+
+            case 3:
+              exception_3 = _c.sent();
+              response.data.Success = false;
+              response.data.ErrorMessage = exception_3.message;
+              response.data.Data = new Schema_1.Engineer.GetLocation.Response();
+              return [3
+              /*break*/
+              , 5];
+
+            case 4:
+              (_a = this.Dispatcher) === null || _a === void 0 ? void 0 : _a.Trigger(domain, ((_b = response === null || response === void 0 ? void 0 : response.data) === null || _b === void 0 ? void 0 : _b.Success) == true ? success : fail, response.data);
+              return [2
+              /*return*/
+              , response.data];
+
+            case 5:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
+    Handler.prototype.GetJobCount = function (engineerId) {
+      var _a, _b;
+
+      return __awaiter(this, void 0, Promise, function () {
+        var response, url, domain, success, fail, request, exception_4;
+        return __generator(this, function (_c) {
+          switch (_c.label) {
+            case 0:
+              response = new Response_1.AxiosResponse({}), url = Schema_1.Engineer.GetJobCount.Url(), domain = "Engineer", success = "EngineerJobCount", fail = "EngineerJobCountFailed", request = new Schema_1.Engineer.GetJobCount.Request({
+                userId: engineerId
+              });
+              _c.label = 1;
+
+            case 1:
+              _c.trys.push([1, 3, 4, 5]);
+
+              return [4
+              /*yield*/
+              , Request_1.AxiosPostRequest(this.Endpoint, url, request)];
+
+            case 2:
+              response = _c.sent();
+              response.data.Data = new Schema_1.Engineer.GetJobCount.Response(response.data.Data);
+              return [3
+              /*break*/
+              , 5];
+
+            case 3:
+              exception_4 = _c.sent();
+              response.data.Success = false;
+              response.data.ErrorMessage = exception_4.message;
+              response.data.Data = new Schema_1.Engineer.GetJobCount.Response();
               return [3
               /*break*/
               , 5];

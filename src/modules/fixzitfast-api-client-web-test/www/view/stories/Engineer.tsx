@@ -58,11 +58,53 @@ export namespace Engineer
         }
     }
 
+    class LocationForm
+    {
+        @observable ResponseData = new ApiResponseData;
+        @observable EngineerId = -1;
+
+        @action Submit()
+        {
+            this.ResponseData.Reset();
+            this.ResponseData.Loading = true;
+
+            const apiStore =  Dependencies.of("store").get<any>("api");
+            const authStore =  Dependencies.of("store").get<any>("auth");
+            let userId =  authStore.Id;
+
+            this.ResponseData.ProcessFor(
+                i => apiStore.Engineer.GetLocation(this.EngineerId)
+            );
+        }
+    }
+    class JobCountForm
+    {
+        @observable ResponseData = new ApiResponseData;
+        @observable EngineerId = -1;
+
+        @action Submit()
+        {
+            this.ResponseData.Reset();
+            this.ResponseData.Loading = true;
+
+            const apiStore =  Dependencies.of("store").get<any>("api");
+            const authStore =  Dependencies.of("store").get<any>("auth");
+            let userId =  authStore.Id;
+
+            this.ResponseData.ProcessFor(
+                i => apiStore.Engineer.GetJobCount(this.EngineerId)
+            );
+        }
+    }
+
     @observer
     export class Pane extends React.Component<any>
     {
         @observable List = new ListForm;
         @observable ListAvailable = new ListAvailableForm;
+
+        @observable Location = new LocationForm;
+        @observable JobCount = new JobCountForm;
 
 
         componentDidMount()
@@ -78,7 +120,6 @@ export namespace Engineer
                 />
                 <NewLine />
 
-                
                 <TestCard.Component
                     title="List Available Engineers"
                     form={this.ListAvailable}
@@ -91,6 +132,30 @@ export namespace Engineer
                         </FormGroup>
                         <FormGroup>
                             <Input placeholder="Finish Time - eg: 12:00" type="text" value={this.ListAvailable.FinishTime} onChange={e => this.ListAvailable.FinishTime = e.target.value}  />
+                        </FormGroup>
+                    </Fragment>}
+                />
+                <NewLine />
+
+                <TestCard.Component
+                    title="Get Engineers Location"
+                    form={this.Location}
+
+                    formElements={ <Fragment>
+                        <FormGroup>
+                            <Input placeholder="Engineer ID" type="number" value={this.Location.EngineerId} onChange={e => this.Location.EngineerId = parseInt(e.target.value)} />
+                        </FormGroup>
+                    </Fragment>}
+                />
+                <NewLine />
+                
+                <TestCard.Component
+                    title="Get Engineers Job Count"
+                    form={this.JobCount}
+
+                    formElements={ <Fragment>
+                        <FormGroup>
+                            <Input placeholder="Engineer ID" type="number" value={this.JobCount.EngineerId} onChange={e => this.JobCount.EngineerId = parseInt(e.target.value)} />
                         </FormGroup>
                     </Fragment>}
                 />
