@@ -20,6 +20,10 @@ $ npm install
 $ npm run test
 ```
 
+## Running browser testbed
+```sh
+$ npm run watch:browser:testbed
+```
 
 ## API Reference Documentation
 You can find the api reference documentation [here](./docs/api-reference.md)
