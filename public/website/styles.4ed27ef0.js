@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../../../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+})({"../../../../../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -149,7 +149,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -184,22 +184,22 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../../assets/styles/lib/bootstrap.min.css":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../../assets/styles/lib/bootstrap.min.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../assets/styles/fa.min.css":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../assets/styles/fa.min.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\fonts\\fa-brands-400.eot":[["fa-brands-400.6b0dec63.eot","../../assets/fonts/fa-brands-400.eot"],"../../assets/fonts/fa-brands-400.eot"],"./..\\fonts\\fa-brands-400.woff2":[["fa-brands-400.4869936c.woff2","../../assets/fonts/fa-brands-400.woff2"],"../../assets/fonts/fa-brands-400.woff2"],"./..\\fonts\\fa-brands-400.woff":[["fa-brands-400.4adac2ed.woff","../../assets/fonts/fa-brands-400.woff"],"../../assets/fonts/fa-brands-400.woff"],"./..\\fonts\\fa-brands-400.ttf":[["fa-brands-400.e0b57dcc.ttf","../../assets/fonts/fa-brands-400.ttf"],"../../assets/fonts/fa-brands-400.ttf"],"./..\\fonts\\fa-brands-400.svg":[["fa-brands-400.d564dc6b.svg","../../assets/fonts/fa-brands-400.svg"],"../../assets/fonts/fa-brands-400.svg"],"./..\\fonts\\fa-regular-400.eot":[["fa-regular-400.81fe5200.eot","../../assets/fonts/fa-regular-400.eot"],"../../assets/fonts/fa-regular-400.eot"],"./..\\fonts\\fa-regular-400.woff2":[["fa-regular-400.a67cf568.woff2","../../assets/fonts/fa-regular-400.woff2"],"../../assets/fonts/fa-regular-400.woff2"],"./..\\fonts\\fa-regular-400.woff":[["fa-regular-400.9a924ac0.woff","../../assets/fonts/fa-regular-400.woff"],"../../assets/fonts/fa-regular-400.woff"],"./..\\fonts\\fa-regular-400.ttf":[["fa-regular-400.f08e931c.ttf","../../assets/fonts/fa-regular-400.ttf"],"../../assets/fonts/fa-regular-400.ttf"],"./..\\fonts\\fa-regular-400.svg":[["fa-regular-400.e1c46f38.svg","../../assets/fonts/fa-regular-400.svg"],"../../assets/fonts/fa-regular-400.svg"],"./..\\fonts\\fa-solid-900.eot":[["fa-solid-900.ce9a9fb7.eot","../../assets/fonts/fa-solid-900.eot"],"../../assets/fonts/fa-solid-900.eot"],"./..\\fonts\\fa-solid-900.woff2":[["fa-solid-900.8231c366.woff2","../../assets/fonts/fa-solid-900.woff2"],"../../assets/fonts/fa-solid-900.woff2"],"./..\\fonts\\fa-solid-900.woff":[["fa-solid-900.957c9416.woff","../../assets/fonts/fa-solid-900.woff"],"../../assets/fonts/fa-solid-900.woff"],"./..\\fonts\\fa-solid-900.ttf":[["fa-solid-900.c2e32e0f.ttf","../../assets/fonts/fa-solid-900.ttf"],"../../assets/fonts/fa-solid-900.ttf"],"./..\\fonts\\fa-solid-900.svg":[["fa-solid-900.e26fce39.svg","../../assets/fonts/fa-solid-900.svg"],"../../assets/fonts/fa-solid-900.svg"],"_css_loader":"../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../assets/styles/index.scss":[function(require,module,exports) {
+},{"./..\\fonts\\fa-brands-400.eot":[["fa-brands-400.6b0dec63.eot","../../assets/fonts/fa-brands-400.eot"],"../../assets/fonts/fa-brands-400.eot"],"./..\\fonts\\fa-brands-400.woff2":[["fa-brands-400.4869936c.woff2","../../assets/fonts/fa-brands-400.woff2"],"../../assets/fonts/fa-brands-400.woff2"],"./..\\fonts\\fa-brands-400.woff":[["fa-brands-400.4adac2ed.woff","../../assets/fonts/fa-brands-400.woff"],"../../assets/fonts/fa-brands-400.woff"],"./..\\fonts\\fa-brands-400.ttf":[["fa-brands-400.e0b57dcc.ttf","../../assets/fonts/fa-brands-400.ttf"],"../../assets/fonts/fa-brands-400.ttf"],"./..\\fonts\\fa-brands-400.svg":[["fa-brands-400.d564dc6b.svg","../../assets/fonts/fa-brands-400.svg"],"../../assets/fonts/fa-brands-400.svg"],"./..\\fonts\\fa-regular-400.eot":[["fa-regular-400.81fe5200.eot","../../assets/fonts/fa-regular-400.eot"],"../../assets/fonts/fa-regular-400.eot"],"./..\\fonts\\fa-regular-400.woff2":[["fa-regular-400.a67cf568.woff2","../../assets/fonts/fa-regular-400.woff2"],"../../assets/fonts/fa-regular-400.woff2"],"./..\\fonts\\fa-regular-400.woff":[["fa-regular-400.9a924ac0.woff","../../assets/fonts/fa-regular-400.woff"],"../../assets/fonts/fa-regular-400.woff"],"./..\\fonts\\fa-regular-400.ttf":[["fa-regular-400.f08e931c.ttf","../../assets/fonts/fa-regular-400.ttf"],"../../assets/fonts/fa-regular-400.ttf"],"./..\\fonts\\fa-regular-400.svg":[["fa-regular-400.e1c46f38.svg","../../assets/fonts/fa-regular-400.svg"],"../../assets/fonts/fa-regular-400.svg"],"./..\\fonts\\fa-solid-900.eot":[["fa-solid-900.ce9a9fb7.eot","../../assets/fonts/fa-solid-900.eot"],"../../assets/fonts/fa-solid-900.eot"],"./..\\fonts\\fa-solid-900.woff2":[["fa-solid-900.8231c366.woff2","../../assets/fonts/fa-solid-900.woff2"],"../../assets/fonts/fa-solid-900.woff2"],"./..\\fonts\\fa-solid-900.woff":[["fa-solid-900.957c9416.woff","../../assets/fonts/fa-solid-900.woff"],"../../assets/fonts/fa-solid-900.woff"],"./..\\fonts\\fa-solid-900.ttf":[["fa-solid-900.c2e32e0f.ttf","../../assets/fonts/fa-solid-900.ttf"],"../../assets/fonts/fa-solid-900.ttf"],"./..\\fonts\\fa-solid-900.svg":[["fa-solid-900.e26fce39.svg","../../assets/fonts/fa-solid-900.svg"],"../../assets/fonts/fa-solid-900.svg"],"_css_loader":"../../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../assets/styles/index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./lib/bootstrap.min.css":"../../assets/styles/lib/bootstrap.min.css","./fa.min.css":"../../assets/styles/fa.min.css","_css_loader":"../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./lib/bootstrap.min.css":"../../assets/styles/lib/bootstrap.min.css","./fa.min.css":"../../assets/styles/fa.min.css","_css_loader":"../../../../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -227,7 +227,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58168" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50938" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -403,5 +403,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+},{}]},{},["../../../../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
 //# sourceMappingURL=/styles.4ed27ef0.js.map

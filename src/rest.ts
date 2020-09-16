@@ -1,1 +1,1 @@
-export * from "./modules/fixzitfast-api-client/rest";
+export * from "./modules/fixzitfast/api-client/rest";

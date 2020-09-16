@@ -7,13 +7,13 @@
     "fixzitfast-api": "./modules/api-client/rest/src"
   },
   "mocha": {
-    "mochaExplorer.files": "./src/modules/fixzitfast-api-client/test/index.ts",
+    "mochaExplorer.files": "./src/modules/fixzitfast/api-client/test/index.ts",
     "mochaExplorer.require": "ts-node/register"
   },
   "scripts": {
-    "watch:browser": "npx parcel src/modules/fixzitfast-api-client-web-test/build/www/index.html --out-dir public/website --port 2221",
-    "build:browser": "npx parcel build src/modules/fixzitfast-api-client-web-test/build/www/index.html --out-dir public/www",
-    "test": "mocha -r ts-node/register ./src/modules/fixzitfast-api-client/test/index.ts"
+    "watch:browser": "npx parcel src/modules/fixzitfast/api-client-web-test/build/www/index.html --out-dir public/website --port 2221",
+    "build:browser": "npx parcel build src/modules/fixzitfast/api-client-web-test/build/www/index.html --out-dir public/www",
+    "test": "mocha -r ts-node/register ./src/modules/fixzitfast/api-client/test/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "node": "^13.6.0",
     "react": "^16.13.1",
     "reflect-metadata": "^0.1.13",
+    "src": "^1.1.2",
     "ts-node": "^9.0.0",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.22"
