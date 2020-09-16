@@ -14,7 +14,7 @@ export class Api extends SchemaApi
 	private Endpoint: AxiosInstance;
 
 	public Account: Account.Handler;
-	// public Bookings: Bookings.Handler;
+	public Bookings: Bookings.Handler;
 	public Contact: Contact.Handler;
 	public Notifications: Notifications.Handler;
 	public Engineer: Engineer.Handler;
@@ -33,7 +33,7 @@ export class Api extends SchemaApi
 		const props = { Endpoint: this.Endpoint /*, Dispatcher: this.Dispatcher*/ };
 
 		this.Account = new Account.Handler(props);
-		// this.Bookings = new Bookings.Handler(props);
+		this.Bookings = new Bookings.Handler(props);
 		this.Contact = new Contact.Handler(props);
 		this.Engineer = new Engineer.Handler(props);
 		this.Notifications = new Notifications.Handler(props);

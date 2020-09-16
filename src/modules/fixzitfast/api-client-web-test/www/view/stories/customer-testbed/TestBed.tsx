@@ -52,14 +52,14 @@ export namespace TestBed
                             Account
                         </NavLink>
                     </NavItem>
-                    {/*<<NavItem>
+                    <NavItem>
                          <NavLink href="#" 
                             active={this.SelectedTab=="booking" ? true : false}
                             onClick={  e=> this.SelectedTab="booking"}
                         >
                             Booking
                         </NavLink>
-                    </NavItem>*/}
+                    </NavItem>
                     <NavItem>
                          <NavLink href="#" 
                             active={this.SelectedTab=="contact" ? true : false}
