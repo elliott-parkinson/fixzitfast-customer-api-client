@@ -6,13 +6,9 @@
   "alias": {
     "fixzitfast-api": "./modules/api-client/rest/src"
   },
-  "mocha": {
-    "mochaExplorer.files": "./src/modules/fixzitfast/api-client/test/index.ts",
-    "mochaExplorer.require": "ts-node/register"
-  },
   "scripts": {
-    "watch:browser:testbed": "npx parcel src/modules/fixzitfast/api-client-web-test/build/www/index.html --out-dir public/website --port 2221",
-    "build:browser:testbed": "npx parcel build src/modules/fixzitfast/api-client-web-test/build/www/index.html --out-dir public/www",
+    "watch:browser:testbed": "npx parcel src/modules/fixzitfast/api-client-web-test/build/www/index.html --out-dir bin/www/testbed --port 2221",
+    "build:browser:testbed": "npx parcel build src/modules/fixzitfast/api-client-web-test/build/www/index.html --out-dir bin/www/testbed",
     "test": "mocha -r ts-node/register ./src/modules/fixzitfast/api-client/test/index.ts"
   },
   "author": "",
