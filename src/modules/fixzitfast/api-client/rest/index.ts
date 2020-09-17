@@ -4,6 +4,7 @@ import { Account } from "./account";
 import { Bookings } from "./bookings";
 import { Contact } from "./contact";
 import { Notifications } from "./notifications";
+import { Payment } from "./payment";
 import { Engineer } from "./engineer";
 import { Services } from "./services";
 
@@ -17,6 +18,7 @@ export class Api extends SchemaApi
 	public Bookings: Bookings.Handler;
 	public Contact: Contact.Handler;
 	public Notifications: Notifications.Handler;
+	public Payment: Payment.Handler;
 	public Engineer: Engineer.Handler;
 	public Services: Services.Handler;
 
@@ -37,6 +39,7 @@ export class Api extends SchemaApi
 		this.Contact = new Contact.Handler(props);
 		this.Engineer = new Engineer.Handler(props);
 		this.Notifications = new Notifications.Handler(props);
+		this.Payment = new Payment.Handler(props);
 		this.Services = new Services.Handler(props);
 	}
 }

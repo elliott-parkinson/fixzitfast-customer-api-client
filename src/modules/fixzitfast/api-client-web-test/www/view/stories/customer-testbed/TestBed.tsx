@@ -84,14 +84,14 @@ export namespace TestBed
                             Notifications
                         </NavLink>
                     </NavItem>
-                    {/*<NavItem>
+                    <NavItem>
                          <NavLink href="#" 
                             active={this.SelectedTab=="payment" ? true : false}
                             onClick={  e=> this.SelectedTab="payment"}
                         >
                             Payment
                         </NavLink>
-                    </NavItem>*/}
+                    </NavItem>
                     <NavItem>
                          <NavLink href="#" 
                             active={this.SelectedTab=="services" ? true : false}
