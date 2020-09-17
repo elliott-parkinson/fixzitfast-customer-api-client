@@ -1,4 +1,4 @@
-export * from "./AddSIgnature";
+export * from "./AddSignature";
 export * from "./Create";
 export * from "./Complete";
 export * from "./GetUpcoming";
