@@ -33,8 +33,8 @@ export namespace ServiceCard
         render() {
             return <Card className="service-card" onClick={this.props.onClick}>
                 <CardBody>
-                    <Button disabled>
-                        ?
+                    <Button color="primary" disabled className="rounded-circle">
+                        <i className="fas fa-images" />
                     </Button>
                 </CardBody>
                 <CardFooter>

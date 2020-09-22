@@ -31,8 +31,8 @@ export namespace ServiceIcon
     {
         render() {
             return <div className="service-icon">
-                <Button color="primary" onClick={this.props.onClick} outline active={this.props.selected ? true : undefined}>
-                    ?
+                <Button color="primary" className="rounded-circle" onClick={this.props.onClick} active={this.props.selected ? true : undefined}>
+                    <i className="fas fa-images" />
                 </Button>
                 <NewLine />
                 <strong>{this.props.name}</strong>

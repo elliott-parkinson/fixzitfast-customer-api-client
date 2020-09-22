@@ -143,8 +143,8 @@ export namespace Landing
                     {this.FeaturedServicesList.map( service => <Column md={3} sm={6} xs={12} key={service.Id}>
                         <Card className="m-1" onClick={e => this.BookService(service.Id)}>
                             <CardBody>
-                                <Button color="primary">
-                                    ?
+                                <Button color="primary" disabled className="rounded-circle">
+                                    <i className="fas fa-images" />
                                 </Button>
                                 &nbsp;
                                 { service.Name }
