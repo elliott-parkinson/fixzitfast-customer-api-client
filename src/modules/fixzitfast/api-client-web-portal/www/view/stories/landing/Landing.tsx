@@ -138,7 +138,7 @@ export namespace Landing
                         <Button color="secondary" onClick={e => this.ViewServices()}>See all Services</Button>
                     </FormGroup>
                 </Form>
-
+                <hr />
                 <Row className="featured-services-bar">
                     {this.FeaturedServicesList.map( service => <Column md={3} sm={6} xs={12} key={service.Id}>
                         <Card className="m-1" onClick={e => this.BookService(service.Id)}>
@@ -152,7 +152,7 @@ export namespace Landing
                         </Card>
                     </Column>)}
                 </Row>
-                    
+                <hr />
                 <Row className="selling-points">
                     <Column md={4} xs={12} className="selling-point">
                         <i className="fas fa-images fa-3x" />
@@ -188,7 +188,7 @@ export namespace Landing
                         <Button color="primary" outline onClick={e => this.ViewServices()}>Book now</Button>
                     </Column>
                 </Row>
-                
+                <hr />
                 <Row>
                     <Column lg={6} className="full-center">
                         <Block>
@@ -201,6 +201,7 @@ export namespace Landing
                         <Paragraph>Just download the app, sign up for an account and enter the service you need. Not sure what the problem is? Include pictures and a description and we’ll send someone round to assess the issue - with the right tools to fix it then and there, if possible.</Paragraph>
                     </Column>
                 </Row>
+                <hr />
                 <Row>
                     <Column lg={6} className="vertical-center">
                         <Header>Services</Header>
@@ -221,6 +222,7 @@ export namespace Landing
                             </Row>
                     </Column>
                 </Row>
+                <hr />
                 <Row>
                     <Column lg={6} className="full-center">
                         <Row>
@@ -249,7 +251,8 @@ export namespace Landing
                         <Header>Fully Accredited</Header>
                         <Paragraph>All our tradespeople work directly for us. They are background checked, qualified, certified and experienced, so you know you and your home are in safe hands.</Paragraph>
                     </Column>
-                </Row>
+                </Row>     
+                <hr />
                 <Row>
                     <Column lg={6} className="vertical-center">
                         <Header>Your satisfaction, guaranteed</Header>
@@ -259,6 +262,7 @@ export namespace Landing
                         <Paragraph>From background checking all our tradespeople, to using electric vans, we’re determined to bring you the fastest, greenest and best home-repair service in the city.</Paragraph>
                     </Column>
                 </Row>
+                <hr />
                 <Row>
                     <Column lg={6} className="full-center">
                         <Block>
