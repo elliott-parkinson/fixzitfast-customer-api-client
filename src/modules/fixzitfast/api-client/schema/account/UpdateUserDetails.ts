@@ -7,7 +7,6 @@ export module UpdateUserDetails
 	{
 		name: string;
 		email: string;
-		password: string;
 		phone: string;
 
 		constructor(props?: Request) { Object.assign(this, props); }

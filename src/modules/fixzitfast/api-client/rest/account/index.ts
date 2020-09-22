@@ -102,7 +102,7 @@ export namespace Account
 			}
 		}
 		
-		async UpdateUserDetails(id: number, name: string, email: string, password: string, phone: string): Promise<ApiResponse<Model.UpdateUserDetails.Response>>
+		async UpdateUserDetails(id: number, name: string, email: string, phone: string): Promise<ApiResponse<Model.UpdateUserDetails.Response>>
 		{
 			let response = new AxiosResponse<Model.UpdateUserDetails.Response>({}),
 				url = Model.UpdateUserDetails.Url(id),
@@ -110,7 +110,6 @@ export namespace Account
 				request = new Model.UpdateUserDetails.Request({
 					name: name,
 					email: email,
-					password: password,
 					phone: phone
 				});
 			

@@ -13,10 +13,14 @@ export {
     Container, Row, Col as Column,
     Form, FormGroup,
     Label, Input, InputGroup, InputGroupAddon,
+    Modal, ModalHeader, ModalBody, ModalFooter,
+    Toast, ToastHeader, ToastBody,
     Nav, NavItem, NavLink, Navbar, NavbarBrand, NavbarText,
     ListGroup, ListGroupItem,
     Card, CardHeader, CardBody, CardFooter,
 } from "reactstrap";
+
+export { Typeahead } from 'react-bootstrap-typeahead';
 
 export { 
     Fragment

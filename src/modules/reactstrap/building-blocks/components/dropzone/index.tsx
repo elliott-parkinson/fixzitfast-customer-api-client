@@ -5,7 +5,7 @@ export interface IDropzoneProps
 {
 	className?: string;
 	style?: React.CSSProperties;
-	children?: React.ReactChild[];
+	children?: React.ReactChild | React.ReactChild[];
 	disabled?: boolean;
 	accept: string;
 	multiple?: boolean;

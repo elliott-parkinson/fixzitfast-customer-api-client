@@ -5,6 +5,9 @@
 @import "./selling-point/selling-point.scss";
 
 
+@import 'react-bootstrap-typeahead/css/Typeahead.css';
+
+
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
