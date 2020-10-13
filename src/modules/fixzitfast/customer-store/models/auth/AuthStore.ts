@@ -18,7 +18,6 @@ export class AuthStore
 
 	@action async Login(email: string, password: string)
 	{
-		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
         let accountStore = Dependencies.of("fixzitfast-customer-store").get<any>("account");
 		let routeStore: any = Dependencies.of("store").get("routes");
 		
@@ -42,7 +41,6 @@ export class AuthStore
 	
 	@action async ForgotPassword(email: string)
 	{
-		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
 		let routeStore: any = Dependencies.of("store").get("routes");
 
 		if (true)

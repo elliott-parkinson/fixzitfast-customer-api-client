@@ -19,8 +19,6 @@ export class AccountStore
 
 	@action async FetchDetails()
 	{
-		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
-
 		this.Id = stub.Id;
 		this.Name = stub.Name;
 		this.Email = stub.Email;
@@ -29,8 +27,6 @@ export class AccountStore
 
 	@action async UpdateUserDetails(name: string, email: string, phone: string)
 	{
-		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
-
 		if (true)
 		{
 	
@@ -51,7 +47,6 @@ export class AccountStore
 
 	@action async ForgotPassword(email: string)
 	{
-		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
 		let routeStore: any = Dependencies.of("store").get("routes");
 
 		if (true)
@@ -71,7 +66,6 @@ export class AccountStore
 
 	@action async ResetPassword(oldPassword: string, password: string, passwordConfirm: string)
 	{
-		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
 		let routeStore: any = Dependencies.of("store").get("routes");
 
 		if (true)
