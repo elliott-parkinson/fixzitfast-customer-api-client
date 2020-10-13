@@ -1,6 +1,5 @@
 import { Container } from "typedi";
 
-import { Api as RestApi } from "../../../api-client/rest";
 import { RouteService } from "./route/RouteService";
 import { SiteStore } from "./SiteStore";
 
