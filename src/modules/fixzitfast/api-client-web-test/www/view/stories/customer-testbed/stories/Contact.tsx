@@ -30,7 +30,7 @@ export namespace Contact
             this.ResponseData.Loading = true;
 
             const authStore =  Dependencies.of("store").get<any>("auth");
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             let userId =  authStore.Id;
 
             this.ResponseData.ProcessFor(

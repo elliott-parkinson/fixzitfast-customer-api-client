@@ -25,7 +25,7 @@ export namespace Notifications
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 

@@ -25,7 +25,7 @@ export namespace Services
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 
@@ -43,7 +43,7 @@ export namespace Services
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 
@@ -62,7 +62,7 @@ export namespace Services
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 
@@ -81,7 +81,7 @@ export namespace Services
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 
@@ -100,7 +100,7 @@ export namespace Services
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 

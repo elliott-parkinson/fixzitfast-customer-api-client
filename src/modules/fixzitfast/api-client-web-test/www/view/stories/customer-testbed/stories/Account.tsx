@@ -30,7 +30,7 @@ export namespace Account
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
 
             this.ResponseData.ProcessFor(
                 i => apiStore.Account.Signup(this.Name, this.Email, this.Password, this.Phone)
@@ -50,7 +50,7 @@ export namespace Account
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
 
             let response = await this.ResponseData.ProcessFor(
@@ -81,7 +81,7 @@ export namespace Account
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
 
             this.ResponseData.ProcessFor(
                 i => apiStore.Account.ForgotPassword(this.Email)
@@ -100,7 +100,7 @@ export namespace Account
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
 
             this.ResponseData.ProcessFor(
                 i => apiStore.Account.ResetPassword(this.Id, this.Password, this.OldPassword)
@@ -118,7 +118,7 @@ export namespace Account
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 
@@ -141,7 +141,7 @@ export namespace Account
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 

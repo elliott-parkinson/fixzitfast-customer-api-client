@@ -22,3 +22,4 @@ Dependencies.of("fixzitfast-customer-data-store").set([
 
 	//{ id: "testimonials", value: new TestimonialStore },
 ]);
+

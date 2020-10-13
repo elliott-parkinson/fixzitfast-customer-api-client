@@ -11,31 +11,18 @@ export namespace CustomerDataStore
     store.Bookings.Load();
     store.Services.Load();
 
-
+    /* On Login */
+    when( () => store.Account.LoggedIn == false, async () =>
+    {
+        // check notifications
+    });
 
     /* On Logout */
-    when(() => store.Account.LoggedIn == false, async () =>
+    when( () => store.Account.LoggedIn == false, async () =>
     {
         store.Bookings.Clear();
     });
 
-
-    autorun( () =>
-    {
-        window.postMessage(
-            JSON.stringify(toJS(store.Account.CurrentUser)),
-            "*"
-        );
-
-        if (store.Account.LoggedIn)
-        {
-            console.log("User logged in");
-        }
-        else
-        {
-            console.log("User logged out");
-        }
-    });
 
     autorun( async () =>
     {

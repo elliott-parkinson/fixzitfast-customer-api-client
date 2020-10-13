@@ -30,7 +30,7 @@ export namespace ForgotPassword
 
         @action async Submit()
         {
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("fixzitfast-customer-store").get<any>("auth");
 
             let success = await authStore.ForgotPassword(this.Email);

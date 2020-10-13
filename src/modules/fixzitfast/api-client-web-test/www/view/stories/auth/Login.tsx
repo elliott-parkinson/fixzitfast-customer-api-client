@@ -31,7 +31,7 @@ export namespace Login
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
 
             let response = await this.ResponseData.ProcessFor(

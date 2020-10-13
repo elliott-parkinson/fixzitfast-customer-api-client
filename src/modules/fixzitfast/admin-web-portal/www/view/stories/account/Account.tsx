@@ -34,7 +34,6 @@ export namespace Account
 
         @action async Submit()
         {
-            const apiStore =  Dependencies.of("store").get<any>("api");
             const accountStore =  Dependencies.of("fixzitfast-customer-store").get<any>("account");
 
             let success = await accountStore.UpdateUserDetails(this.Name, this.Email, this.Phone);
@@ -63,7 +62,6 @@ export namespace Account
 
         @action async Submit()
         {
-            const apiStore =  Dependencies.of("store").get<any>("api");
             const accountStore =  Dependencies.of("fixzitfast-customer-store").get<any>("account");
 
             let success = await accountStore.UpdateCardDetails(this.CardDigits, this.CardDigits, this.CardDigits);
@@ -90,7 +88,6 @@ export namespace Account
 
         @action async Submit()
         {
-            const apiStore =  Dependencies.of("store").get<any>("api");
             const accountStore =  Dependencies.of("fixzitfast-customer-store").get<any>("account");
 
             let success = await accountStore.ResetPassword(this.CurrentPassword, this.Password, this.PasswordConfirm);

@@ -34,7 +34,6 @@ export namespace Siginup
 
         @action async Submit()
         {
-            const apiStore =  Dependencies.of("fixzitfast-customer-store").get<any>("api");
             const authStore =  Dependencies.of("fixzitfast-customer-store").get<any>("auth");
 
             if (this.Password !== this.PasswordConfirm)

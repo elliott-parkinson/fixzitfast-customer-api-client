@@ -1,8 +1,9 @@
 import { observable, when } from "mobx";
+import { serialize, deserialize } from "serializer.ts/Serializer";
+
 import { Account } from "./account/Account";
 import { Contact } from "./Contact";
 
-import { serialize, deserialize } from "serializer.ts/Serializer";
 import { Services } from "./service/Services";
 import { Bookings } from "./booking/Bookings";
 import { InProgressBooking } from "./booking/InProgressBooking";

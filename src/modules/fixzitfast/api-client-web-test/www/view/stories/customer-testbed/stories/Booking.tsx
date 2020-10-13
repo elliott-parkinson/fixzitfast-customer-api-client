@@ -24,7 +24,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             const bookingStore =  Dependencies.of("store").get<any>("booking");
             let userId =  authStore.Id;
@@ -56,7 +56,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             const bookingStore =  Dependencies.of("store").get<any>("booking");
             let userId =  authStore.Id;
@@ -77,7 +77,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             const bookingStore =  Dependencies.of("store").get<any>("booking");
             let userId =  authStore.Id;
@@ -139,7 +139,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             const bookingStore =  Dependencies.of("store").get<any>("booking");
             let userId =  authStore.Id;
@@ -163,7 +163,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             const bookingStore =  Dependencies.of("store").get<any>("booking");
             let userId =  authStore.Id;
@@ -185,7 +185,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
 
             let response = await this.ResponseData.ProcessFor(
@@ -207,7 +207,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             const bookingStore =  Dependencies.of("store").get<any>("booking");
             let userId =  authStore.Id;
@@ -227,7 +227,7 @@ export namespace Booking
             this.ResponseData.Reset();
             this.ResponseData.Loading = true;
 
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("store").get<any>("auth");
             let userId =  authStore.Id;
 

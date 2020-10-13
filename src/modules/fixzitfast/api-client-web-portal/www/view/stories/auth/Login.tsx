@@ -29,7 +29,7 @@ export namespace Login
 
         @action async Submit()
         {
-            const apiStore =  Dependencies.of("store").get<any>("api");
+            
             const authStore =  Dependencies.of("fixzitfast-customer-store").get<any>("auth");
 
             let success = await authStore.Login(this.Email, this.Password);
