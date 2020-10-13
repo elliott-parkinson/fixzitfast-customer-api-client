@@ -117,7 +117,7 @@ export namespace PaymentDetails
                                         </Column>
                                         <Column xs={4} md={3}>
                                             <FormGroup tag="fieldset">
-                                                <Input type="tel" maxlength="3" autoComplete="cc-csc" required placeholder="CCV" value={this.Form.CCV} onChange={ e => this.Form.CCV = e.target.value } />{' '}
+                                                <Input type="tel" maxLength="3" autoComplete="cc-csc" required placeholder="CCV" value={this.Form.CCV} onChange={ e => this.Form.CCV = e.target.value } />{' '}
                                             </FormGroup>
                                         </Column>
                                     </Row>
