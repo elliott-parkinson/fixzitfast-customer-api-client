@@ -81,7 +81,6 @@ export default class Routes extends React.Component<any>
 						<Route path={match + "/upcoming"} exact component={ props => <Upcoming.Screen {...props}/> } />
 						<Route path={match + "/past"} exact component={ props => <Past.Screen {...props}/> } />
 
-
 						<Route component={ props => <Error404.Screen {...props}/> } />
 					</Switch>
 				</Column>

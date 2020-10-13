@@ -3,6 +3,7 @@ import { Account } from "./Account";
 import { Contact } from "./Contact";
 
 import { serialize, deserialize } from "serializer.ts/Serializer";
+import { Services } from "./Services";
 
 
 
@@ -12,5 +13,8 @@ export class Store
     @observable Bookings = new Account;
     @observable InProgressBooking = new Account;
     @observable Contact = new Contact;
-    @observable Services = new Account;
+    @observable Services = new Services;
+
+
+    
 }

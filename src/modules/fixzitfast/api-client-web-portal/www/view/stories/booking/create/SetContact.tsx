@@ -41,8 +41,8 @@ export namespace SetContact
             let bookingStore = Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
             bookingStore.SetBookingContactDetails(this.Name, this.PhoneNumber, this.Email);
         }
-
     }
+    
     @observer
     export class Screen extends React.Component<any>
     {

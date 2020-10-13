@@ -62,7 +62,7 @@ export namespace Contact
             return <Container>
                <Header size="lg">Contact Us</Header>
 
-               <Row>
+                <Row>
                     <Column sm={12} lg={6} className="p-3">
                         <Header size="md">Call Us</Header>
                         <Paragraph>0800 0948 9493</Paragraph>

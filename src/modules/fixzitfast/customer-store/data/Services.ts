@@ -1,38 +1,93 @@
 export default [
     {
-        Id: "12341",
-        CategoryId: "12341",
-        Name: "Make Table",
+        Id: "serv-11",
+        CategoryId: "cat-1",
+        Name: "General service",
+        IconUrl: "",
+    }, {
+        Id: "serv-12",
+        CategoryId: "cat-1",
+        Name: "Lighting + Switches + Sockets",
+        IconUrl: "",
+    }, {
+        Id: "serv-13",
+        CategoryId: "cat-1",
+        Name: "Alarms & Detectors",
+        IconUrl: "",
+    }, {
+        Id: "serv-14",
+        CategoryId: "cat-1",
+        Name: "Internal wiring",
+        IconUrl: "",
+    }, {
+        Id: "serv-15",
+        CategoryId: "cat-1",
+        Name: "Fans + Extractors",
+        IconUrl: "",
+    }, {
+        Id: "serv-16",
+        CategoryId: "cat-1",
+        Name: "Fuseboards",
+        IconUrl: "",
+    },
+
+    
+    {
+        Id: "serv-21",
+        CategoryId: "cat-2",
+        Name: "General service",
+        IconUrl: "",
+    },{
+        Id: "serv-23",
+        CategoryId: "cat-2",
+        Name: "Bathroom & toilet utilities",
+        IconUrl: "",
+    },{
+        Id: "serv-24",
+        CategoryId: "cat-2",
+        Name: "Appliances",
+        IconUrl: "",
+    },{
+        Id: "serv-25",
+        CategoryId: "cat-2",
+        Name: "Heating & radiators",
+        IconUrl: "",
+    },{
+        Id: "serv-26",
+        CategoryId: "cat-2",
+        Name: "Sealing and waterproofing",
+        IconUrl: "",
+    },{
+        Id: "serv-26",
+        CategoryId: "cat-2",
+        Name: "Blockages & drainage",
+        IconUrl: "",
+    },
+
+    {
+        Id: "serv-31",
+        CategoryId: "cat-3",
+        Name: "General service",
+        IconUrl: "",
+    },
+
+    {
+        Id: "serv-41",
+        CategoryId: "cat-4",
+        Name: "General service",
+        IconUrl: "",
+    },
+
+    {
+        Id: "serv-51",
+        CategoryId: "cat-5",
+        Name: "General service",
         IconUrl: "",
     },
     {
-        Id: "12342",
-        CategoryId: "12341",
-        Name: "Re-wiring Electrics",
+        Id: "serv-51",
+        CategoryId: "cat-6",
+        Name: "General service",
         IconUrl: "",
     },
-    {
-        Id: "12343",
-        CategoryId: "12341",
-        Name: "Tile Wall",
-        IconUrl: "",
-    },
-    {
-        Id: "12344",
-        CategoryId: "12341",
-        Name: "Paint Wall",
-        IconUrl: "",
-    },
-    {
-        Id: "12345",
-        CategoryId: "12342",
-        Name: "Make Table",
-        IconUrl: "",
-    },
-    {
-        Id: "12346",
-        CategoryId: "12342",
-        Name: "Re-wiring Electrics",
-        IconUrl: "",
-    }
 ]
