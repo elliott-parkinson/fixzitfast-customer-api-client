@@ -4,6 +4,7 @@ import { Api as RestApi } from "../../../api-client/rest";
 import { RouteService } from "./route/RouteService";
 import { SiteStore } from "./SiteStore";
 
+import "../../../customer-data-store";
 import "../../../customer-store/Store";
 import { ModalController } from "./controller/ModalController";
 import { NotificationsController } from "./controller/NotificationsController";
