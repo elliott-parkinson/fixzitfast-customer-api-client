@@ -56,13 +56,13 @@ export class ServicesStore
 
 	constructor()
 	{
-		// this.Load();
-		// this.GetServices(true);
-		// this.GetPopularServices(true);
-		// this.GetServiceCategories(true);
-		// this.GetFeaturedServices(true);
-		// this.GetFeaturedServiceCategories(true);
-		// this.Store();
+		this.Load();
+		this.GetServices(true);
+		this.GetPopularServices(true);
+		this.GetServiceCategories(true);
+		this.GetFeaturedServices(true);
+		this.GetFeaturedServiceCategories(true);
+		this.Store();
 	}
 
 	Store()
@@ -70,7 +70,7 @@ export class ServicesStore
 		let storage = window.localStorage;
 
 		let services = this.Services.map( item => item.ToJSON() );
-		storage.setItem('fixzitfast.services.services', JSON.stringify(services));
+		storage.setItem('fixzitfast.services.services', JSON.stringify({ List: services }));
 
 		let featured_services = this.FeaturedServices.map( item => item.ToJSON() );
 		storage.setItem('fixzitfast.services.featuredservices', JSON.stringify(featured_services));
@@ -80,7 +80,7 @@ export class ServicesStore
 
 
 		let categories = this.ServiceCategories.map( item => item.ToJSON() );
-		storage.setItem('fixzitfast.services.categories', JSON.stringify(categories));
+		storage.setItem('fixzitfast.services.categories', JSON.stringify({ List: categories }));
 
 		let featured_categories = this.FeaturedServiceCategories.map( item => item.ToJSON() );
 		storage.setItem('fixzitfast.services.featuredcategories', JSON.stringify(featured_categories));
@@ -107,8 +107,8 @@ export class ServicesStore
 		if (services != undefined)
 		{
 			let items = JSON.parse(services);
-			
-			this.Services = items.map( item => {
+			console.warn(items);
+			this.Services = items.List?.map( item => {
 				let category = new Service;
 				category.FromJSON(item);
 				return category;
@@ -144,7 +144,7 @@ export class ServicesStore
 		{
 			let items = JSON.parse(categories);
 			
-			this.ServiceCategories = items.map( item => {
+			this.ServiceCategories = items.List?.map( item => {
 				let category = new ServiceCategory;
 				category.FromJSON(item);
 				return category;

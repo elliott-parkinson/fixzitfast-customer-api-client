@@ -9,8 +9,6 @@ export class App
 {
 	static async Init()
 	{
-		Container.of("Workers").set("api", {} );
-
 		await import("../../www/view");
 	}
 }

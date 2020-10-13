@@ -12,29 +12,7 @@ export class ServicesStore
 
 	@action async Update()
 	{
-		let apiStore = Dependencies.of("fixzitfast-customer-store").get<Api>("api");
-
-		try
-		{
-			let response = await apiStore.Services.List();
-			if (response.Success == true)
-			{
-				let services = response.Data.services;
-
-				for (let service of services)
-				{
-					this.Services.set(service.id, new Service(service) );
-				}
-			}
-			else
-			{
-				throw response.ErrorMessage;
-			}
-		}
-		catch (exception)
-		{
-			throw "Unexpected response from API.";
-		}
+		
 	}
 
 	@action async UpdateFeatured()
