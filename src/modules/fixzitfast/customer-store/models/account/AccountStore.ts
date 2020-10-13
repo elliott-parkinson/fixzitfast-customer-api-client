@@ -12,7 +12,7 @@ export class AccountStore
 	@observable CardType: string = "";
 	@observable CardDigits: string = "";
 
-	@action SetUserId(id: number)
+	@action SetUserId(id: string)
 	{
 		this.Id = id;
 	}

@@ -11,10 +11,12 @@ import { LocationStore } from "./models/location/LocationStore";
 import { ServicesStore } from "./models/services/ServicesStore";
 import { TestimonialStore } from "./models/customers/TestimonialStore";
 
+let authStore = new AuthStore;
+
 Dependencies.of("fixzitfast-customer-store").set([
 	{ id: "api", value: new RestApi("http://127.0.0.1:3000/") },
 
-	{ id: "auth", value: new AuthStore },
+	{ id: "auth", value: authStore },
 	{ id: "account", value: new AccountStore },
 	{ id: "bookings", value: new BookingStore },
 	{ id: "contact", value: new ContactStore },
@@ -23,3 +25,5 @@ Dependencies.of("fixzitfast-customer-store").set([
 	{ id: "services", value: new ServicesStore },
 	{ id: "testimonials", value: new TestimonialStore },
 ]);
+
+authStore.Load();
