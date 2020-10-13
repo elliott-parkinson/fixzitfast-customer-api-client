@@ -5,7 +5,8 @@ import Dependencies from "typedi";
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
 
-import { 
+import {
+    Alert,
 	AppLayout, Titlebar, Fragment,
     Button,
     Container, Block, Row, Column,
@@ -14,8 +15,8 @@ import {
 	Header,
 	NewLine,
     Nav, NavItem, NavLink,
+    InputGroupAddon
 } from "../../Theme";
-import { Alert } from "reactstrap";
 
 
 export namespace Account
@@ -37,6 +38,35 @@ export namespace Account
             const accountStore =  Dependencies.of("fixzitfast-customer-store").get<any>("account");
 
             let success = await accountStore.UpdateUserDetails(this.Name, this.Email, this.Phone);
+
+            if (success == true)
+            {
+                this.Finished = true;
+            }
+
+            this.Error = accountStore.Error;
+        }
+    }
+
+    class CardDetailsForm
+    {
+        @observable Finished: boolean = false;
+        
+        @observable ResponseData = {};
+        @observable CardType: string = "";
+        @observable CardName: string = "";
+        @observable CardExpiry: string = "";
+        @observable CardNumber: string = "";
+        @observable CardDigits: string = "";
+        
+        @observable Error: string = "";
+
+        @action async Submit()
+        {
+            const apiStore =  Dependencies.of("store").get<any>("api");
+            const accountStore =  Dependencies.of("fixzitfast-customer-store").get<any>("account");
+
+            let success = await accountStore.UpdateCardDetails(this.CardDigits, this.CardDigits, this.CardDigits);
 
             if (success == true)
             {
@@ -81,6 +111,7 @@ export namespace Account
         @observable Routes: any;
 
         @observable PersonalForm = new PersonalDetailsForm;
+        @observable CardForm = new CardDetailsForm;
         @observable ResetForm = new ResetPasswordForm;
 
         @observable SelectedTab = "account";
@@ -95,6 +126,7 @@ export namespace Account
             this.PersonalForm.Name = accountStore.Name;
             this.PersonalForm.Email = accountStore.Email;
             this.PersonalForm.Phone = accountStore.Phone;
+            this.CardForm.CardDigits = accountStore.CardDigits;
         }
     
         render() {
@@ -108,6 +140,7 @@ export namespace Account
                             <Card>
                                 <CardBody>
                                     <Header>Personal Details</Header>
+
                                     <Form onSubmit={e => { this.PersonalForm.Submit(); e.preventDefault(); return false; }}>
                                         <FormGroup>
                                             <Label>
@@ -137,9 +170,21 @@ export namespace Account
                                 <CardBody>
                                     <Header>Card Details</Header>
 
-                                    <Alert color="danger">
-                                        <strong>Error: </strong> No API exists to get censored card details.
-                                    </Alert>
+                                    <Form onSubmit={e => { this.PersonalForm.Submit(); e.preventDefault(); return false; }}>
+                                        <FormGroup>
+                                            <InputGroup>
+                                                <InputGroupAddon addonType="prepend">
+                                                    <Button disabled>
+                                                        <i className="fas fa-credit-card" />
+                                                    </Button>
+                                                </InputGroupAddon>
+                                                <Input placeholder={"**** " + this.CardForm.CardDigits} type="text" disabled value={""} />
+                                            </InputGroup>
+
+                                        </FormGroup>
+
+                                        <Button color="primary">Update Card Information</Button>
+                                    </Form>
                                 </CardBody>
                             </Card>
                             <NewLine />

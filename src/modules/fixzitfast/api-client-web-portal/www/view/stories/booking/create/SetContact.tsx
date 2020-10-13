@@ -25,58 +25,21 @@ export namespace SetContact
 {
     export class ContactForm
     {
-        @observable Type = "fix";
-        @observable Details = "";
-        @observable Files = [];
+        @observable Name = "";
+        @observable PhoneNumber = "";
+        @observable Email = "";
         
         @observable Errors = [];
 
-        @action SetType(type: string)
+        @action SetName(name: string)
         {
-            this.Type = type;
-        }
-
-        ProcessImage(img: any, fileString: any, maxSize: number = 1200): string
-		{
-			if (img.width > maxSize || img.height > maxSize)
-			{
-				const ratio = (img.width > maxSize) ? maxSize / img.width : maxSize / img.height;
-
-				const canvas = document.createElement('canvas');
-				canvas.width = ratio * img.width;
-				canvas.height = ratio * img.height;
-
-				const ctx = canvas.getContext('2d');
-				ctx.drawImage(img, 0, 0, ratio * img.width, ratio * img.height);
-				return canvas.toDataURL("image/jpeg", 8) as string;
-			}
-			else
-			{
-				return fileString as string;
-			}
-		}
-
-		SelectFile(event: any)
-		{
-			let images = [];
-
-			for (let i = 0; i < event.target.files.length; i++)
-			{
-				const reader = new FileReader;
-				reader.onloadend = () => {
-					const img = new Image();
-					img.src = reader.result as string;
-					img.onload = action(() => this.Files[0] = this.ProcessImage(img, reader.result));
-				};
-
-				reader.readAsDataURL(event.target.files[i]);
-			}
+            this.Name = name;
         }
         
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
-            bookingStore.SetBookingDetails(this.Type, this.Details, this.Files);
+            bookingStore.SetBookingContactDetails(this.Name, this.PhoneNumber, this.Email);
         }
 
     }
@@ -102,64 +65,41 @@ export namespace SetContact
                     <Column md={9} x={12}>
                         <CreateBookingStepper.Component position={1} onBack={e => this.Router.Back()}/>
 
-                        <Card>
+                        <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
-                                <Header size="sm">What's the problem?</Header>
+                                <Header size="sm">Contact Details</Header>
                                 <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+     
                                     <FormGroup tag="fieldset">
-                                        <FormGroup check>
-                                            <Label check>
-                                                <Input type="radio" name="fix" checked={this.Form.Type == "fix"} onChange={ e => this.Form.SetType("fix") } />{' '}
-                                                Fix (5-10 days)
-                                            </Label>
-                                        </FormGroup>
-                                        <FormGroup check>
-                                            <Label check>
-                                                <Input type="radio" name="fastfix" checked={this.Form.Type == "fastfix"} onChange={ e => this.Form.SetType("fastfix") } />{' '}
-                                                Fast Fix (1-5 days)
-                                            </Label>
-                                        </FormGroup>
-                                        <FormGroup check disabled>
-                                            <Label check>
-                                                <Input type="radio" name="emergency" checked={this.Form.Type == "emergency"} onChange={ e => this.Form.SetType("emergency") } />{' '}
-                                                Emergency (Same day)
-                                            </Label>
-                                        </FormGroup>
-                                    </FormGroup>
-
-                                    <FormGroup tag="fieldset">
-                                        <Input type="textarea" required cplaceholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
+                                        <Label>
+                                            Name (Required)
+                                        </Label>
+                                        <Input type="text" required placeholder="Enter Full Name" value={this.Form.Name} onChange={ e => this.Form.Name = e.target.value } />{' '}
                                     </FormGroup>
 
                                     <FormGroup tag="fieldset">
                                         <Label>
-                                            File upload (optional)
+                                            Phone Number (Required)
                                         </Label>
-                                        { this.Form.Files.length && <Fragment>
-                                            { this.Form.Files.map( file => 
-                                                <Card style={{ width: "96px", height: "96px" }} >
-                                                    <img src={file} style={{ maxWidth: "100%", maxHeight: "100%" }} />
-                                                </Card>
-                                             )}
-                                        </Fragment>}
-                                        <Dropzone accept="image/*" 
-                                            onSelect={event => this.Form.SelectFile(event)}
-                                        >
-                                            <React.Fragment>
-                                                Drag here to upload or choose a file
-                                            </React.Fragment>
-                                        </Dropzone>
+                                        <Input type="text" required placeholder="eg: 07959 484858" value={this.Form.PhoneNumber} onChange={ e => this.Form.PhoneNumber = e.target.value } />{' '}
                                     </FormGroup>
 
-                                    <Button color="primary" block>Confirm Details</Button>
+                                    <FormGroup tag="fieldset">
+                                        <Label>
+                                            Email (Required)
+                                        </Label>
+                                        <Input type="text" required placeholder="Enter Email" value={this.Form.Email} onChange={ e => this.Form.Email = e.target.value } />{' '}
+                                    </FormGroup>
+
+                                    <Button color="primary" block>See Pricing</Button>
                                 </Form>
                             </CardBody>
                         </Card>
                     </Column>
                     <Column md={3} x={12}>
                         <OrderSummary.Component 
-                            service={this.BookingStore?.CurrentBooking?.ServiceName}
-                            location={this.BookingStore?.CurrentBooking?.LocationString}
+                            service={this.BookingStore?.CurrentBooking?.Service}
+                            location={this.BookingStore?.CurrentBooking?.Location}
                         />
                     </Column>
                 </Row>

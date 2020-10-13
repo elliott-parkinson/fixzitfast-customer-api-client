@@ -11,8 +11,8 @@ export namespace OrderSummary
 {
     export interface IViewProps
     {
-        service?: string;
-        location?: string;
+        service?: any;
+        location?: any;
 
         total?: string;
 
@@ -26,19 +26,20 @@ export namespace OrderSummary
             return <Fragment>
                 <Header size="sm">Your Order Summary</Header>
 
-                { this.props.service && <Fragment>
-                    Service
-                    <NewLine />
-                    { this.props.service }
-                    <NewLine />
-                    <NewLine />
-                </Fragment> }
-
                 { this.props.location && <Fragment>
                     Location
                     <NewLine />
-                    { this.props.location }
+                    <i className="fas fa-map-marker-alt" /> &nbsp; { [this.props.location.Line1, this.props.location.Line2, this.props.location.Line3, this.props.location.Town, this.props.location.County, this.props.location.Postcode].filter(n => n).join(", ") }
                 </Fragment> }
+                <NewLine />
+                <NewLine />
+
+                { this.props.service && <Fragment>
+                    Service Summary
+                    <NewLine />
+                    { this.props.service.CategoryName }
+                </Fragment> }
+
                 { this.props.total && <Fragment>
                     <hr />
 

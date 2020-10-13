@@ -71,9 +71,6 @@ export namespace ForgotPassword
                             </Fragment>
                             }
 
-                            <Alert color="danger">
-                                <strong>Error: </strong> No API exists to reset password with a password reset code from an email.
-                            </Alert>
                             { this.Form.Finished == false && <Form className="login-form" onSubmit={e => { this.Form.Submit(); e.preventDefault(); return false; }}>
                                 <Header size="lg">Forgot password</Header>
 

@@ -43,17 +43,7 @@ export class App extends React.Component<any>
 
 	@action async Init()
 	{
-		try /* Get Services and Featured Services */
-		{
-			const servicesStore = Dependencies.of("fixzitfast-customer-store").get<any>("services");
-			await servicesStore.Update();
-			await servicesStore.UpdateFeatured();
-			await servicesStore.UpdatePopular();
-		}
-		catch (exception)
-		{
-			this.Notifications.Push("Error loading services", exception, "danger")
-		}
+		
 	}
 
 	@action ViewPlayStore()
@@ -83,14 +73,26 @@ export class App extends React.Component<any>
 							
 						</Column>
 						<Column md={3} sm={6} xs={12} className="p-3">
-							<Header size="sm"></Header>
+							<Header size="sm">
+								<NavLink href="/booking/create/services" onClick={ e => { e.preventDefault(); this.Routes.Go("/booking/create/services"); return false; }}>
+									Services
+								</NavLink>
+							</Header>
+							<Header size="sm">
+								<NavLink href="/contact" onClick={ e => { e.preventDefault(); this.Routes.Go("/contact"); return false; }}>
+									Contact Us
+								</NavLink>
+								
+							</Header>
 							
 						</Column>
 						<Column md={3} sm={6} xs={12} className="p-3">
+							{/*
 							<Header size="sm">Popular Services</Header>
 							<Alert color="danger">
 								<strong>Error: </strong> Popular services API does not exist.
 							</Alert>
+							*/}
 						</Column>
 						<Column md={3} sm={6} xs={12} className="p-3">
 							<Header size="sm">Contact us</Header>

@@ -10,6 +10,37 @@ h2 {
 	font-weight: 700;
 }
 
+/* Loading */
+.currently-loading {
+	* {
+		width: 100%;
+		border-radius: 8px;
+	}
+
+	h1, h2, h3, h4, h5, p, span, div {
+		background-color: rgb(240, 241, 241);
+	}
+	img {
+		background-color: rgb(211, 217, 228);
+		min-width: 40px;
+		min-height: 40px;
+	}
+
+	.btn {
+		background-color: rgb(154, 160, 170) !important;
+		min-width: 40px;
+		min-height: 28px;
+	}
+
+	p {
+		min-height: 28px;
+	}
+
+	h1, h2, h3, h4, h5 {
+		min-height: 38px;
+	}
+}
+
 
 .app-sidebar {
 	padding: 0px;

@@ -24,7 +24,7 @@ export namespace Login
         @observable ResponseData = {};
         @observable Email: string = "";
         @observable Password: string = "";
-        
+
         @observable Error: string = "";
 
         @action async Submit()
@@ -88,7 +88,7 @@ export namespace Login
                                     <strong>Error: </strong> { this.Form.Error } 
                                 </Alert> }
 
-                                <Button block>Sign in</Button>
+                                <Button color="primary" block>Sign in</Button>
                             </Form>
                         </Column>
                         <Column sm={12} md={6}>

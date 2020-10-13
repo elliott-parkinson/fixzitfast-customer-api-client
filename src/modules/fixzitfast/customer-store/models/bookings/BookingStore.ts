@@ -5,7 +5,7 @@ import { BookingSummaryStore } from "./BookingSummaryStore";
 
 export class BookingStore
 {
-	@observable CurrentBooking: any;
+	@observable CurrentBooking: any = new BookingSummaryStore;
 
 	@action Create(service?: any)
 	{
@@ -22,10 +22,12 @@ export class BookingStore
 
 	@action BookService(service: any)
 	{
-		this.CurrentBooking = new BookingSummaryStore;
+		this.CurrentBooking = new BookingSummaryStore(true);
 
-		this.CurrentBooking.ServiceId = service.Id;
-		this.CurrentBooking.ServiceName = service.Name;
+		this.CurrentBooking.Service.Id = service.Id;
+		this.CurrentBooking.Service.Name = service.Name;
+
+		this.CurrentBooking.Store();
 
 		let routes = Dependencies.of("store").get<any>("routes");
 			routes.Go("/booking/create/location");
@@ -34,26 +36,65 @@ export class BookingStore
 	}
 	@action SetBookingLocation(location: any)
 	{
-		this.CurrentBooking.LocationString = "123 Fake Street, Fatown, Facounty, FA1 K3E";
+		this.CurrentBooking.Location.Line1 = "123 Fake Street";
+		this.CurrentBooking.Location.Town = "Fatown";
+		this.CurrentBooking.Location.County = "Facounty";
+		this.CurrentBooking.Location.Postcode = "FA1 K3E";
+
+		this.CurrentBooking.Store();
 
 		let routes = Dependencies.of("store").get<any>("routes");
 			routes.Go("/booking/create/details");
-            
-		const notificationStore = Dependencies.of("store").get<any>("notifications");
-		notificationStore.Push("Error: Not Implemented", "Cannot set a bookings details yet.", "danger", 2.5);
-		notificationStore.Push("Warning: Data Faked", "Location data was faked as the API does not yet exist.", "warning", 2.5);
 	}
 
 	@action SetBookingDetails(type: string, description: string, files: string[] = [])
 	{
 		this.CurrentBooking.Details.Type = type;
 		this.CurrentBooking.Details.Desciption = description;
-		this.CurrentBooking.Details.File = files;
+		this.CurrentBooking.Details.Files = files;
+
+		this.CurrentBooking.Store();
 
 		let routes = Dependencies.of("store").get<any>("routes");
 			routes.Go("/booking/create/contact");
             
 	}
+
+	@action SetBookingContactDetails(name: string, phonenumber: string, email: string[] = [])
+	{
+		this.CurrentBooking.ContactDetails.Name = name;
+		this.CurrentBooking.ContactDetails.PhoneNumber = phonenumber;
+		this.CurrentBooking.ContactDetails.Email = email;
+
+		this.CurrentBooking.Store();
+
+		let routes = Dependencies.of("store").get<any>("routes");
+			routes.Go("/booking/create/times");  
+	}
+	@action SetTimeDetails(day: string, hourBlock: string, agree: boolean)
+	{
+		this.CurrentBooking.Time.Day = day;
+		this.CurrentBooking.Time.HourBlock = hourBlock;
+		this.CurrentBooking.Time.Agree = agree;
+
+		this.CurrentBooking.Store();
+
+		let routes = Dependencies.of("store").get<any>("routes");
+			routes.Go("/booking/create/paymentdetails");  
+	}
+
+	@action SetPaymentCard(cardId: string, type: string, name: string, cardNumber: string, expiry: string, ccv: string)
+	{
+		this.CurrentBooking.Store();
+
+		let routes = Dependencies.of("store").get<any>("routes");
+			routes.Go("/booking/create/payment");
+
+		return true;
+	}
+
+
+	
 
 	private async GetCurrentPosition(): Promise<any> {
 		if ('geolocation' in navigator)
@@ -64,7 +105,7 @@ export class BookingStore
 		}
 		else
 		{
-			throw new Error("Could not obtain permission to use location service.");
+			throw new Error("Location service is not available.");
 		}
 	}
 
@@ -90,14 +131,10 @@ export class BookingStore
 
 		try
 		{
-			console.log(position);
+			let locationStore = Dependencies.of("fixzitfast-customer-store").get<any>("location");
+			let postcode = await locationStore.GetPostcodeFromLocation(position.latitude, position.longitude);
 
-			// let response = await axios.get<any>(this.ApiUrl + "/postcodes?lat=" + position.latitude + "&lon=" + position.longitude);
-			// if (!response.data || !response.data.result || response.data.result === 0) {
-				throw new Error("");
-			// }
-
-			// return response.data.result;
+			return postcode;
 		}
 		catch (exception)
 		{

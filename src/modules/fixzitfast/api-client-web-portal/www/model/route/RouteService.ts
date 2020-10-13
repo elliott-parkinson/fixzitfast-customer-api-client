@@ -43,12 +43,24 @@ export class RouteService
 		this.CheckAuth(this.Location);
 	}
 
+	public scrollToTop() {
+		const c = document.documentElement.scrollTop || document.body.scrollTop;
+		if (c > 0) {
+			window.requestAnimationFrame( a => this.scrollToTop() );
+			window.scrollTo(0, c - c / 8);
+		}
+	}
+
 	@action Go(path: string)
 	{
 		this.CheckAuth(path) && this.History.push(path);
 
 		this.Hops++;
 		this.Forwards = 0;
+		
+		setTimeout( e=> {
+			this.scrollToTop();
+		}, 300);
 
 		return false;
 	}

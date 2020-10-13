@@ -12,6 +12,9 @@ import { SelectService } from "./SelectService";
 import { SelectLocation } from "./SelectLocation";
 import { SetDetails } from "./SetDetails";
 import { SetContact } from "./SetContact";
+import { Payment } from "./Payment";
+import { DateAndTime } from "./DateAndTime";
+import { PaymentDetails } from "./PaymentDetails";
 
 
 @withRouter
@@ -29,6 +32,10 @@ export default class Routes extends React.Component<any>
 			<Route path={match + "/location"} exact component={ props => <SelectLocation.Screen {...props}/> } />
 			<Route path={match + "/details"} exact component={ props => <SetDetails.Screen {...props}/> } />
 			<Route path={match + "/contact"} exact component={ props => <SetContact.Screen {...props}/> } />
+			<Route path={match + "/times"} exact component={ props => <DateAndTime.Screen {...props}/> } />
+			<Route path={match + "/paymentdetails"} exact component={ props => <PaymentDetails.Screen {...props}/> } />
+			<Route path={match + "/payment"} exact component={ props => <Payment.Screen {...props}/> } />
+
 
 			<Route component={ props => <Error404.Screen {...props}/> } />
 		</Switch>;

@@ -120,7 +120,7 @@ export namespace Siginup
                                         <strong>Error: </strong> { this.Form.Error } 
                                     </Alert> }
 
-                                    <Button block>Sign up</Button>
+                                    <Button color="primary" block>Sign up</Button>
                                 </Form>
                             }
                             

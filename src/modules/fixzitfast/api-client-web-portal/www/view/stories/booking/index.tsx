@@ -8,6 +8,7 @@ import Dependencies from "typedi";
 
 
 import CreateRoutes from "./create";
+import ListRoutes from "./list";
 import { Error404 } from "../Error404";
 
 
@@ -27,6 +28,7 @@ export default class Routes extends React.Component<any>
 			<Redirect path={match + "/"} exact to={match + "/create"} />
 			
 			<Route path={match + "/create"} component={ props => <CreateRoutes {...props}/> } />
+			<Route path={match + "/list"} component={ props => <ListRoutes {...props}/> } />
 
 			<Route component={ props => <Error404.Screen {...props}/> } />
 		</Switch>;

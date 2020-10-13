@@ -1,13 +1,16 @@
 import Dependencies from "typedi";
 import { observable, action } from "mobx";
+import stub from "../../data/Account";
 
 
 export class AccountStore
 {
-	@observable Id: number = -1;
+	@observable Id: string = null;
 	@observable Name: string = "";
 	@observable Email: string = "";
 	@observable Phone: string = "";
+	@observable CardType: string = "";
+	@observable CardDigits: string = "";
 
 	@action SetUserId(id: number)
 	{
@@ -18,28 +21,23 @@ export class AccountStore
 	{
 		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
 
-		let userDetailsResponse = await apiStore.Account.GetUserDetails(this.Id);
-		let accountDetails = userDetailsResponse.Data.accountDetails;
-
-		this.Id = accountDetails.id ? accountDetails.id : accountDetails.ID;
-		this.Name = accountDetails.name ? accountDetails.name : accountDetails.Name;
-		this.Email = accountDetails.email ? accountDetails.email : accountDetails.Email;
-		this.Phone = accountDetails.phone ? accountDetails.phone : accountDetails.Phone;
+		this.Id = stub.Id;
+		this.Name = stub.Name;
+		this.Email = stub.Email;
+		this.Phone = stub.PhoneNumber;
 	}
 
 	@action async UpdateUserDetails(name: string, email: string, phone: string)
 	{
 		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
 
-		let response = await apiStore.Account.UpdateUserDetails(this.Id, name, email, phone);
-		if (response.Success == true)
+		if (true)
 		{
-			let accountDetails = response.Data.accountDetails;
 	
-			this.Id = accountDetails.id ? accountDetails.id : accountDetails.ID;
-			this.Name = accountDetails.name ? accountDetails.name : accountDetails.Name;
-			this.Email = accountDetails.email ? accountDetails.email : accountDetails.Email;
-			this.Phone = accountDetails.phone ? accountDetails.phone : accountDetails.Phone;
+			this.Id = stub.Id;
+			this.Name = stub.Name;
+			this.Email = stub.Email;
+			this.Phone = stub.PhoneNumber;
 
 
 			const notificationStore = Dependencies.of("store").get<any>("notifications");
@@ -52,12 +50,32 @@ export class AccountStore
 		}
 	}
 
+	@action async ForgotPassword(email: string)
+	{
+		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
+		let routeStore: any = Dependencies.of("store").get("routes");
+
+		if (true)
+		{
+			routeStore.Go("/");
+
+
+			const notificationStore = Dependencies.of("store").get<any>("notifications");
+			notificationStore.Push("Resetting password succeded", "Your password has been reset", "success", 5);
+		}
+		else
+		{
+			const notificationStore = Dependencies.of("store").get<any>("notifications");
+			notificationStore.Push("Resetting password failed", response.ErrorMessage, "danger", 5);
+		}
+	}
+
 	@action async ResetPassword(oldPassword: string, password: string, passwordConfirm: string)
 	{
 		let apiStore = Dependencies.of("fixzitfast-customer-store").get<any>("api");
+		let routeStore: any = Dependencies.of("store").get("routes");
 
-		let response = await apiStore.Account.ResetPassword(this.Id, password, oldPassword);
-		if (response.Success == true)
+		if (true)
 		{
 			const notificationStore = Dependencies.of("store").get<any>("notifications");
 			notificationStore.Push("Resetting password succeded", "Your password has been reset", "success", 5);
@@ -71,7 +89,7 @@ export class AccountStore
 
 	@action async ClearDetails()
 	{
-		this.Id = -1;
+		this.Id = null;
 		this.Name = "";
 		this.Email = "";
 		this.Phone = "";

@@ -8,7 +8,7 @@ import {
 	Fragment,
     Button,
     Container,
-	Card, CardBody, CardHeader, ,CardFooter,
+	Card, CardBody, CardHeader, CardFooter,
 	Form, FormGroup, Input, InputGroup,
 	Header,
 	NewLine,

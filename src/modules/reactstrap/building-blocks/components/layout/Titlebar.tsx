@@ -15,15 +15,15 @@ export interface ITitlebarProps
     brand?: IBrandProps;
 }
 export const Titlebar = (props: ITitlebarProps) => <Navbar
-        className={ ["titlebar", props.className].join(" ") }
-        style={{ justifyContent: "center", ...props.style }}
-    >
-        { props.brand && 
-            <NavbarBrand href="" onClick={ event => { props.brand.onSelect ? props.brand.onSelect(event) : null; event.preventDefault(); }}>
-                { props.brand.content }
-            </NavbarBrand>
-        }
-        <Nav>
-            
-        </Nav>
-    </Navbar>;
+    className={ ["titlebar", props.className].join(" ") }
+    style={{ justifyContent: "center", ...props.style }}
+>
+    { props.brand && 
+        <NavbarBrand href="" onClick={ event => { props.brand.onSelect ? props.brand.onSelect(event) : null; event.preventDefault(); }}>
+            { props.brand.content }
+        </NavbarBrand>
+    }
+    <Nav>
+        
+    </Nav>
+</Navbar>;

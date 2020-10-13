@@ -1,0 +1,56 @@
+
+.payment-status {
+	text-align: center;
+	width: 100%;
+
+	.indicator {
+		border: 2px solid;
+		border-radius: 50%;
+		height: 172px;
+		width: 172px;
+		
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+		padding: 0 5%;
+
+		i {
+			font-size: 2rem;
+		}
+
+		&.done {
+			border-color: rgb(101, 203, 92);
+
+			i {
+				color: rgb(101, 203, 92);
+			}
+		}
+
+		&.processing {
+			border-color: rgb(101, 203, 92);
+
+		}
+
+		&.failed {
+			border-color: rgb(203, 92, 92);
+
+			i {
+				color: rgb(203, 92, 92);
+			}
+		}
+
+		.indicator-icon {
+			color: rgb(171, 183, 204);
+		}
+	}
+
+	.status-text {
+		color: rgb(142, 153, 173);
+		font-weight: bold;
+		text-align: center;
+		margin-top: 24px;
+		margin-bottom: 24px;
+	}
+
+}

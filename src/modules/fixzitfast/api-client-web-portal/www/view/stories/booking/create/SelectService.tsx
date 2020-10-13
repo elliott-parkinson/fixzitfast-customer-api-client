@@ -43,9 +43,7 @@ export namespace SelectService
             let list = [];
             if (this.ServicesStore != undefined)
             {
-                this.ServicesStore.Services.forEach( service =>
-                    service.ParentId == -1 && list.push(service)
-                );
+                list = this.ServicesStore.ServiceCategories;
             }
 
             return list;
@@ -58,11 +56,11 @@ export namespace SelectService
             {
                 let services = [];
 
-                this.ServicesStore.Services.forEach( service => service.ParentId == -1 && services.push(service) );
+                this.ServicesStore.Services.forEach( service => service.CategoryId == -1 && services.push(service) );
                 this.ServicesStore.Services.forEach( service => {
-                    if (service.ParentId !== -1)
+                    if (service.CategoryId !== -1)
                     {
-                        let parent = services.find(result => result.Id == service.ParentId);
+                        let parent = this.ServicesStore.ServiceCategories.find(result => result.Id == service.CategoryId);
                         list.push({ Id: service.Id, Name: parent.Name + " - " + service.Name });
                     }
                 });
@@ -81,13 +79,25 @@ export namespace SelectService
             return list;
         }
 
+
+        GetPopularServices()
+        {
+            let list = [];
+            if (this.ServicesStore != undefined)
+            {
+                list = this.ServicesStore.PopularServices.splice(0, 6);
+            }
+
+            return list;
+        }
+
         GetServicesForCategory(id: number)
         {
             let list = [];
             if (this.ServicesStore != undefined)
             {
                 this.ServicesStore.Services.forEach( service =>
-                    service.ParentId == id && list.push(service)
+                    service.CategoryId == id && list.push(service)
                 );
             }
 
@@ -131,7 +141,7 @@ export namespace SelectService
                 <Header>Choose a service</Header>
                 <Row>
                     <Column md={9} x={12}>
-                        <Form>
+                        <Form className="animate__animated animate__fadeIn animate__delay-02s">
                             <FormGroup>
                                 <InputGroup>
                                     <Typeahead
@@ -150,45 +160,54 @@ export namespace SelectService
                         </Form>
 
                         <div className="service-category-list">
-                            <Header size="xs">Most popular services</Header>
-                            <Alert color="danger">
-                                <strong>API Error: </strong> No popular services api exists.
-                            </Alert>
-                            <div className="service-list">
+                            <div className="animate__animated animate__fadeIn animate__delay-02s">
+                                <Header size="xs">Most popular services</Header>
+                                <Row className="service-list">
+                                    { this.GetPopularServices().map( service => 
+                                        <Column md={4} sm={6} xs={12} key={service.Id} className="p-1">
+                                            <ServiceCard.Component
+                                                name={service.Name}
+                                                description={service.Description}
 
+                                                onClick={e => this.BookService(service)}
+                                            />
+                                        </Column>
+                                    )}
+                                </Row>
+
+                                <NewLine />
                             </div>
-                            
-                            {this.ServiceCategories.map( category => <Fragment key={category.Id}>
-                                { (this.FilterCategory== undefined || (this.FilterCategory && this.FilterCategory.Id == category.Id)) && <Fragment>
-                                    <Header size="xs">{category.Name}</Header>
-                                    { this.GetServicesForCategory(category.Id).length == 0 && <Alert color="info">
-                                        <strong>Error: </strong> No services exist for this category.
-                                    </Alert> }
-                                    
-                                    <Row className="service-list">
-                                        { this.GetServicesForCategory(category.Id).map( service => 
-                                            <Column md={4} sm={6} xs={12} key={service.Id}>
-                                                <ServiceCard.Component
-                                                    name={service.Name}
-                                                    description={service.Description}
+                            <div className="animate__animated animate__fadeIn animate__delay-04s">
+                                {this.ServiceCategories.map( category => <Fragment key={category.Id}>
+                                    { (this.FilterCategory== undefined || (this.FilterCategory && this.FilterCategory.Id == category.Id)) && <Fragment>
+                                        <Header size="xs">{category.Name}</Header>
+                                        { this.GetServicesForCategory(category.Id).length == 0 && <Alert color="info">
+                                            <strong>Error: </strong> No services exist for this category.
+                                        </Alert> }
+                                        
+                                        <Row className="service-list">
+                                            { this.GetServicesForCategory(category.Id).map( service => 
+                                                <Column md={4} sm={6} xs={12} key={service.Id} className="p-1">
+                                                    <ServiceCard.Component
+                                                        name={service.Name}
+                                                        description={service.Description}
 
-                                                    onClick={e => this.BookService(service)}
-                                                />
-                                            </Column>
-                                        )}
-                                    </Row>
-                                </Fragment> }
-                            </Fragment>)}
-
-
+                                                        onClick={e => this.BookService(service)}
+                                                    />
+                                                </Column>
+                                            )}
+                                        </Row>
+                                    </Fragment> }
+                                </Fragment>)}
+                            </div>
                         </div>
                     </Column>
-                    <Column md={3} x={12}>
+                    <Column md={3} x={12} className="animate__animated animate__fadeIn animate__faster d-none d-lg-inline-flex">
                         <div className="service-category-filter-icons">
                             <Header size="xs">Filter</Header>
                             <Row>
                                 { this.ServiceCategories.map( category => <Fragment key={category.Id}>
-                                    <Column>
+                                    <Column className="m-1">
                                         <ServiceIcon.Component
                                             name={category.Name}
                                             selected={this.FilterCategory?.Id == category.Id}

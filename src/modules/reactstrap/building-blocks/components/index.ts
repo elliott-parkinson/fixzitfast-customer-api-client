@@ -1,6 +1,8 @@
 export * from "./button";
 export * from "./block";
 export * from "./dropzone";
+export * from "./icon";
+export * from "./image";
 export * from "./layout";
 export * from "./text";
 export * from "./selling-point";
@@ -19,6 +21,8 @@ export {
     ListGroup, ListGroupItem,
     Card, CardHeader, CardBody, CardFooter,
 } from "reactstrap";
+
+export let Rating = require("pretty-rating-react").default;
 
 export { Typeahead } from 'react-bootstrap-typeahead';
 

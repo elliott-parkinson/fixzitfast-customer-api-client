@@ -4,7 +4,7 @@ import Dependencies, { Service } from "typedi";
 import { 
     Alert,
 	AppLayout, Titlebar, Fragment,
-    Button,
+    Button, Block,
     Container,
 	Card, CardBody, CardHeader,
 	Form, FormGroup, Input, InputGroup, InputGroupAddon, Typeahead,
@@ -30,7 +30,7 @@ export namespace SelectLocation
 
         componentDidMount()
         {
-            this.BookingStore =  Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
+            this.BookingStore = Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
         }
 
         @computed get CanGetStarted(): boolean
@@ -45,7 +45,8 @@ export namespace SelectLocation
 
         @action async FindLocation()
         {
-            await this.BookingStore.FindUserAddress();
+            let postcode = await this.BookingStore.FindUserAddress();
+            this.Search = postcode;
         }
     
         render() {
@@ -53,7 +54,7 @@ export namespace SelectLocation
                 <Header>Enter your location</Header>
                 <Row>
                     <Column md={9} x={12}>
-                        <Form>
+                        <Form className="animate__animated animate__fadeIn animate__delay-02s">
                             <FormGroup>
                                 <InputGroup>
                                     <Input type="text" placeholder="Enter address or postcode here" value={this.Search} onChange={e => this.Search = e.target.value} />
@@ -64,12 +65,7 @@ export namespace SelectLocation
                             </FormGroup>
                         </Form>
 
-                        
-                        <Alert color="danger">
-                            <strong>API Error: </strong> No api for location finding exists. Data will be faked to continue. Type anything in the above box and click 'Get Started' to progress.
-                        </Alert>
-
-                        <Card>
+                        <Card className="animate__animated animate__fadeIn animate__delay-04s">
                             <CardBody>
                                 <Header size="sm">Unsure? Let us find you!</Header>
                                 <Button color="primary" block onClick={e => this.FindLocation() }>Find my location</Button>
@@ -78,8 +74,10 @@ export namespace SelectLocation
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12}>
-                        
+                    <Column md={3} x={12} className="vertical-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
+                        <Block>
+                           <i className="fas fa-images fa-5x" />
+                        </Block>
                     </Column>
                 </Row>
             </Container>;

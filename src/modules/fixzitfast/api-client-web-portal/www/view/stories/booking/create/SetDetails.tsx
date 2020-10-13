@@ -102,7 +102,7 @@ export namespace SetDetails
                     <Column md={9} x={12}>
                         <CreateBookingStepper.Component position={0} onBack={e => this.Router.Back()}/>
 
-                        <Card>
+                        <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
                                 <Header size="sm">What's the problem?</Header>
                                 <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
@@ -158,8 +158,8 @@ export namespace SetDetails
                     </Column>
                     <Column md={3} x={12}>
                         <OrderSummary.Component 
-                            service={this.BookingStore?.CurrentBooking?.ServiceName}
-                            location={this.BookingStore?.CurrentBooking?.LocationString}
+                            service={this.BookingStore?.CurrentBooking?.Service}
+                            location={this.BookingStore?.CurrentBooking?.Location}
                         />
                     </Column>
                 </Row>

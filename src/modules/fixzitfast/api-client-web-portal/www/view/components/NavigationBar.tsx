@@ -32,7 +32,7 @@ export namespace NavigationBar
         }
     
         render() {
-            return <Navbar color="light" light expand="md">
+            return <Navbar color="light" light expand="md" className=" animate__animated animate__fadeInDown">
             <Container>
                 <NavbarBrand href="/" onClick={ e => { e.preventDefault(); this.Routes.Go("/"); return false; }}>fixzitfast</NavbarBrand>
 
@@ -42,7 +42,7 @@ export namespace NavigationBar
                 { this.Auth?.LoggedIn == true ?
                     <Fragment>
                         <NavbarText>{this.Account?.Name}</NavbarText>
-                        <NavLink href="/bookings" onClick={ e => { e.preventDefault(); this.Routes.Go("/bookings"); return false; }}>My Bookings</NavLink>
+                        <NavLink href="/booking/list" onClick={ e => { e.preventDefault(); this.Routes.Go("/booking/list"); return false; }}>My Bookings</NavLink>
                         <NavLink href="/account" onClick={ e => { e.preventDefault(); this.Routes.Go("/account"); return false; }}>My Account</NavLink>
                         <NavLink href="/auth/logout" onClick={ e => { e.preventDefault(); this.Auth.Logout(); return false; }}>Sign out</NavLink>
                     </Fragment>
