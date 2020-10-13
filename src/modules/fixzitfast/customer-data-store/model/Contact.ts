@@ -1,5 +1,4 @@
 import { observable, action, toJS } from "mobx";
-import { CurrentUser } from "./CurrentUser";
 
 
 export class Contact

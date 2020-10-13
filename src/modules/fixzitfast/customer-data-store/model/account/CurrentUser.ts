@@ -1,6 +1,8 @@
+import Dependencies from "typedi";
 import { observable, action, toJS } from "mobx";
-import { serialize, deserialize } from "serializer.ts/Serializer";
 import { Type } from "serializer.ts/Decorators";
+
+import stub from "../../../customer-store/data/Account";
 
 export class AddressDetails
 {
@@ -21,6 +23,8 @@ export class AddressDetails
         this.Postcode = postcode;
 
         console.warn("API Not implemented");
+
+        return true;
     }
 }
 
@@ -35,6 +39,8 @@ export class CardDetails
         this.CardDigits = cardNumber.slice(11);
 
         console.warn("API Not implemented");
+
+        return true;
     }
 }
 
@@ -53,30 +59,38 @@ export class CurrentUser
     
     @action UpdatePersonalDetails(name: string, email: string, phone: string)
     {
-        this.Name = name;
-        this.Email = email;
-        this.Phone = phone;
+        if (true)
+		{
+			this.Name = name;
+			this.Email = email;
+			this.Phone = phone;
 
-        console.warn("API Not implemented");
+			const notificationStore = Dependencies.of("store").get<any>("notifications");
+			notificationStore.Push("Updating personal details succeded", "Your details have been updated", "success", 5);
+
+            return true;
+		}
+		else
+		{
+			const notificationStore = Dependencies.of("store").get<any>("notifications");
+			//notificationStore.Push("Updating personal details failed", response.ErrorMessage, "danger", 5);
+		}
     }
 
     @action async ResetPassword(oldPassword: string, password: string, passwordConfirm: string)
     {
-        console.warn("API Not implemented");
-    }
+        if (true)
+		{
+			const notificationStore = Dependencies.of("store").get<any>("notifications");
+			notificationStore.Push("Resetting password succeded", "Your password has been reset", "success", 5);
 
-
-    Store()
-    {
-        let storage = window.localStorage;
-		storage.setItem('fixzitfast.currentuser', serialize(this));
-    }
-
-    @action Load()
-    {
-        let storage = window.localStorage;
-		let user = storage.getItem('fixzitfast.currentuser');
-		if (user != undefined) deserialize(CurrentUser, user);
+            return true;
+		}
+		else
+		{
+			const notificationStore = Dependencies.of("store").get<any>("notifications");
+			//notificationStore.Push("Resetting password failed", response.ErrorMessage, "danger", 5);
+		}
     }
 
     @action Clear()
@@ -88,8 +102,5 @@ export class CurrentUser
 
         this.Address = new AddressDetails;
         this.Card = new CardDetails;
-
-        let storage = window.localStorage;
-		storage.clearItem('fixzitfast.currentuser');
     }
 }

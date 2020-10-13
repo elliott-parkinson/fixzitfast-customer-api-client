@@ -3,13 +3,14 @@ import { observable, action } from "mobx";
 
 export class Service
 {
-	@observable Id = -1;
-	@observable ParentId = -1;
+	@observable Id = "";
+	@observable ParentId = "";
 
 	@observable Name = "";
 	@observable ImageUrl = "";
 
 	@observable HourlyRate = 0;
-
-
+	
+	@observable Featured = false;
+	@observable Popular = false;
 }

@@ -14,7 +14,7 @@ import { TestimonialStore } from "./models/customers/TestimonialStore";
 let authStore = new AuthStore;
 
 Dependencies.of("fixzitfast-customer-store").set([
-	{ id: "api", value: new RestApi("http://127.0.0.1:3000/") },
+	// { id: "api", value: new RestApi("http://127.0.0.1:3000/") },
 
 	{ id: "auth", value: authStore },
 	{ id: "account", value: new AccountStore },

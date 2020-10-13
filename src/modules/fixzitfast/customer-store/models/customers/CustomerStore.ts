@@ -38,11 +38,11 @@ export class CustomerStore
 	Store()
 	{
 		let storage = window.localStorage;
-		storage.setItem('fixzitfast.customers.total', this.TotalCustomers.toString());
+		storage.setItem('fixzitfast.customers.total', this.TotalCustomers?.toString());
 		
 		if (this.CustomerQuote != undefined)
 		{
-			storage.setItem('fixzitfast.customers.quote', this.CustomerQuote.ToJSON() );
+			storage.setItem('fixzitfast.customers.quote', this.CustomerQuote?.ToJSON() );
 		}
 	}
 	

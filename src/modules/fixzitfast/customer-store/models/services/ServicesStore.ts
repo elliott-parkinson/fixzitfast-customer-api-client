@@ -56,13 +56,13 @@ export class ServicesStore
 
 	constructor()
 	{
-		this.Load();
-		this.GetServices(true);
-		this.GetPopularServices(true);
-		this.GetServiceCategories(true);
-		this.GetFeaturedServices(true);
-		this.GetFeaturedServiceCategories(true);
-		this.Store();
+		// this.Load();
+		// this.GetServices(true);
+		// this.GetPopularServices(true);
+		// this.GetServiceCategories(true);
+		// this.GetFeaturedServices(true);
+		// this.GetFeaturedServiceCategories(true);
+		// this.Store();
 	}
 
 	Store()

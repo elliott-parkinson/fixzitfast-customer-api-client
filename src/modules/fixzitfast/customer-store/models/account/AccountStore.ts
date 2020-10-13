@@ -39,7 +39,6 @@ export class AccountStore
 			this.Email = stub.Email;
 			this.Phone = stub.PhoneNumber;
 
-
 			const notificationStore = Dependencies.of("store").get<any>("notifications");
 			notificationStore.Push("Updating personal details succeded", "Your details have been updated", "success", 5);
 		}

@@ -118,8 +118,6 @@ export class BookingSummaryStore
 	Store()
 	{
 		let storage = window.localStorage;
-
-		console.warn("storing", this);
 		storage.setItem('fixzitfast.bookings.current', JSON.stringify(toJS(this)));
 	}
 
@@ -142,8 +140,6 @@ export class BookingSummaryStore
 			this.Details.FromJSON(item.Details);
 			this.Time.FromJSON(item.Time);
 			this.ContactDetails.FromJSON(item.ContactDetails);
-
-			console.warn("loaded", item);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-import { autorun, observable, toJS } from "mobx";
+import { observable, toJS, autorun, when } from "mobx";
 
 import { Store } from "./model";
 
@@ -7,6 +7,17 @@ export namespace CustomerDataStore
 {
 
     let store = new Store();
+    store.Account.Load();
+    store.Bookings.Load();
+    store.Services.Load();
+
+
+
+    /* On Logout */
+    when(() => store.Account.LoggedIn == false, async () =>
+    {
+        store.Bookings.Clear();
+    });
 
 
     autorun( () =>
@@ -19,7 +30,6 @@ export namespace CustomerDataStore
         if (store.Account.LoggedIn)
         {
             console.log("User logged in");
-            store.Account.CurrentUser.Store();
         }
         else
         {
@@ -32,21 +42,9 @@ export namespace CustomerDataStore
         await store.Services.Services.Fetch();
         await store.Services.Categories.Fetch();
 
-        console.log( toJS(store.Services.Services) );
-        console.log( toJS(store.Services.Categories) );
+		store.Services.Store();
     });
 
-
-
-    
-
-    setInterval(() =>
-    {
-        // get service categories
-        // get services
-
-        // store.CurrentUser.LoggedIn = !store.CurrentUser.LoggedIn;
-    }, 1000);
 
 
     window.addEventListener("message", event =>
