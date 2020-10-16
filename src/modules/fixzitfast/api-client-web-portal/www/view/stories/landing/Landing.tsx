@@ -94,60 +94,57 @@ export namespace Landing
         
     
         render() {
-            return <Container>
-                <Row className="main-hero"> 
-                    <Column lg={8} className="vertical-center animate__animated animate__fadeIn">
-                        <Header>When it comes to your home, Fixzitfast</Header>
-                        <Paragraph>The smart home-repair service that frees up your time for the important things in life.</Paragraph>
+            return <Container fluid>
+                <div className="main-hero">
+                    <Row> 
+                        <Column lg={2} xs={1} />
+                        <Column lg={6} xs={10} className="vertical-center animate__animated animate__fadeIn">
+                            <Header>When it comes to your home, Fixzitfast</Header>
+                            <Paragraph>The smart home-repair service that frees up your time for the important things in life.</Paragraph>
 
-                        <Form>
-                            <FormGroup>
-                                <InputGroup>
-                                    <Typeahead
-                                        id="basic-typeahead-single"
-                                        onChange={e => this.SelectService(e[0]) }
-                                        options={this.ServicesTypeaheadList}
-                                        placeholder="Type the service that you need."
-                                        selected={null}
-                                        labelKey={service => this.GetService(service).Name}
-                                        renderMenuItemChildren={props => this.GetService(props).Name}
-                                    />
-                                    <InputGroupAddon addonType="prepend">
-                                        <Button color="primary" disabled={ this.SelectedService != undefined ? undefined : true } onClick={e => { e.preventDefault(); this.BookService(); return false; }}>Book</Button>
-                                    </InputGroupAddon>
-                                </InputGroup>
-                            </FormGroup>
-                            <FormGroup>
-                                <Button color="secondary" onClick={e => this.ViewServices()}>See all Services</Button>
-                            </FormGroup>
-                        </Form>
-                    </Column>
-                    <Column lg={4} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
-                        <Block>
-                           <i className="fas fa-images fa-5x" />
-                        </Block>
-                    </Column>
-                </Row>
+                            <Form>
+                                <FormGroup>
+                                    <InputGroup>
+                                        <Typeahead
+                                            id="basic-typeahead-single"
+                                            onChange={e => this.SelectService(e[0]) }
+                                            options={this.ServicesTypeaheadList}
+                                            placeholder="Type the service that you need."
+                                            selected={null}
+                                            labelKey={service => this.GetService(service).Name}
+                                            renderMenuItemChildren={props => this.GetService(props).Name}
+                                        />
+                                        <InputGroupAddon addonType="prepend">
+                                            <Button color="primary" disabled={ this.SelectedService != undefined ? undefined : true } onClick={e => { e.preventDefault(); this.BookService(); return false; }}>Get Started</Button>
+                                        </InputGroupAddon>
+                                    </InputGroup>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Button color="secondary" onClick={e => this.ViewServices()}>See all Services</Button>
+                                </FormGroup>
+                            </Form>
+                        </Column>
+                        <Column lg={4} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex van-image-container">
+                            <div className="van-image"></div>
+                        </Column>
+                    </Row>
+                </div>
                 
-                <hr />
-                <FeaturedServicesBar.Component />
-                <hr />
+
+                <FeaturedServicesBar.Component onClick={() => this.ViewServices()} />
+
                 <YearlyCustomers.Component />
-                <hr />
+
                 <SellingPoints.Component onClick={() => this.ViewServices()} />
                 
                 <QuoteArea.Component onClick={() => this.ViewServices()} />
 
-                <HowItWorks.Component />
-                <hr />
-                <ServicesBanner.Component onBook={service => this.BookService(service.Id)} onView={() => this.ViewServices()} />
-                <hr />
-                <Accredited.Component />
-                <hr />
                 <SatisfactionBanner.Component />
-                <hr />
+                <HowItWorks.Component />
+                <ServicesBanner.Component onBook={service => this.BookService(service.Id)} onView={() => this.ViewServices()} />
+                <Accredited.Component />
                 <TestimonialsBanner.Component />
-                <hr />
                 <AppBanner.Component />
             </Container>;
         }

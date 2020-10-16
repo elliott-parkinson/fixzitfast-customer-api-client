@@ -6,7 +6,7 @@ export class Service
 	@observable Id = -1;
 	@observable ParentId = -1;
 	@observable Name = "";
-	@observable IconUrl = "";
+	@observable ImageUrl = "";
 	@observable HourlyRate = 0;
 
 	constructor(props: any)
@@ -14,7 +14,7 @@ export class Service
 		this.Id = props.id;
 		this.ParentId = props.parent;
 		this.Name = props.name;
-		this.IconUrl = props.icon;
+		this.ImageUrl = props.icon;
 		this.HourlyRate = props.hourlyRate;
 	}
 }

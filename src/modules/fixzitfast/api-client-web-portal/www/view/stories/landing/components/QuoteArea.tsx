@@ -41,9 +41,9 @@ export namespace QuoteArea
             <Column md={12} xs={12} className="full-center">
                 <Header size="md">{ this.Quote?.Excerpt }</Header>
                 <NewLine />
-                <Header size="md"> -{ this.Quote?.Name }- </Header>
+                <Header size="sm"> -{ this.Quote?.Name }- </Header>
 
-                <Button color="primary" outline onClick={this.props.onClick}>See All Services</Button>
+                <Button color="primary" size="lg" onClick={this.props.onClick}>See All Services</Button>
             </Column>
         </Row>
         }

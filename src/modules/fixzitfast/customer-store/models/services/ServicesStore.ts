@@ -12,7 +12,7 @@ export class Service
 	Id: string;
 	CategoryId: string;
 	Name: string;
-	IconUrl: string;
+	ImageUrl: string;
 
 	ToJSON()
 	{
@@ -107,7 +107,6 @@ export class ServicesStore
 		if (services != undefined)
 		{
 			let items = JSON.parse(services);
-			console.warn(items);
 			this.Services = items.List?.map( item => {
 				let category = new Service;
 				category.FromJSON(item);

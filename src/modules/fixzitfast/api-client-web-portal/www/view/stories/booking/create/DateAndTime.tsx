@@ -88,11 +88,11 @@ export namespace DateAndTime
                                                 <Input type="select" onChange={e => this.Form.HourBlock = e.target.value.toString()}>
                                                     <option value="1">8 am - 10 am</option>
                                                     <option value="2">9 am - 11 am</option>
-                                                    <option value="3" disabled>10 am - 12 pm</option>
-                                                    <option value="4" disabled>11 am - 1 pm</option>
+                                                    <option value="3" disabled>10 am - 12 pm (fully booked)</option>
+                                                    <option value="4" disabled>11 am - 1 pm (fully booked)</option>
                                                     <option value="5">12 pm - 2 pm</option>
                                                     <option value="6">1 pm - 3 pm</option>
-                                                    <option value="7" disabled>2 pm - 4 pm</option>
+                                                    <option value="7" disabled>2 pm - 4 pm (fully booked)</option>
                                                     <option value="8">3 pm - 5 pm</option>
                                                     <option value="9">4 pm - 6 pm</option>
                                                 </Input>

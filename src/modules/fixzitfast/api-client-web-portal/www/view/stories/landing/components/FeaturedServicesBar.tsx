@@ -15,12 +15,13 @@ import {
 
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
+import { ServiceCategoryIcon } from "../../../../../../react-components";
 
 export namespace FeaturedServicesBar
 {
     export interface IViewProps
     {
-        
+        onClick?: Function;
     }
 
     @observer
@@ -47,7 +48,7 @@ export namespace FeaturedServicesBar
 
         CalculateDelayClass(index: number)
         {
-            if (index >= 0)
+            if (index <= 0)
             {
                 return "";
             }
@@ -62,19 +63,24 @@ export namespace FeaturedServicesBar
         }
 
         render() {
-            return <Row className="featured-services-bar">
-                {this.FeaturedServicesList?.map( (service, index) => <Column md={3} sm={6} xs={12} key={service.Id}>
-                    <Card className={"m-1 animate__animated animate__fadeIn " + this.CalculateDelayClass(index)}>
-                        <CardBody>
-                            <Button color="primary" disabled className="rounded-circle">
-                                <i className="fas fa-images" />
-                            </Button>
-                            &nbsp;
-                            { service.Name }
-                        </CardBody>
-                    </Card>
-                </Column>)}
-            </Row>
+            return <div className="featured-services-bar">
+                <Container>
+                    <Row>
+                        {this.FeaturedServicesList?.map( (service, index) => <Column lg={3} md={6} xs={12} key={service.Id}>
+                            <Card className={"noselect m-1 animate__animated animate__fadeIn " + this.CalculateDelayClass(index)} onClick={this.props.onClick}>
+                                <CardBody>
+                                    <ServiceCategoryIcon.Component src={service.IconUrl ? service.IconUrl : ""} />
+
+                                    &nbsp;
+                                    <span>
+                                        { service.Name }
+                                    </span>
+                                </CardBody>
+                            </Card>
+                        </Column>)}
+                    </Row>
+                </Container>
+            </div>
         }
     }
 }

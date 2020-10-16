@@ -19,15 +19,17 @@ export namespace SatisfactionBanner
     export class Component extends React.Component<IViewProps>
     {
         render() {
-            return <Row>
-                <Column lg={6} className="vertical-center">
-                    <Header>Your satisfaction, guaranteed</Header>
-                </Column>
-                <Column lg={6} className="vertical-center">
-                    <Paragraph>Your satisfaction matters to us. Our guarantee is our name: if you’re not happy, we’ll Fixzitfast.</Paragraph>
-                    <Paragraph>From background checking all our tradespeople, to using electric vans, we’re determined to bring you the fastest, greenest and best home-repair service in the city.</Paragraph>
-                </Column>
-            </Row>;
+            return <Container className="jumbo-container">
+                <Row>
+                    <Column lg={6} className="banner-jumbo">
+                        <Header size="lg">Your satisfaction, guaranteed</Header>
+                    </Column>
+                    <Column lg={6} className="banner-jumbo">
+                        <Paragraph>Your satisfaction matters to us. Our guarantee is our name: if you’re not happy, we’ll Fixzitfast.</Paragraph>
+                        <Paragraph>From background checking all our tradespeople, to using electric vans, we’re determined to bring you the fastest, greenest and best home-repair service in the city.</Paragraph>
+                    </Column>
+                </Row>
+            </Container>;
         }
     }
 }

@@ -16,7 +16,7 @@ import {
 
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
-import { ServiceCard, ServiceIcon } from "../../../../../../react-components";
+import { ServiceCard, ServiceIcon, ServiceCategoryIcon } from "../../../../../../react-components";
 
 export namespace SelectService
 {
@@ -101,6 +101,8 @@ export namespace SelectService
                 );
             }
 
+            console.warn(list);
+
             return list;
         }
 
@@ -168,6 +170,7 @@ export namespace SelectService
                                             <ServiceCard.Component
                                                 name={service.Name}
                                                 description={service.Description}
+                                                src={service.ImageUrl}
 
                                                 onClick={e => this.BookService(service)}
                                             />
@@ -193,6 +196,7 @@ export namespace SelectService
                                                     <ServiceCard.Component
                                                         name={service.Name}
                                                         description={service.Description}
+                                                        src={service.ImageUrl}
 
                                                         onClick={e => this.BookService(service)}
                                                     />
@@ -216,6 +220,7 @@ export namespace SelectService
                                     <Column className="m-1">
                                         <ServiceIcon.Component
                                             name={category.Name}
+                                            src={category.IconUrl}
                                             selected={this.FilterCategory?.Id == category.Id}
 
                                             onClick={e => this.SetFilterCategory(category)}

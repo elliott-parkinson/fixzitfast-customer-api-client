@@ -48,45 +48,45 @@ export namespace TestimonialsBanner
         }
 
         render() {
-            return <Row>
-                <Column lg={6} className="vertical-center">
-                    <Header>Your satisfaction matters to us. Our guarantee is our name: if you’re not happy, we’ll Fixzitfast.</Header>
-                    <Paragraph>From background checking all our tradespeople, to using electric vans, we’re determined to bring you the fastest, greenest and best home-repair service in the city.</Paragraph>
-                </Column>
-                <Column lg={6} className="">
-                    <Row className="testimonials-block w-100">
-                        {this.TestimonialsList.map( testimonial => <Column md={4} sm={12} xs={12} key={testimonial.Id} className="p-1">
-                            <Card className="testimonial-card">
-                                <CardBody className="text-center">
-                                    <Button color="primary" disabled className="rounded-circle">
-                                        <i className="fas fa-images" />
-                                    </Button>
-                                    <NewLine />
-                                    <NewLine />
-                                    <Header size="xs">
-                                        <strong>
-                                            {testimonial.Name}
-                                        </strong>
-                                    </Header>
-                                    <Rating rating={testimonial.StarRating}
-                                        icons={{
-                                            complete: 'fa fa-star',
-                                            half: 'fas fa-star-half-alt',
-                                            empty: 'far fa-star',
-                                        }}
-                                        setColors={['#d9ad26', '#d9ad26', '#434b4d']}
-                                    />
-                                    <Paragraph className="text-left">
-                                        <small>
-                                            {testimonial.Excerpt}
-                                        </small>
-                                    </Paragraph>
-                                </CardBody>
-                            </Card>
-                        </Column>)}
-                    </Row>
-                </Column>
-            </Row>;
+            return <Container>
+                <Row>
+                    <Column lg={6} className="banner-jumbo">
+                        <Header size="lg">Taking care of our customers</Header>
+                        <Paragraph>From background checking all our tradespeople, to using electric vans, we’re determined to bring you the fastest, greenest and best home-repair service in the city.</Paragraph>
+                    </Column>
+                    <Column lg={6} className="vertical-center p-0">
+                        <Row className="testimonials-block w-100">
+                            {this.TestimonialsList.map( testimonial => <Column md={4} sm={12} xs={12} key={testimonial.Id} className="p-1">
+                                <Card className="testimonial-card">
+                                    <CardBody className="text-center">
+                                        D
+                                        <NewLine />
+                                        <NewLine />
+                                        <Header size="xs">
+                                            <strong>
+                                                {testimonial.Name}
+                                            </strong>
+                                        </Header>
+                                        <Rating rating={testimonial.StarRating}
+                                            icons={{
+                                                complete: 'fa fa-star',
+                                                half: 'fas fa-star-half-alt',
+                                                empty: 'far fa-star',
+                                            }}
+                                            setColors={['rgb(255, 182, 39)', 'rgb(255, 182, 39)', '#434b4d']}
+                                        />
+                                        <Paragraph className="text-left">
+                                            <small>
+                                                {testimonial.Excerpt}
+                                            </small>
+                                        </Paragraph>
+                                    </CardBody>
+                                </Card>
+                            </Column>)}
+                        </Row>
+                    </Column>
+                </Row>
+            </Container>;
         }
     }
 }

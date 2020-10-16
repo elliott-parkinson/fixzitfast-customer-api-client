@@ -14,13 +14,15 @@ import {
 	NewLine,
     Nav, NavItem, NavLink,
     
-} from "../../../reactstrap/building-blocks";
+} from "../../../../reactstrap/building-blocks";
+
+import "./service-card.scss";
 
 export namespace ServiceCard
 {
     export interface IViewProps
     {
-        iconUrl: string;
+        src?: string;
         name: string;
         description: string;
 
@@ -33,9 +35,7 @@ export namespace ServiceCard
         render() {
             return <Card className="service-card" onClick={this.props.onClick}>
                 <CardBody>
-                    <Button color="primary" disabled className="rounded-circle">
-                        <i className="fas fa-images" />
-                    </Button>
+                    <img src={this.props.src} />
                 </CardBody>
                 <CardFooter>
                     <strong>{this.props.name}</strong>

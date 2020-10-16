@@ -62,7 +62,7 @@ export namespace YearlyCustomers
             if (this.Total)
             {
                 var num_parts = this.Total.toString().split(".");
-                num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ", ");
                 return num_parts.join(".");
             }
 
@@ -70,22 +70,26 @@ export namespace YearlyCustomers
         }
 
         render() {
-            return <Row className="animate__animated animate__fadeIn animate__delay-02s">
-                <Column lg={6} className="vertical-center">
-                    <Block>
-                        <Header size="lg">
-                            Customers this Year
-                        </Header>
-                    </Block>
-                </Column>
-                <Column lg={6} className="vertical-center">
-                    <Block>
-                        <Header size="lg">
-                            { this.TotalNumbers }
-                        </Header>
-                    </Block>
-                </Column>
-            </Row>
+            return <div className="yearly-customers-bar">
+                <Container>
+                    <Row className="animate__animated animate__fadeIn animate__delay-02s">
+                        <Column lg={6} className="vertical-center">
+                            <Block>
+                                <Header size="lg" className="main-text">
+                                    Customers this year
+                                </Header>
+                            </Block>
+                        </Column>
+                        <Column lg={6} className="vertical-center">
+                            <Block>
+                                <Header size="lg" className="details-text">
+                                    { this.TotalNumbers }
+                                </Header>
+                            </Block>
+                        </Column>
+                    </Row>
+                </Container>
+            </div>
         }
     }
 }

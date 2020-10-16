@@ -1,0 +1,19 @@
+
+.service-icon {
+    padding: 6px;
+
+    &.clickable {
+        &.active {
+            .service-category-icon {
+                background-color: #ececf0;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+
+            .service-category-icon {
+                background-color: #e7e7eb;
+            }
+        }
+    }
+}

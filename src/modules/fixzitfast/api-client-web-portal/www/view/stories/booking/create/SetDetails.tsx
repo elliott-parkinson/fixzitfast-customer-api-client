@@ -107,35 +107,13 @@ export namespace SetDetails
                                 <Header size="sm">What's the problem?</Header>
                                 <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
                                     <FormGroup tag="fieldset">
-                                        <FormGroup check>
-                                            <Label check>
-                                                <Input type="radio" name="fix" checked={this.Form.Type == "fix"} onChange={ e => this.Form.SetType("fix") } />{' '}
-                                                Fix (5-10 days)
-                                            </Label>
-                                        </FormGroup>
-                                        <FormGroup check>
-                                            <Label check>
-                                                <Input type="radio" name="fastfix" checked={this.Form.Type == "fastfix"} onChange={ e => this.Form.SetType("fastfix") } />{' '}
-                                                Fast Fix (1-5 days)
-                                            </Label>
-                                        </FormGroup>
-                                        <FormGroup check disabled>
-                                            <Label check>
-                                                <Input type="radio" name="emergency" checked={this.Form.Type == "emergency"} onChange={ e => this.Form.SetType("emergency") } />{' '}
-                                                Emergency (Same day)
-                                            </Label>
-                                        </FormGroup>
+                                        <Input type="textarea" rows={8} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
                                     </FormGroup>
 
                                     <FormGroup tag="fieldset">
-                                        <Input type="textarea" required cplaceholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
-                                    </FormGroup>
-
-                                    <FormGroup tag="fieldset">
-                                        <Label>
-                                            File upload (optional)
-                                        </Label>
-                                        { this.Form.Files.length && <Fragment>
+                                        <NewLine />
+                                        <Paragraph>Show us the problem by uploading a photo.</Paragraph>
+                                        { this.Form.Files.length >= 0 && <Fragment>
                                             { this.Form.Files.map( file => 
                                                 <Card style={{ width: "96px", height: "96px" }} >
                                                     <img src={file} style={{ maxWidth: "100%", maxHeight: "100%" }} />
@@ -146,7 +124,7 @@ export namespace SetDetails
                                             onSelect={event => this.Form.SelectFile(event)}
                                         >
                                             <React.Fragment>
-                                                Drag here to upload or choose a file
+                                                Drag here to upload or choose an image
                                             </React.Fragment>
                                         </Dropzone>
                                     </FormGroup>

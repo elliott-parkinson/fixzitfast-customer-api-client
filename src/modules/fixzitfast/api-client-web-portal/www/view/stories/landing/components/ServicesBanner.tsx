@@ -64,26 +64,28 @@ export namespace ServicesBanner
         }
 
         render() {
-            return <Row>
-                <Column lg={6} className="vertical-center">
-                    <Header>Services</Header>
-                    <Paragraph>Know what you need? Search our services to find the right person for the job. From tiling and painting to repairing boilers and rewiring, we’ll FixzitFast.</Paragraph>
-                    
-                    <Button color="primary" block onClick={e => this.props.onView() }>See all Services</Button>
-                </Column>
-                <Column lg={6} className="vertical-center">
-                    <Row className="featured-services-block w-100">
-                        {this.FeaturedServicesList.map( service => <Column md={6} sm={6} xs={12} key={service.Id} className="p-1">
-                            <ServiceCard.Component
-                                name={service.Name}
-                                description={service.Description}
+            return <Container className="jumbo-container">
+                <Row>
+                    <Column lg={6} className="banner-jumbo">
+                        <Header size="lg">Services</Header>
+                        <Paragraph>Know what you need? Search our services to find the right person for the job. From tiling and painting to repairing boilers and rewiring, we’ll FixzitFast.</Paragraph>
+                        
+                        <Button color="primary" block onClick={e => this.props.onView() }>See all Services</Button>
+                    </Column>
+                    <Column lg={6} className="vertical-center p-0">
+                        <Row className="featured-services-block w-100">
+                            {this.FeaturedServicesList.map( service => <Column md={6} sm={6} xs={12} key={service.Id} className="p-1">
+                                <ServiceCard.Component
+                                    name={service.Name}
+                                    description={service.Description}
 
-                                onClick={e => this.props.onBook(service.Id)}
-                            />
-                        </Column>)}
-                    </Row>
-                </Column>
-            </Row>;
+                                    onClick={e => this.props.onBook(service.Id)}
+                                />
+                            </Column>)}
+                        </Row>
+                    </Column>
+                </Row>
+            </Container>;
         }
     }
 }

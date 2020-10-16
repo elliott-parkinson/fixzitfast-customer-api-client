@@ -67,7 +67,7 @@ export namespace SetContact
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
-                                <Header size="sm">Contact Details</Header>
+                                <Header size="sm">Job Contact Details</Header>
                                 <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
      
                                     <FormGroup tag="fieldset">

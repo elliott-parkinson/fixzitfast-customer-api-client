@@ -19,35 +19,37 @@ export namespace Accredited
     export class Component extends React.Component<IViewProps>
     {
         render() {
-            return <Row>
-                <Column lg={6} className="full-center">
-                    <Row>
-                        <Column md={4} sm={6} xs={12} className="0-1">
-                            <i className="fas fa-images fa-3x" />
-                        </Column>
-                        <Column md={4} sm={6} xs={12} className="0-1">
-                            <i className="fas fa-images fa-3x" />
-                        </Column>
-                        <Column md={4} sm={6} xs={12} className="0-1">
-                            <i className="fas fa-images fa-3x" />
-                        </Column>
-                        <Column md={4} sm={6} xs={12} className="0-1">
-                            <i className="fas fa-images fa-3x" />
-                        </Column>
-                        <Column md={4} sm={6} xs={12} className="0-1">
-                            <i className="fas fa-images fa-3x" />
-                        </Column>
-                        <Column md={4} sm={6} xs={12} className="0-1">
-                            <i className="fas fa-images fa-3x" />
-                        </Column>
-                    </Row>
-                </Column>
-                <Column lg={6} className="vertical-center">
-                    <Header size="sm">Tradesmen</Header>
-                    <Header>Fully Accredited</Header>
-                    <Paragraph>All our tradespeople work directly for us. They are background checked, qualified, certified and experienced, so you know you and your home are in safe hands.</Paragraph>
-                </Column>
-            </Row>;
+            return <Container className="jumbo-container accredited-banner">
+                <Row>
+                    <Column lg={6} className="full-center p-0">
+                        <Row>
+                            <Column md={4} sm={6} xs={12} className="full-center">
+                                <img title="How it works" src={require("../../../../../assets/images/landing/accredited/accr1.png")} />
+                            </Column>
+                            <Column md={4} sm={6} xs={12} className="full-center">
+                                <img title="How it works" src={require("../../../../../assets/images/landing/accredited/accr2.png")} />
+                            </Column>
+                            <Column md={4} sm={6} xs={12} className="full-center">
+                                <img title="How it works" src={require("../../../../../assets/images/landing/accredited/accr3.png")} />
+                            </Column>
+                            <Column md={4} sm={6} xs={12} className="full-center">
+                                <img title="How it works" src={require("../../../../../assets/images/landing/accredited/accr4.png")} />
+                            </Column>
+                            <Column md={4} sm={6} xs={12} className="full-center">
+                                <img title="How it works" src={require("../../../../../assets/images/landing/accredited/accr5.png")} />
+                            </Column>
+                            <Column md={4} sm={6} xs={12} className="full-center">
+                                <img title="How it works" src={require("../../../../../assets/images/landing/accredited/accr6.png")} />
+                            </Column>
+                        </Row>
+                    </Column>
+                    <Column lg={6} className="banner-jumbo">
+                        <Header size="sm">Tradesmen</Header>
+                        <Header size="lg">Fully Accredited</Header>
+                        <Paragraph>All our tradespeople work directly for us. They are background checked, qualified, certified and experienced, so you know you and your home are in safe hands.</Paragraph>
+                    </Column>
+                </Row>
+            </Container>;
         }
     }
 }

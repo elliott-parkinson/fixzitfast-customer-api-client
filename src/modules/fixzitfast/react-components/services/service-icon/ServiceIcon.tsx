@@ -1,9 +1,9 @@
+
 import * as React from "react";
 import Dependencies from "typedi";
 
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
-
 import { 
 	AppLayout, Titlebar, Fragment,
     Button,
@@ -13,7 +13,9 @@ import {
 	NewLine,
     Nav, NavItem, NavLink,
     
-} from "../../../reactstrap/building-blocks";
+} from "../../../../reactstrap/building-blocks";
+
+import "./service-icon.scss";
 
 export namespace ServiceIcon
 {
@@ -30,10 +32,9 @@ export namespace ServiceIcon
     export class Component extends React.Component<any>
     {
         render() {
-            return <div className="service-icon">
-                <Button color="primary" className="rounded-circle" onClick={this.props.onClick} active={this.props.selected ? true : undefined}>
-                    <i className="fas fa-images" />
-                </Button>
+            return <div className={"service-icon text-center clickable" + (this.props.selected ? " active" : "")}>
+                <img className="service-category-icon" src={this.props.src} onClick={this.props.onClick}  />
+
                 <NewLine />
                 <strong>{this.props.name}</strong>
             </div>;

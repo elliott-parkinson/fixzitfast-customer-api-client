@@ -18,15 +18,5 @@ export default [
         Id: "12344",
         Name: "Paint Wall",
         IconUrl: "",
-    },
-    {
-        Id: "12345",
-        Name: "Make Table",
-        IconUrl: "",
-    },
-    {
-        Id: "12346",
-        Name: "Re-wiring Electrics",
-        IconUrl: "",
     }
 ]

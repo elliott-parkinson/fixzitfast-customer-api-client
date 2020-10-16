@@ -32,9 +32,11 @@ export namespace NavigationBar
         }
     
         render() {
-            return <Navbar color="light" light expand="md" className=" animate__animated animate__fadeInDown">
+            return <Navbar color="light" light expand="md" className="top-navbar animate__animated animate__fadeInDown">
             <Container>
-                <NavbarBrand href="/" onClick={ e => { e.preventDefault(); this.Routes.Go("/"); return false; }}>fixzitfast</NavbarBrand>
+                <NavbarBrand href="/" onClick={ e => { e.preventDefault(); this.Routes.Go("/"); return false; }}>
+                    <img src={require("../../../assets/images/site-logo.png")} />
+                </NavbarBrand>
 
                 <Nav className="mr-auto" navbar>
                 </Nav>
@@ -51,7 +53,7 @@ export namespace NavigationBar
                         <NavItem>
                             <NavLink href="/auth/login" onClick={ e => { e.preventDefault(); this.Routes.Go("/auth/login"); return false; }}>Sign in</NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="highlighted">
                             <NavLink href="/auth/signup" onClick={ e => { e.preventDefault(); this.Routes.Go("/auth/signup"); return false; }}>Sign up</NavLink>
                         </NavItem>
                     </Nav>
