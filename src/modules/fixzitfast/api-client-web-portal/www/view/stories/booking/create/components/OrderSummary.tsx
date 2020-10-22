@@ -24,7 +24,7 @@ export namespace OrderSummary
     {
         render() {
             return <Fragment>
-                <Header size="sm">Your Order Summary</Header>
+                <Header size="xs">Your Order Summary</Header>
 
                 { this.props.location && <Fragment>
                     Location

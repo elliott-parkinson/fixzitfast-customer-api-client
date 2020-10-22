@@ -23,6 +23,7 @@ export namespace SelectLocation
     @observer
     export class Screen extends React.Component<any>
     {
+        @observable Router: any;
         @observable BookingStore: any;
         @observable LocationStore: any;
 
@@ -32,6 +33,7 @@ export namespace SelectLocation
 
         componentDidMount()
         {
+            this.Router =  Dependencies.of("store").get<any>("routes");
             this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
             if (Dependencies.of("fixzitfast-customer-data-store").has<any>("location"))
@@ -54,7 +56,8 @@ export namespace SelectLocation
             else
             {
                 this.Error = "";
-                this.BookingStore.SetBookingLocation();
+                this.BookingStore.InProgress.Location.Set("", "", "line3", "town", "county", "postcode");
+                this.Router.Go("/booking/create/details");
             }
         }
 
@@ -100,9 +103,9 @@ export namespace SelectLocation
                             </CardBody>
                         </Card>
                     </Column>
-				<Column sm={12} md={6} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
-					<img className="p-0 m-0" src={require("../../../../../assets/images/bookings-bg.png")} />
-				</Column>
+                    <Column sm={12} md={6} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
+                        <img className="p-0 m-0" src={require("../../../../../assets/images/bookings-bg.png")} />
+                    </Column>
                 </Row>
             </Container>;
         }

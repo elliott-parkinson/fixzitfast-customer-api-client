@@ -104,7 +104,8 @@ export namespace SetDetails
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
-                                <Header size="sm">What's the problem?</Header>
+                                <Header size="md">What's the problem?</Header>
+                                <NewLine />
                                 <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
                                     <FormGroup tag="fieldset">
                                         <Input type="textarea" rows={8} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
