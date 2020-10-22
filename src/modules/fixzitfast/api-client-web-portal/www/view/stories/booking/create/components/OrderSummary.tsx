@@ -94,9 +94,9 @@ export namespace OrderSummary
                             </Button>
                         </Column>
                     </Row>
-                    <Paragraph>{this.Booking?.Contact.Name}</Paragraph>
-                    <Paragraph>{this.Booking?.Contact.Email}</Paragraph>
-                    <Paragraph>{this.Booking?.Contact.PhoneNumber}</Paragraph>
+                    <Paragraph><i className="fas fa-user" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Name}</Paragraph>
+                    <Paragraph><i className="fas fa-envelope" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Email}</Paragraph>
+                    <Paragraph><i className="fas fa-phone" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.PhoneNumber}</Paragraph>
                     <NewLine />
                     <NewLine />
                 </Fragment> }
