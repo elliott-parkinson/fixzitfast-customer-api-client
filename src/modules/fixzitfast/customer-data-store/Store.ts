@@ -9,6 +9,7 @@ import { Bookings } from "./model/booking/Bookings";
 import { InProgressBooking } from "./model/booking/InProgressBooking";
 import { Customers } from "./model/customers/Customers";
 import { Testimonials } from "./model/customers/Testimonials";
+import { Location } from "./model/location/Location";
 
 
 Dependencies.of("fixzitfast-customer-data-store").set([
@@ -16,7 +17,7 @@ Dependencies.of("fixzitfast-customer-data-store").set([
 	{ id: "bookings", value: new Bookings },
 	{ id: "contact", value: new Contact },
 	{ id: "customers", value: new Customers },
-	// { id: "location", value: new LocationStore },
+	{ id: "location", value: new Location },
 	{ id: "services", value: new Services },
 
 	{ id: "testimonials", value: new Testimonials },

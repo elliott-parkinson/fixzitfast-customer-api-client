@@ -24,13 +24,20 @@ export namespace SelectLocation
     export class Screen extends React.Component<any>
     {
         @observable BookingStore: any;
+        @observable LocationStore: any;
 
+        @observable Error: string = "";
         @observable Search: string = "";
         @observable Location: any;
 
         componentDidMount()
         {
             this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("location"))
+            {
+                this.LocationStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("location");
+            }
         }
 
         @computed get CanGetStarted(): boolean
@@ -40,12 +47,20 @@ export namespace SelectLocation
 
         @action GetStarted()
         {
-            this.BookingStore.SetBookingLocation();
+            if (this.Search.indexOf("EH") === -1)
+            {
+                this.Error = "Sorry we are not in your area right now, please come back another time.";
+            }
+            else
+            {
+                this.Error = "";
+                this.BookingStore.SetBookingLocation();
+            }
         }
 
         @action async FindLocation()
         {
-            let postcode = await this.BookingStore.FindUserAddress();
+            let postcode = await this.LocationStore.FindUserAddress();
             this.Search = postcode;
         }
     
@@ -64,6 +79,12 @@ export namespace SelectLocation
                                     </InputGroupAddon>
                                 </InputGroup>
                             </FormGroup>
+
+                            { this.Error != "" && <FormGroup>
+                                <Alert color="danger">
+                                    <i className="fas fa-exclamation" /> &nbsp; Sorry we are not in your area right now, please come back another time.
+                                </Alert>
+                            </FormGroup> }
                         </Form>
                         
                         <NewLine />
