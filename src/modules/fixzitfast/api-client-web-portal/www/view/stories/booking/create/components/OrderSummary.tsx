@@ -58,7 +58,7 @@ export namespace OrderSummary
                             </Button>
                         </Column>
                     </Row>
-                    <Paragraph><i className="fas fa-map-marker-alt" /> &nbsp; { [this.Booking?.Location.Line1, this.Booking?.Location.Line2, this.Booking?.Location.Line3, this.Booking?.Location.Town, this.Booking?.Location.County, this.Booking?.Location.Postcode].filter(n => n).join(", ") }</Paragraph>
+                    <Paragraph><i className="fas fa-map-marker-alt" style={{ color: "#ff9505" }}/> &nbsp; { [this.Booking?.Location.Line1, this.Booking?.Location.Line2, this.Booking?.Location.Line3, this.Booking?.Location.Town, this.Booking?.Location.County, this.Booking?.Location.Postcode].filter(n => n).join(", ") }</Paragraph>
                     <NewLine />
                     <NewLine />
                 </Fragment> }
@@ -101,15 +101,59 @@ export namespace OrderSummary
                     <NewLine />
                 </Fragment> }
 
-                { this.props.service && <Fragment>
-                    Service Summary
+                { this.Booking?.Time.TimeSlotText != "" && <Fragment>
+                    <Row className="summary-header">
+                        <Column xs={7}>
+                            <Header>
+                                Date and Time
+                            </Header>
+                        </Column>
+                        <Column xs={5} className="text-right">
+                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/times") }>
+                                Change
+                            </Button>
+                        </Column>
+                    </Row>
+                    <Paragraph><i className="fas fa-calendar-alt" style={{ color: "#ff9505" }}/> &nbsp; { this.Booking?.Time.TimeSlotText }</Paragraph>
                     <NewLine />
-                    { this.props.service.CategoryName }
+                    <NewLine />
                 </Fragment> }
 
-                { this.props.total && <Fragment>
-                    <hr />
 
+
+                { this.Booking?.Service.Name != "" && <Fragment>
+                    <Row className="summary-header">
+                        <Column xs={7}>
+                            <Header>
+                                Service Summary
+                            </Header>
+                        </Column>
+                        <Column xs={5} className="text-right">
+                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/contact") }>
+                                Change
+                            </Button>
+                        </Column>
+                    </Row>
+                    <Paragraph>{this.Booking?.Service.CategoryName}, {this.Booking?.Service.Name}</Paragraph>
+                    <Paragraph className="note">Please be aware that you will be charged until the job is completed.</Paragraph>
+                    <NewLine />
+                    <NewLine />
+                </Fragment> }
+
+                { true && this.Booking?.Time.TimeSlotText != "" && <Fragment>
+                    <hr />
+                    <Row className="summary-header">
+                        <Column xs={7}>
+                            <Paragraph>
+                                Total Amount
+                            </Paragraph>
+                        </Column>
+                        <Column xs={5} className="text-right">
+                            <Paragraph className="text-right" style={{ color: "#ff9505" }}>
+                                £100
+                            </Paragraph>
+                        </Column>
+                    </Row>
                 </Fragment> }
             </div>;
         }

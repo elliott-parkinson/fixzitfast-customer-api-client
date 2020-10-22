@@ -67,11 +67,14 @@ export class InProgressBooking
 		let stored: any = storage.getItem('fixzitfast.bookings.current');
 		if (stored != undefined)
 		{
-            this.Service = deserialize(Service, JSON.parse(stored).Service );
-            this.Location = deserialize(Address, JSON.parse(stored).Location );
-            this.Details = deserialize(Details, JSON.parse(stored).Details );
-            this.Time = deserialize(Time, JSON.parse(stored).Time );
-            this.Contact = deserialize(Contact, JSON.parse(stored).Contact );
+            this.Service = deserialize(Service, JSON.parse(stored).Service);
+            this.Location = deserialize(Address, JSON.parse(stored).Location);
+            this.Details = deserialize(Details, JSON.parse(stored).Details);
+            this.Time = deserialize(Time, JSON.parse(stored).Time);
+            this.Contact = deserialize(Contact, JSON.parse(stored).Contact);
+
+            this.Time.Date = new Date( this.Time.DateId );
+            this.Time.SetTimeSlot();
 		}
     }
 }

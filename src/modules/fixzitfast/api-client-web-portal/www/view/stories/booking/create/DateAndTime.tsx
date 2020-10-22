@@ -27,23 +27,21 @@ export namespace DateAndTime
 {
     export class DateAndTimeForm
     {
-        @observable Day = "";
-        @observable HourBlock = "";
+        @observable Date = new Date;
         @observable Agree = false;
         
         @observable Errors = [];
 
-        @action SetTimeslot(event: any)
+        @action SetTimeslot(date: any)
         {
-            console.warn(event);
+            this.Date = new Date(Date.parse(date));
         }
         
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-            // bookingStore.SetTimeDetails(this.Day, this.HourBlock, this.Agree);
-
-            
+            bookingStore.InProgress.Time.Set(this.Date, this.Agree);
+            bookingStore.InProgress.Store();
 
             let router = Dependencies.of("store").get<any>("routes");
             router.Go("/booking/create/paymentdetails");
