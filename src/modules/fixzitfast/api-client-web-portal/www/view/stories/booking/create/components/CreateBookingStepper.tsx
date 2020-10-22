@@ -48,6 +48,7 @@ export namespace CreateBookingStepper
                             activeColor="#ff9505"
                             activeTitleColor="#ff9505"
                             completeColor="#ff9505"
+                            completeBarColor="#ff9505"
                             completeTitleColor="#ff9505"
                             circleTop={34}
                             lineMarginOffset={0}

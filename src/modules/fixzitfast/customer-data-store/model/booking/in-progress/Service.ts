@@ -19,7 +19,5 @@ export class Service
         this.Name = name;
         this.CategoryId = categoryId;
         this.CategoryName = categoryName;
-
-        console.warn(id, name, categoryId, categoryName);
 	}
 }

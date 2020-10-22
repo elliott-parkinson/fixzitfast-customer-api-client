@@ -2,6 +2,8 @@ import * as React from "react";
 import { Redirect } from "react-router-dom";
 import Dependencies, { Service } from "typedi";
 
+import BookingSelector from 'react-booking-selector';
+
 import { 
     Alert,
 	AppLayout, Titlebar, Fragment,
@@ -31,9 +33,9 @@ export namespace DateAndTime
         
         @observable Errors = [];
 
-        @action SetName(name: string)
+        @action SetTimeslot(event: any)
         {
-            this.Name = name;
+            console.warn(event);
         }
         
         @action async Submit()
@@ -67,38 +69,37 @@ export namespace DateAndTime
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
                                 <Header size="sm">Select a date and time</Header>
+                                <NewLine />
                                 <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                                    <BookingSelector
+                                        selection={[]}
+                                        blocked={[
+                                            new Date("Thu Oct 22 2020 08:00:00 GMT+0100"),
+                                            new Date("Thu Oct 22 2020 09:00:00 GMT+0100"),
+                                            new Date("Thu Oct 22 2020 10:00:00 GMT+0100"),
+                                            new Date("Fri Oct 23 2020 16:00:00 GMT+0100"),
+                                            new Date("Fri Oct 23 2020 17:00:00 GMT+0100"),
+                                            new Date("Fri Oct 23 2020 18:00:00 GMT+0100"),
+
+                                            new Date("Tue Oct 27 2020 16:00:00 GMT+0100"),
+                                            new Date("Tue Oct 27 2020 17:00:00 GMT+0100"),
+                                            new Date("Tue Oct 27 2020 18:00:00 GMT+0100"),
+                                            new Date("Wed Oct 28 2020 16:00:00 GMT+0100"),
+                                            new Date("Wed Oct 28 2020 17:00:00 GMT+0100"),
+                                            new Date("Wed Oct 28 2020 18:00:00 GMT+0100"),
+                                        ]}
+                                        numDays={14}
+                                        minTime={8}
+                                        maxTime={18}
+                                        unselectedColor="#ff9505"
+                                        selectedColor="#e6e9f0"
+                                        onChange={e => this.Form.SetTimeslot(e)}
+                                    />
+
+                                    <NewLine />
 
                                     <Row>
-                                        <Column lg={6} md={5} xs={12}>
-                                            <FormGroup>
-                                                <Input type="select" onChange={e => this.Form.Day = e.target.value.toString()}>
-                                                    <option value="1">Oct 14th</option>
-                                                    <option value="2">Oct 15th</option>
-                                                    <option value="3">Oct 16th</option>
-                                                    <option value="4">Oct 17th</option>
-                                                    <option value="5">Oct 18th</option>
-                                                    <option value="6">Oct 19th</option>
-                                                    <option value="7">Oct 20th</option>
-                                                </Input>
-                                            </FormGroup>
-                                        </Column>
-                                        <Column lg={4} md={4} xs={7}>
-                                            <FormGroup>
-                                                <Input type="select" onChange={e => this.Form.HourBlock = e.target.value.toString()}>
-                                                    <option value="1">8 am - 10 am</option>
-                                                    <option value="2">9 am - 11 am</option>
-                                                    <option value="3" disabled>10 am - 12 pm (fully booked)</option>
-                                                    <option value="4" disabled>11 am - 1 pm (fully booked)</option>
-                                                    <option value="5">12 pm - 2 pm</option>
-                                                    <option value="6">1 pm - 3 pm</option>
-                                                    <option value="7" disabled>2 pm - 4 pm (fully booked)</option>
-                                                    <option value="8">3 pm - 5 pm</option>
-                                                    <option value="9">4 pm - 6 pm</option>
-                                                </Input>
-                                            </FormGroup>
-                                        </Column>
-                                        <Column lg={2} md={3} xs={5}>
+                                        <Column className="text-center">
                                             <Button disabled block>£100</Button>
                                         </Column>
                                     </Row>

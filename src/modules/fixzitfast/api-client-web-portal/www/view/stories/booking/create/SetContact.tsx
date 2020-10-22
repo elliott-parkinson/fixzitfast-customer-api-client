@@ -39,7 +39,10 @@ export namespace SetContact
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-            bookingStore.SetBookingContactDetails(this.Name, this.PhoneNumber, this.Email);
+            bookingStore.InProgress.Contact.Set(this.Name, this.PhoneNumber, this.Email);
+
+            let router = Dependencies.of("store").get<any>("routes");
+            router.Go("/booking/create/times");
         }
     }
     
@@ -67,8 +70,9 @@ export namespace SetContact
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
-                                <Header size="sm">Job Contact Details</Header>
-                                <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                                <Form className="fixzitfast-form" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                                    <Header size="sm">Contact Details</Header>
+                                    <Paragraph>Give us the contact details for this job. This is the number or email we will call if we need to get in touch.</Paragraph>
      
                                     <FormGroup tag="fieldset">
                                         <Label>

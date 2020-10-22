@@ -76,7 +76,10 @@ export namespace SetDetails
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-            bookingStore.SetBookingDetails(this.Type, this.Details, this.Files);
+            bookingStore.InProgress.Details.Set(this.Type, this.Details);
+
+            let router = Dependencies.of("store").get<any>("routes");
+            router.Go("/booking/create/contact");
         }
 
     }
@@ -104,9 +107,9 @@ export namespace SetDetails
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
-                                <Header size="md">What's the problem?</Header>
-                                <NewLine />
-                                <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                                <Form className="fixzitfast-form" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                                    <Header size="md">What's the problem?</Header>
+                                    
                                     <FormGroup tag="fieldset">
                                         <Input type="textarea" rows={8} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
                                     </FormGroup>
