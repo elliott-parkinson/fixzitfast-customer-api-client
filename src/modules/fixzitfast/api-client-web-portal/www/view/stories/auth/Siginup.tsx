@@ -4,17 +4,17 @@ import Dependencies from "typedi";
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
 
-import { 
+import {
+    Alert,
 	AppLayout, Titlebar, Fragment,
     Button,
     Container, Block, Row, Column,
 	Card, CardBody, CardHeader,
 	Form, FormGroup, Input, InputGroup,
-	Header,
+	Header, Paragraph,
 	NewLine,
     Nav, NavItem, NavLink,
 } from "../../Theme";
-import { Alert } from "reactstrap";
 
 
 export namespace Siginup
@@ -34,7 +34,7 @@ export namespace Siginup
 
         @action async Submit()
         {
-            const authStore =  Dependencies.of("fixzitfast-customer-store").get<any>("auth");
+            const authStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
 
             if (this.Password !== this.PasswordConfirm)
             {
@@ -82,21 +82,31 @@ export namespace Siginup
 
         componentDidMount()
         {
-            this.Store = Dependencies.of("fixzitfast-customer-store").get<any>("auth");
+            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
             this.Routes =  Dependencies.of("store").get<any>("routes");
         }
     
         render() {
-            return <Container>
+            return <div className="background-white">
+                <Container>
+                    <NewLine />
                     <Row>
-                        <Column sm={12} md={6}>
+                        <Column sm={12} md={6} className="auth-column">
                             { this.Form.Finished == true &&
-                                <Alert>
-                                    <strong>Success: </strong> You have successfully signed up. Please go to the login page  to carry on.
-                                </Alert>
+                                <Fragment>
+                                    <Header size="lg">Sign up with email</Header>
+
+                                    <Alert>
+                                        <strong>Success: </strong> Sign up successful!
+                                    </Alert>
+
+                                    <Paragraph>
+                                        Thank you for joining us, you need to login to use your account, please follow the link below:
+                                    </Paragraph>
+                                </Fragment>
                             }
                             { this.Form.Finished == false &&
-                                <Form className="login-form" onSubmit={e => { this.Form.Submit(); e.preventDefault(); return false; }}>
+                                <Form className="fixzitfast-form signup-form" onSubmit={e => { this.Form.Submit(); e.preventDefault(); return false; }}>
                                     <Header size="lg">Sign up with email</Header>
 
                                     <FormGroup>
@@ -118,20 +128,30 @@ export namespace Siginup
                                     { this.Form.Error != "" && <Alert color="danger">
                                         <strong>Error: </strong> { this.Form.Error } 
                                     </Alert> }
-
+                                    
+                                    <NewLine />
+                                    <NewLine />
+                                    
                                     <Button color="primary" block>Sign up</Button>
                                 </Form>
                             }
-                            
                         </Column>
                         <Column sm={12} md={6}>
-                            { this.Form.Finished == false && <Block className="full-center w-100 h-100">
-                                    <Button block onClick={e => this.Form.SignupWithFacebook() }>Sign up with Facebook</Button>
-                                    <Button block onClick={e => this.Form.SignupWithGoogle() }>Sign up with Google</Button>
-                            </Block> }
+                            <Block className="full-center w-100 h-100">
+                                <div className="g-signin2" data-onsuccess="onSignIn"></div>
+                                <div className="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width="280px"></div>
+                                <NewLine />
+                                
+                                {/*
+                                <Button block onClick={e => this.Form.LoginWithGoogle() }>Sign in with Google</Button>
+                                <Button block onClick={e => this.Form.LoginWithFacebook() }>Sign in with Facebook</Button>
+                                */}
+                            </Block>
                         </Column>
                     </Row>
-            </Container>;
+                    <NewLine />
+                </Container>
+            </div>;
         }
     }
 }

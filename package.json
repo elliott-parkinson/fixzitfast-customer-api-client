@@ -11,6 +11,8 @@
     "build:browser:testbed": "npx parcel build src/modules/fixzitfast/api-client-web-test/build/www/index.html --out-dir bin/www/testbed",
     "watch:browser:portal": "npx parcel src/modules/fixzitfast/api-client-web-portal/build/www/index.html --out-dir bin/www/portal --port 2222",
     "build:browser:portal": "npx parcel build src/modules/fixzitfast/api-client-web-portal/build/www/index.html --out-dir bin/www/portal",
+    "watch:app:portal": "npx parcel src/modules/fixzitfast/customer-mobile-app/build/www/index.html --out-dir bin/www/portal --port 2222",
+    "build:app:portal": "npx parcel build src/modules/fixzitfast/customer-mobile-app/build/www/index.html --out-dir bin/www/portal",
     "test": "mocha -r ts-node/register ./src/modules/fixzitfast/api-client/test/index.ts"
   },
   "author": "",

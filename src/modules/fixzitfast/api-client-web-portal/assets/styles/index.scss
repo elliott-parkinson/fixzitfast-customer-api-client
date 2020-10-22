@@ -43,6 +43,10 @@ body {
 	
 		> .content {
 			flex: 1 0 auto;
+
+			:only-child {
+				min-height: 100%;
+			}
 		}
 	
 		> footer {

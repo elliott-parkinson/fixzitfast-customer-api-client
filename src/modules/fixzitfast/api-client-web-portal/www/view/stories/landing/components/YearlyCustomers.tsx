@@ -24,9 +24,13 @@ export namespace YearlyCustomers
 
         async componentDidMount()
         {
-            this.CustomersStore = Dependencies.of("fixzitfast-customer-store").get<any>("customers");
+            
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("customers"))
+            {
+                this.CustomersStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("customers");
+            }
 
-            let customers = await this.CustomersStore.GetTotalCustomers();
+            let customers = await this.CustomersStore?.GetTotalCustomers();
             this.SetTotal(customers);
         }
 

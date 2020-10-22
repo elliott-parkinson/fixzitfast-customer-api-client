@@ -36,10 +36,14 @@ export namespace ServicesBanner
         async componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
-            this.ServicesStore =  Dependencies.of("fixzitfast-customer-store").get<any>("services");
 
-            let services = await this.ServicesStore.GetFeaturedServices();
-            this.SetFeaturedServices(services);
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
+            {
+                this.ServicesStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("services");
+
+                let featured = this.ServicesStore.Services.Featured();
+                this.SetFeaturedServices(featured);
+            }
         }
 
         @action SetFeaturedServices(services: any)
@@ -74,12 +78,12 @@ export namespace ServicesBanner
                     </Column>
                     <Column lg={6} className="vertical-center p-0">
                         <Row className="featured-services-block w-100">
-                            {this.FeaturedServicesList.map( service => <Column md={6} sm={6} xs={12} key={service.Id} className="p-1">
+                            {this.FeaturedServicesList?.slice(0, 4).map( service => <Column md={6} sm={6} xs={12} key={service.Id} className="p-1">
                                 <ServiceCard.Component
                                     name={service.Name}
                                     description={service.Description}
 
-                                    onClick={e => this.props.onBook(service.Id)}
+                                    onClick={e => this.props.onBook(service, undefined)}
                                 />
                             </Column>)}
                         </Row>

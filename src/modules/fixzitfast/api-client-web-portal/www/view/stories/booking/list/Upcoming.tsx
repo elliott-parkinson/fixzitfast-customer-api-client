@@ -26,12 +26,18 @@ export namespace Upcoming
     {
         @observable Router: any;
         @observable BookingStore: any;
+        @observable ServicesStore: any;
         @observable Status: string = "none";
 
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
-            this.BookingStore =  Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
+            this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
+            {
+                this.ServicesStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("services");
+            }
         }
 
         @action MakeABooking()
@@ -41,23 +47,25 @@ export namespace Upcoming
 
 
         render() {
-            return <Container>
+            return <Fragment>
                 <Card className="animate__animated animate__fadeIn animate__delay-02s">
                     <CardBody className="p-4 m-4 text-center">
-                        <Header size="xl">
-                            <i className="fas fa-tools" />
-                        </Header>
-                            <NewLine />
-                        <Paragraph className="text-center">
+                        <img className="p-4 m-0" style={{maxWidth: "260px"}} src={require("../../../../../assets/images/icons/upcoming.png")} />
+                        <NewLine />
+                        <NewLine />
+                        <Paragraph className="text-center text-lighter" style={{maxWidth: "260px", marginLeft: "auto", marginRight: "auto"}}>
                             No upcoming bookings.
                             <NewLine />
                             All the bookings you make will be shown here.
                         </Paragraph>
                         <NewLine />
-                        <Button block onClick={e => this.MakeABooking()}>Make a booking</Button>
+
+                        { this.ServicesStore != undefined && 
+                            <Button block color="primary" onClick={e => this.MakeABooking()}>Make a booking</Button>
+                        }
                     </CardBody>
                 </Card>
-            </Container>;
+            </Fragment>;
         }
     }
 }

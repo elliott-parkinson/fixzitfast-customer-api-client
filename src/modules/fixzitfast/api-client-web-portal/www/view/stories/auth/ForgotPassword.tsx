@@ -10,7 +10,7 @@ import {
     Container, Block, Row, Column,
 	Card, CardBody, CardHeader,
 	Form, FormGroup, Input, InputGroup,
-	Header,
+	Header, Paragraph,
 	NewLine,
     Nav, NavItem, NavLink,
 } from "../../Theme";
@@ -31,7 +31,7 @@ export namespace ForgotPassword
         @action async Submit()
         {
             
-            const authStore =  Dependencies.of("fixzitfast-customer-store").get<any>("auth");
+            const authStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
 
             let success = await authStore.ForgotPassword(this.Email);
 
@@ -56,22 +56,28 @@ export namespace ForgotPassword
 
         componentDidMount()
         {
-            this.Store = Dependencies.of("fixzitfast-customer-store").get<any>("auth");
+            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
             this.Routes =  Dependencies.of("store").get<any>("routes");
         }
     
         render() {
-            return <Container>
+            return <div className="background-white">
+                <Container>
+                    <NewLine />
                     <Row>
-                        <Column sm={12} md={6}>
+                        <Column sm={12} md={6} className="offset-md-3">
                             { this.Form.Finished == true && <Fragment>
+                                <Header size="lg">Forgot password</Header>
                                 <Alert>
-                                    <strong>Success: </strong> If the username provided is in our database you should recieve an email with further instructions.
+                                    <strong>Success: </strong> Request was successful.
                                 </Alert>
+                                <Paragraph>
+                                    If the username provided is in our database you should recieve an email with further instructions.
+                                </Paragraph>
                             </Fragment>
                             }
 
-                            { this.Form.Finished == false && <Form className="login-form" onSubmit={e => { this.Form.Submit(); e.preventDefault(); return false; }}>
+                            { this.Form.Finished == false && <Form className="fixzitfast-form forgotpassword-form" onSubmit={e => { this.Form.Submit(); e.preventDefault(); return false; }}>
                                 <Header size="lg">Forgot password</Header>
 
                                 <FormGroup>
@@ -85,11 +91,10 @@ export namespace ForgotPassword
                                 <Button block>Reset</Button>
                             </Form> }
                         </Column>
-                        <Column sm={12} md={6}>
-
-                        </Column>
                     </Row>
-            </Container>;
+                    <NewLine />
+                </Container>
+            </div>;
         }
     }
 }

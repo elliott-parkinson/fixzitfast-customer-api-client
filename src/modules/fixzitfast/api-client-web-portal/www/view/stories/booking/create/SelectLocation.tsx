@@ -30,7 +30,7 @@ export namespace SelectLocation
 
         componentDidMount()
         {
-            this.BookingStore = Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
+            this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
         }
 
         @computed get CanGetStarted(): boolean
@@ -51,9 +51,10 @@ export namespace SelectLocation
     
         render() {
             return <Container>
-                <Header>Enter your location</Header>
                 <Row>
-                    <Column md={9} x={12}>
+                    <Column sm={12} md={6}>
+                        <Header size="xl">Enter your location</Header>
+                        <NewLine />
                         <Form className="animate__animated animate__fadeIn animate__delay-02s">
                             <FormGroup>
                                 <InputGroup>
@@ -64,21 +65,23 @@ export namespace SelectLocation
                                 </InputGroup>
                             </FormGroup>
                         </Form>
+                        
+                        <NewLine />
 
                         <Card className="animate__animated animate__fadeIn animate__delay-04s">
                             <CardBody>
-                                <Header size="sm">Unsure? Let us find you!</Header>
+                                <Header size="md">Unsure? Let us find you!</Header>
+                                <NewLine />
                                 <Button color="primary" block onClick={e => this.FindLocation() }>Find my location</Button>
+                                <NewLine />
                                 <Paragraph>Note: Your browser will ask you for permission to know your location. You will need to press allow for this feature to work.</Paragraph>
                                 <Paragraph>Depending on your device this feature may not be accurate. Please verify the postcode is your own before getting your quote.</Paragraph>
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12} className="vertical-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
-                        <Block>
-                           <i className="fas fa-images fa-5x" />
-                        </Block>
-                    </Column>
+				<Column sm={12} md={6} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
+					<img className="p-0 m-0" src={require("../../../../../assets/images/bookings-bg.png")} />
+				</Column>
                 </Row>
             </Container>;
         }

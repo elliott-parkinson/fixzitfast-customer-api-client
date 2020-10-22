@@ -1,0 +1,128 @@
+
+@import "./font-face.scss";
+
+
+@import "./theme/buttons.scss";
+@import "./theme/main-hero.scss";
+@import "./theme/featured-services-bar.scss";
+@import "./theme/yearly-customers-bar.scss";
+@import "./theme/selling-points.scss";
+@import "./theme/customer-quote.scss";
+@import "./theme/banner-jumbo.scss";
+@import "./theme/landing.scss";
+@import "./theme/testimonials.scss";
+
+
+@import "./theme/footer.scss";
+
+html {
+    &:not([data-scroll='0']) {
+        .navbar.top-navbar {
+            border-bottom: 1px solid #d6d6d6;
+        }
+    }
+}
+
+.app {
+    > .content {
+        padding-top: 95px;
+    }
+}
+// 8pt;
+// 12pt;
+// 18pt;
+// 24pt;
+// 40pt;
+// 80pt;
+.navbar.top-navbar {
+    padding-top: 28px;
+    padding-bottom: 28px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: white !important;
+    z-index: 10;
+    height: 95px;
+
+    .navbar-text {
+        color: #202a3d;
+    }
+
+    .nav-item {
+        &.highlighted {
+            .nav-link {
+                margin-left: 18px;
+                margin-right: 6px;
+                padding-left: 32px;
+                padding-right: 32px;
+
+                border-radius: 5px;
+                background-color: #ff9505;
+                color: white;
+            }
+        }
+    }
+    .nav-link {
+        color: #202a3d;
+
+        &.highlighted {
+            color: #ff9505;
+        }
+        
+        &:hover {
+            color: #ff9505;
+        }
+    }
+}
+.navbar-brand {
+    img {
+        height: 22px;
+    }
+}
+
+
+
+h2, h3, h4, h5 {
+    font-family: 'muli', 'Open Sans', sans-serif !important;
+}
+
+h1 {
+    font-family: 'muli-semibold', 'Open Sans', sans-serif !important;
+    font-size: 40px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.btn {
+    font-family: 'muli-light', 'Open Sans', sans-serif !important;
+
+}
+
+p, a {
+    font-family: 'muli', 'Open Sans', sans-serif !important;
+}
+
+.background-white {
+    background-color: white;;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #d6d6d6 #eaeaea;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #eaeaea;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #d6d6d6;
+    border-radius: 20px;
+    border: 3px solid #eaeaea;
+  }
+
+

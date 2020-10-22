@@ -1,1 +1,1 @@
-export * from "./ServiceCategoryIcon";
+export * from "./ServiceIcon";

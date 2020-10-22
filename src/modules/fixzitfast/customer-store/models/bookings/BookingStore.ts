@@ -131,7 +131,7 @@ export class BookingStore
 
 		try
 		{
-			let locationStore = Dependencies.of("fixzitfast-customer-store").get<any>("location");
+			let locationStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("location");
 			let postcode = await locationStore.GetPostcodeFromLocation(position.latitude, position.longitude);
 
 			return postcode;

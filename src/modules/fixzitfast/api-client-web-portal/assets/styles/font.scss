@@ -11,6 +11,8 @@
 @import "./theme/banner-jumbo.scss";
 @import "./theme/landing.scss";
 @import "./theme/testimonials.scss";
+@import "./theme/form.scss";
+@import "./theme/card.scss";
 
 
 @import "./theme/footer.scss";
@@ -89,6 +91,9 @@ h2, h3, h4, h5 {
 
 h1 {
     font-family: 'muli-semibold', 'Open Sans', sans-serif !important;
+    font-size: 40px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .btn {
@@ -123,3 +128,30 @@ p, a {
   }
 
 
+.auth-column {
+    border-right: 2px solid rgb(216, 222, 231);
+}
+
+.g-signin2 {
+    width: 100%;
+    height: 64px;
+    margin-bottom: 24px;
+}
+
+.fb-login-button {
+    padding: 0px;
+    height: 64px;
+    overflow-x: visible;
+    overflow-y: visible;
+
+    span {
+        padding: 0px !important;
+
+        :only-child {
+            padding: 0px !important;
+        }
+    }
+}
+.text-lighter {
+    color: #8e99ad;
+}

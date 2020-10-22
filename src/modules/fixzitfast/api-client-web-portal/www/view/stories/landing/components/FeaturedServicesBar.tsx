@@ -35,10 +35,15 @@ export namespace FeaturedServicesBar
         async componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
-            this.ServicesStore =  Dependencies.of("fixzitfast-customer-store").get<any>("services");
 
-            let services = await this.ServicesStore.GetFeaturedServiceCategories();
-            this.SetFeaturedServices(services);
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
+            {
+                this.ServicesStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("services");
+                
+                let featured = this.ServicesStore.Categories.Featured();
+                this.SetFeaturedServices(featured);
+            }
+
         }
 
         @action SetFeaturedServices(services: any)

@@ -11,7 +11,7 @@ import { TestimonialStore } from "./models/customers/TestimonialStore";
 let authStore = new AuthStore;
 
 Dependencies.of("fixzitfast-customer-store").set([
-	{ id: "auth", value: authStore },
+	{ id: "account", value: authStore },
 	{ id: "account", value: new AccountStore },
 	{ id: "bookings", value: new BookingStore },
 	{ id: "contact", value: new ContactStore },

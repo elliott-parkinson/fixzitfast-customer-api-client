@@ -25,8 +25,7 @@ export namespace NavigationBar
 
         componentDidMount()
         {
-            this.Account = Dependencies.of("fixzitfast-customer-store").get<any>("account");
-            this.Auth = Dependencies.of("fixzitfast-customer-store").get<any>("auth");
+            this.Account = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
             
             this.Routes = Dependencies.of("store").get<any>("routes");
         }
@@ -41,14 +40,14 @@ export namespace NavigationBar
                 <Nav className="mr-auto" navbar>
                 </Nav>
 
-                { this.Auth?.LoggedIn == true ?
+                { this.Account?.LoggedIn == true ?
                     <Fragment>
-                        <NavbarText>{this.Account?.Name}</NavbarText>
+                        <NavbarText>{this.Account?.CurrentUser?.Name}</NavbarText>
                         <NavLink href="/booking/list" onClick={ e => { e.preventDefault(); this.Routes.Go("/booking/list"); return false; }}>My Bookings</NavLink>
                         <NavLink href="/account" onClick={ e => { e.preventDefault(); this.Routes.Go("/account"); return false; }}>My Account</NavLink>
-                        <NavLink href="/auth/logout" onClick={ e => { e.preventDefault(); this.Auth.Logout(); return false; }}>Sign out</NavLink>
+                        <NavLink href="/auth/logout" onClick={ e => { e.preventDefault(); this.Account.Logout(); return false; }}>Sign out</NavLink>
                     </Fragment>
-                :
+                : this.Account != undefined && 
                     <Nav navbar>
                         <NavItem>
                             <NavLink href="/auth/login" onClick={ e => { e.preventDefault(); this.Routes.Go("/auth/login"); return false; }}>Sign in</NavLink>

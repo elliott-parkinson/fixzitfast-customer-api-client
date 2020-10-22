@@ -15,6 +15,7 @@ export namespace QuoteArea
     export interface IViewProps
     {
         onClick?: Function;
+        showButtons: boolean;
     }
 
     @observer
@@ -26,8 +27,12 @@ export namespace QuoteArea
 
         async componentDidMount()
         {
-            this.CustomersStore = Dependencies.of("fixzitfast-customer-store").get<any>("customers");
-            let quote = await this.CustomersStore.GetCustomerQuote();
+            
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("customers"))
+            {
+                this.CustomersStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("customers");
+            }
+            let quote = await this.CustomersStore?.GetCustomerQuote();
             this.SetQuote(quote);
         }
 
@@ -42,8 +47,10 @@ export namespace QuoteArea
                 <Header size="md">{ this.Quote?.Excerpt }</Header>
                 <NewLine />
                 <Header size="sm"> -{ this.Quote?.Name }- </Header>
-
-                <Button color="primary" size="lg" onClick={this.props.onClick}>See All Services</Button>
+                
+                { this.props.showButtons &&
+                    <Button color="primary" size="lg" onClick={this.props.onClick}>See All Services</Button>
+                }
             </Column>
         </Row>
         }

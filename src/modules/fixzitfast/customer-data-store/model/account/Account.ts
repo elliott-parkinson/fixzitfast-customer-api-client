@@ -19,10 +19,20 @@ export class Account
     {
         this.Load();
     }
+
+    @action async GetUserDetails()
+    {
+        if (this.LoggedIn == true)
+        {
+            return this.CurrentUser;
+        }
+
+        return null;
+    }
     
     @action async Signup(name: string, email: string, phone: string, password: string, passwordConfirm: string, agree: boolean)
     {
-        this.LoggedIn = true;
+        // this.LoggedIn = true;
 
 		return true;
     }
@@ -36,13 +46,15 @@ export class Account
         this.CurrentUser.Email = stub.Email;
         this.CurrentUser.Phone = stub.PhoneNumber;
 
+        this.Store();
+
 		return true;
     }
 
     @action async ForgotPassword(email: string)
     {
-        const notificationStore = Dependencies.of("store").get<any>("notifications");
-        notificationStore.Push("Resetting password succeded", "Your password has been reset", "success", 5);
+        // const notificationStore = Dependencies.of("store").get<any>("notifications");
+        // notificationStore.Push("Resetting password succeded", "Your password has been reset", "success", 5);
 
         return true;
     }
@@ -52,6 +64,8 @@ export class Account
         this.LoggedIn = false;
         this.CurrentUser.Clear();
 
+        this.Store();
+
         return true;
     }
 
@@ -59,7 +73,7 @@ export class Account
     {
         let storage = window.localStorage;
 		storage.setItem('fixzitfast.loggedin', this.LoggedIn == true ? "1" : "0");
-		storage.setItem('fixzitfast.currentuser', serialize(this.CurrentUser));
+		storage.setItem('fixzitfast.currentuser', JSON.stringify(serialize(this.CurrentUser)));
     }
 
     @action Load()
@@ -71,7 +85,7 @@ export class Account
         this.LoggedIn = loggedin && loggedin == "1" ? true : false;
         if (user != undefined)
         {
-            this.CurrentUser = deserialize(CurrentUser, user);
+            this.CurrentUser = deserialize(CurrentUser, JSON.parse(user));
         }
     }
 

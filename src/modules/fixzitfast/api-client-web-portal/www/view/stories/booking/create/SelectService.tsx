@@ -17,6 +17,7 @@ import {
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
 import { ServiceCard, ServiceIcon, ServiceCategoryIcon } from "../../../../../../react-components";
+import { ServicesTypeAhead } from "../../../components/ServicesTypeAhead";
 
 export namespace SelectService
 {
@@ -31,64 +32,47 @@ export namespace SelectService
         @observable FilterCategory: any;
         @observable FilterText: string = "";
 
+        @observable Services: any = [];
+        @observable Categories: any = [];
+
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
-            this.BookingStore =  Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
-            this.ServicesStore =  Dependencies.of("fixzitfast-customer-store").get<any>("services");
-        }
+            this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
-        @computed get ServiceCategories()
-        {
-            let list = [];
-            if (this.ServicesStore != undefined)
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
             {
-                list = this.ServicesStore.ServiceCategories;
+                this.ServicesStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("services");
             }
-
-            return list;
+            this.UpdateServiceData();
         }
 
-        @computed get FullServicesList()
+        @action async UpdateServiceData()
         {
-            let list = [];
-            if (this.ServicesStore != undefined)
-            {
-                let services = [];
-
-                this.ServicesStore.Services.forEach( service => service.CategoryId == -1 && services.push(service) );
-                this.ServicesStore.Services.forEach( service => {
-                    if (service.CategoryId !== -1)
-                    {
-                        let parent = this.ServicesStore.ServiceCategories.find(result => result.Id == service.CategoryId);
-                        list.push({ Id: service.Id, Name: parent.Name + " - " + service.Name });
-                    }
-                });
-            }
-
-            return list;
+            this.Services = await this.ServicesStore.Services.List;
+            this.Categories = await this.ServicesStore.Categories.List;
         }
 
-        @computed get ServicesTypeaheadList()
+        GetService(id: string)
         {
-            let list = [];
-            this.FullServicesList.forEach( service =>
-                list.push(service.Id.toString())
-            );
+            return this.Services.find( service => service.Id == id);
+        }
 
-            return list;
+        GetCategory(id: string)
+        {
+            return this.Categories.find( category => category.Id == id);
+        }
+
+        @action BookService(service: any, category: any)
+        {
+            this.BookingStore?.Create(service.Id, service.Name, category.Id, category.Name);
+            this.Router.Go("/booking/create/location");
         }
 
 
         GetPopularServices()
         {
-            let list = [];
-            if (this.ServicesStore != undefined)
-            {
-                list = this.ServicesStore.PopularServices.splice(0, 6);
-            }
-
-            return list;
+            return this.ServicesStore?.Services.Popular();
         }
 
         GetServicesForCategory(id: number)
@@ -96,12 +80,10 @@ export namespace SelectService
             let list = [];
             if (this.ServicesStore != undefined)
             {
-                this.ServicesStore.Services.forEach( service =>
+                this.Services.forEach( service =>
                     service.CategoryId == id && list.push(service)
                 );
             }
-
-            console.warn(list);
 
             return list;
         }
@@ -118,45 +100,15 @@ export namespace SelectService
             }
         }
 
-        GetService(id: string)
-        {
-            return this.FullServicesList.find( service => service.Id == id);
-        }
-
-        @action SelectService(service: any)
-        {
-            this.SelectedService = service;
-        }
-
-        @action Book()
-        {
-            this.BookService(this.SelectedService);
-        }
-
-        @action BookService(service: any)
-        {
-            this.BookingStore.BookService(service);
-        }
-    
         render() {
             return <Container>
-                <Header>Choose a service</Header>
+                <Header size="xl">Choose a service</Header>
                 <Row>
                     <Column md={9} x={12}>
                         <Form className="animate__animated animate__fadeIn animate__delay-02s">
                             <FormGroup>
                                 <InputGroup>
-                                    <Typeahead
-                                        onChange={e => this.SelectService( this.GetService(e) ) }
-                                        options={this.ServicesTypeaheadList}
-                                        placeholder="What service are you looking for?"
-                                        selected={null}
-                                        labelKey={service => this.GetService(service).Name}
-                                        renderMenuItemChildren={props => this.GetService(props).Name}
-                                    />
-                                    <InputGroupAddon addonType="prepend">
-                                        <Button color="primary"  disabled={ this.SelectedService != undefined ? undefined : true } onClick={e => { e.preventDefault(); this.Book(); return false; }}>Book</Button>
-                                    </InputGroupAddon>
+                                    <ServicesTypeAhead.Component text="Book" onClick={ (service, category) => { this.BookService(service, category); }} />
                                 </InputGroup>
                             </FormGroup>
                         </Form>
@@ -164,15 +116,16 @@ export namespace SelectService
                         <div className="service-category-list">
                             <div className="animate__animated animate__fadeIn animate__delay-02s">
                                 <Header size="xs">Most popular services</Header>
+                                <hr />
                                 <Row className="service-list">
-                                    { this.GetPopularServices().map( service => 
+                                    { this.GetPopularServices()?.map( service => 
                                         <Column md={4} sm={6} xs={12} key={service.Id} className="p-1">
                                             <ServiceCard.Component
                                                 name={service.Name}
                                                 description={service.Description}
                                                 src={service.ImageUrl}
 
-                                                onClick={e => this.BookService(service)}
+                                                onClick={e => this.BookService(service, this.GetCategory(service.CategoryId))}
                                             />
                                         </Column>
                                     )}
@@ -183,9 +136,10 @@ export namespace SelectService
                                 <NewLine />
                             </div>
                             <div className="animate__animated animate__fadeIn animate__delay-04s">
-                                {this.ServiceCategories.map( category => <Fragment key={category.Id}>
+                                {this.Categories.map( category => <Fragment key={category.Id}>
                                     { (this.FilterCategory== undefined || (this.FilterCategory && this.FilterCategory.Id == category.Id)) && <Fragment>
                                         <Header size="xs">{category.Name}</Header>
+                                        <hr />
                                         { this.GetServicesForCategory(category.Id).length == 0 && <Alert color="info">
                                             <strong>Error: </strong> No services exist for this category.
                                         </Alert> }
@@ -198,7 +152,7 @@ export namespace SelectService
                                                         description={service.Description}
                                                         src={service.ImageUrl}
 
-                                                        onClick={e => this.BookService(service)}
+                                                        onClick={e => this.BookService(service, category)}
                                                     />
                                                 </Column>
                                             )}
@@ -216,7 +170,7 @@ export namespace SelectService
                         <div className="service-category-filter-icons">
                             <Header size="xs">Filter</Header>
                             <Row>
-                                { this.ServiceCategories.map( category => <Fragment key={category.Id}>
+                                { this.Categories.map( category => <Fragment key={category.Id}>
                                     <Column className="m-1">
                                         <ServiceIcon.Component
                                             name={category.Name}

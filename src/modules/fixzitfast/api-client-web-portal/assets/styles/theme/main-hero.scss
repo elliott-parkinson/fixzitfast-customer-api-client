@@ -84,6 +84,7 @@
                     .rbt-menu.dropdown-menu.show {
                         min-height: 280px;
                         margin-top: -5px;
+                        z-index: 500 !important;
 
                         border-color: #eaeaea;
                         border-top: 0px;

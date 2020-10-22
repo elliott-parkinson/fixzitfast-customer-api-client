@@ -30,11 +30,19 @@ export namespace Login
         @action async Submit()
         {
             
-            const authStore =  Dependencies.of("fixzitfast-customer-store").get<any>("auth");
+            const authStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            const routeStore = Dependencies.of("store").get<any>("routes");
 
             let success = await authStore.Login(this.Email, this.Password);
-
-            this.Error = authStore.Error;
+            if (success == true)
+            {
+                routeStore.Go("/");
+                return;
+            }
+            else
+            {
+                this.Error = authStore.Error;
+            }
         }
 
         @action async LoginWithGoogle()
@@ -62,15 +70,17 @@ export namespace Login
 
         componentDidMount()
         {
-            this.Store = Dependencies.of("fixzitfast-customer-store").get<any>("auth");
+            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
             this.Routes =  Dependencies.of("store").get<any>("routes");
         }
     
         render() {
-            return <Container>
+            return <div className="background-white">
+                <Container>
+                    <NewLine />
                     <Row>
-                        <Column sm={12} md={6}>
-                            <Form className="login-form" onSubmit={e => { this.Form.Submit(); e.preventDefault(); return false; }}>
+                        <Column sm={12} md={6} className="auth-column">
+                            <Form className="fixzitfast-form login-form" onSubmit={e => { this.Form.Submit(); e.preventDefault(); return false; }}>
                                 <Header size="lg">Sign in with email</Header>
 
                                 <FormGroup>
@@ -79,26 +89,36 @@ export namespace Login
                                 <FormGroup>
                                     <Input placeholder="Password" type="password" required value={this.Form.Password} onChange={e => this.Form.Password = e.target.value} />
                                 </FormGroup>
-
-                                <Block className="text-right">
+                                
+                                <FormGroup className="text-right">
                                     <a href="./forgot-password" onClick={ e => { e.preventDefault(); this.Routes.Go("./forgot-password"); return false; }}>Forgot Password?</a>
-                                </Block>
+                                </FormGroup>
 
                                 { this.Form.Error != "" && <Alert color="danger">
                                     <strong>Error: </strong> { this.Form.Error } 
                                 </Alert> }
+                                <NewLine />
+                                <NewLine />
 
                                 <Button color="primary" block>Sign in</Button>
                             </Form>
                         </Column>
                         <Column sm={12} md={6}>
                             <Block className="full-center w-100 h-100">
+                                <div className="g-signin2" data-onsuccess="onSignIn"></div>
+                                <div className="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width="280px"></div>
+                                <NewLine />
+                                
+                                {/*
                                 <Button block onClick={e => this.Form.LoginWithGoogle() }>Sign in with Google</Button>
                                 <Button block onClick={e => this.Form.LoginWithFacebook() }>Sign in with Facebook</Button>
+                                */}
                             </Block>
                         </Column>
                     </Row>
-            </Container>;
+                    <NewLine />
+                </Container>
+            </div>;
         }
     }
 }

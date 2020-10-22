@@ -44,7 +44,7 @@ export default class Routes extends React.Component<any>
 	componentDidMount()
 	{
 		this.Routes =  Dependencies.of("store").get<any>("routes");
-		this.BookingStore =  Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
+		this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 	}
 
 
@@ -54,8 +54,9 @@ export default class Routes extends React.Component<any>
 		return <Container>
 			<Row>
 				<Column sm={12} md={6}>
-					<Header>Bookings</Header>
+					<Header size="xl">Bookings</Header>
 
+					{/*
 					<Nav pills>
 						<NavItem>
 							<NavLink href="./upcoming"
@@ -74,7 +75,11 @@ export default class Routes extends React.Component<any>
 							</NavLink>
 						</NavItem>
 					</Nav>
+					*/}
 
+					
+					<Header size="sm">Upcoming</Header>
+					<NewLine />
 					<Switch>
 						<Redirect path={match + "/"} exact to={match + "/upcoming"} />
 
@@ -85,9 +90,7 @@ export default class Routes extends React.Component<any>
 					</Switch>
 				</Column>
 				<Column sm={12} md={6} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
-					<Block>
-						<i className="fas fa-images fa-5x" />
-					</Block>
+					<img className="p-0 m-0" src={require("../../../../../assets/images/bookings-bg.png")} />
 				</Column>
 			</Row>
 		</Container>;

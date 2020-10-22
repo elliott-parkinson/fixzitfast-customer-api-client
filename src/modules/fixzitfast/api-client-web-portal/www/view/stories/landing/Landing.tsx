@@ -25,6 +25,7 @@ import { FeaturedServicesBar } from "./components/FeaturedServicesBar";
 import { QuoteArea } from "./components/QuoteArea";
 import { ServicesBanner } from "./components/ServicesBanner";
 import { TestimonialsBanner } from "./components/TestimonialsBanner";
+import { ServicesTypeAhead } from "../../components/ServicesTypeAhead";
 
 export namespace Landing
 {
@@ -35,6 +36,8 @@ export namespace Landing
         @observable ServicesStore: any;
         @observable BookingStore: any;
         @observable CustomersStore: any;
+        @observable TestimonialsStore: any;
+
         @observable SelectedService: any;
 
         @observable Services: any = [];
@@ -43,58 +46,63 @@ export namespace Landing
         componentDidMount()
         {
             this.Router = Dependencies.of("store").get<any>("routes");
-            this.BookingStore = Dependencies.of("fixzitfast-customer-store").get<any>("bookings");
-            this.ServicesStore = Dependencies.of("fixzitfast-customer-store").get<any>("services");
-            this.CustomersStore = Dependencies.of("fixzitfast-customer-store").get<any>("customers");
+
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("bookings"))
+            {
+                this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+            }
+
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
+            {
+                this.ServicesStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("services");
+            }
+
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("customers"))
+            {
+                this.CustomersStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("customers");
+            }
+
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("testimonials"))
+            {
+                this.TestimonialsStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("testimonials");
+            }
 
             this.UpdateServiceData();
         }
 
         @action async UpdateServiceData()
         {
-            this.Services = await this.ServicesStore.GetServices();
-            this.Categories = await this.ServicesStore.GetServiceCategories();
+            this.Services = await this.ServicesStore.Services.List;
+            this.Categories = await this.ServicesStore.Categories.List;
         }
 
-        @computed get ServicesTypeaheadList()
-        {
-            let list = [];
-            this.ServicesStore?.FullServicesList.forEach( service =>
-                list.push(service.Id.toString())
-            );
-
-            return list;
-        }
 
         GetService(id: string)
         {
-            return this.ServicesStore?.FullServicesList.find( service => service.Id == id);
+            return this.Services.find( service => service.Id == id);
         }
 
-        @action SelectService(id: string)
+        GetCategory(id: string)
         {
-            this.SelectedService = this.GetService(id);
+            return this.Categories.find( category => category.Id == id);
         }
 
-        @action BookService(id?: string)
+
+        @action BookService(service: any, category: any)
         {
-            if (id != undefined)
-            {
-                this.SelectService(id);
-            }
-
-            this.BookingStore.Create(this.SelectedService);
+            this.BookingStore?.Create(service.Id, service.Name, category.Id, category.Name);
+            this.Router.Go("/booking/create/services");
         }
 
-        @action ViewServices(id?: string)
+        @action ViewServices()
         {
-            this.BookingStore.Create();
+            this.BookingStore?.Create();
+            this.Router.Go("/booking/create/services");
         }
-
         
     
         render() {
-            return <Container fluid>
+            return <Fragment>
                 <div className="main-hero">
                     <Row> 
                         <Column lg={2} xs={1} />
@@ -102,28 +110,17 @@ export namespace Landing
                             <Header>When it comes to your home, Fixzitfast</Header>
                             <Paragraph>The smart home-repair service that frees up your time for the important things in life.</Paragraph>
 
-                            <Form>
-                                <FormGroup>
-                                    <InputGroup>
-                                        <Typeahead
-                                            id="basic-typeahead-single"
-                                            onChange={e => this.SelectService(e[0]) }
-                                            options={this.ServicesTypeaheadList}
-                                            placeholder="Type the service that you need."
-                                            selected={null}
-                                            labelKey={service => this.GetService(service).Name}
-                                            renderMenuItemChildren={props => this.GetService(props).Name}
-                                        />
-                                        <InputGroupAddon addonType="prepend">
-                                            <Button color="primary" disabled={ this.SelectedService != undefined ? undefined : true } onClick={e => { e.preventDefault(); this.BookService(); return false; }}>Get Started</Button>
-                                        </InputGroupAddon>
-                                    </InputGroup>
-                                </FormGroup>
+                            { this.ServicesStore &&
+                                <Form>
+                                    <FormGroup>
+                                        <ServicesTypeAhead.Component text="Get Started" onClick={ (service, category) => { this.BookService(service, category); }} />
+                                    </FormGroup>
 
-                                <FormGroup>
-                                    <Button color="secondary" onClick={e => this.ViewServices()}>See all Services</Button>
-                                </FormGroup>
-                            </Form>
+                                    <FormGroup>
+                                        <Button color="secondary" onClick={e => this.ViewServices()}>See all Services</Button>
+                                    </FormGroup>
+                                </Form>
+                            }
                         </Column>
                         <Column lg={4} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex van-image-container">
                             <div className="van-image"></div>
@@ -131,22 +128,33 @@ export namespace Landing
                     </Row>
                 </div>
                 
+                { this.ServicesStore &&
+                    <FeaturedServicesBar.Component onClick={() => this.ViewServices()} />
+                }
 
-                <FeaturedServicesBar.Component onClick={() => this.ViewServices()} />
 
-                <YearlyCustomers.Component />
+                { this.CustomersStore &&
+                    <YearlyCustomers.Component />
+                }
 
-                <SellingPoints.Component onClick={() => this.ViewServices()} />
                 
-                <QuoteArea.Component onClick={() => this.ViewServices()} />
+                <SellingPoints.Component onClick={() => this.ViewServices()} showButtons={this.ServicesStore && this.BookingStore} />
+                
+                { this.CustomersStore &&
+                    <QuoteArea.Component onClick={() => this.ViewServices()} showButtons={this.ServicesStore && this.BookingStore} />
+                }
 
                 <SatisfactionBanner.Component />
                 <HowItWorks.Component />
-                <ServicesBanner.Component onBook={service => this.BookService(service.Id)} onView={() => this.ViewServices()} />
+                <ServicesBanner.Component onBook={(service, category) => this.BookService(service, category)} onView={() => this.ViewServices()} />
                 <Accredited.Component />
-                <TestimonialsBanner.Component />
+
+                { this.TestimonialsStore &&
+                    <TestimonialsBanner.Component />
+                }
+
                 <AppBanner.Component />
-            </Container>;
+            </Fragment>;
         }
     }
 }

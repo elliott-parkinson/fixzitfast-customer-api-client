@@ -4,6 +4,7 @@ import { observable, action, computed } from "mobx";
 import { serialize, deserialize } from "serializer.ts/Serializer";
 import { Type } from "serializer.ts/Decorators";
 import { BookingListItem, BOOKINGTYPES } from "./BookingListItem";
+import { InProgressBooking } from "./InProgressBooking";
 
 export class BookingList
 {
@@ -24,6 +25,9 @@ export class Bookings
     @Type(() => BookingList)
     @observable List: BookingList = new BookingList;
 
+    @Type(() => InProgressBooking)
+    @observable InProgress: InProgressBooking = new InProgressBooking;
+
     constructor()
     {
         this.Load();
@@ -37,6 +41,16 @@ export class Bookings
     @computed get Past()
     {
         return this.List.List.filter(item => item.Type == BOOKINGTYPES.PAST);
+    }
+
+    @action Create(serviceId?: string, serviceName?: string, categoryId?: string, categoryName?: string)
+    {
+        this.InProgress = new InProgressBooking;
+
+        if (serviceId)
+        {
+            this.InProgress.Service.Set(serviceId, serviceName, categoryId, categoryName);
+        }
     }
 
 

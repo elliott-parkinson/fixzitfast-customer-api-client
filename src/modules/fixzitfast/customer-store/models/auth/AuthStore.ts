@@ -18,7 +18,7 @@ export class AuthStore
 
 	@action async Login(email: string, password: string)
 	{
-        let accountStore = Dependencies.of("fixzitfast-customer-store").get<any>("account");
+        let accountStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
 		let routeStore: any = Dependencies.of("store").get("routes");
 		
 		accountStore.SetUserId(1);
@@ -59,7 +59,7 @@ export class AuthStore
 	}
 	@action async Logout()
 	{
-        let accountStore = Dependencies.of("fixzitfast-customer-store").get<any>("account");
+        let accountStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
 		accountStore.ClearDetails();
 		
 		this.LoggedIn = false;
@@ -74,7 +74,7 @@ export class AuthStore
 		let storage = window.localStorage;
 		storage.setItem('fixzitfast.auth', JSON.stringify(toJS(this)));
 
-        let accountStore = Dependencies.of("fixzitfast-customer-store").get<any>("account");
+        let accountStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
 		storage.setItem('fixzitfast.account', JSON.stringify(toJS(accountStore)));
 	}
 
@@ -97,7 +97,7 @@ export class AuthStore
 		}
 
 		
-        let accountStore = Dependencies.of("fixzitfast-customer-store").get<any>("account");
+        let accountStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
 		let account = storage.getItem('fixzitfast.account');
 		if (account != undefined)
 		{

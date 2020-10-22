@@ -1,0 +1,59 @@
+
+form.fixzitfast-form {
+    padding: 44px;
+
+    h2 {
+        margin-bottom: 44px;
+    }
+    a {
+        color: #ff9505;
+    }
+
+    label {
+        width: 100%;
+        color: #8e99ad;
+        font-size: 12px;
+        font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+    }
+
+    .form-group {
+        margin-top: 22px;
+        margin-bottom: 22px;
+        width: 100%;
+        display: inline-flex;
+        flex-direction: column;
+
+        &.text-right, &.text-center, &.text-left {
+            display: inline-block;
+        }
+
+        .input-group {
+            .addon-icon {
+                min-width: 36px;
+                height: 100%;
+                padding-top: 7px;
+                color: #959fb2;
+            }
+        }
+
+        input.form-control {
+            border: 0px;
+
+            &[type="text"], &[type="email"], &[type="tel"], &[type="password"] {
+                color: #202a3d;
+                border-bottom: 2px solid #c7ccd6;
+                font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+
+                &:active, &:focus {
+                    border-bottom: 2px solid #ff9505;
+
+                }
+
+                &::placeholder {
+                    color: #8e99ad;
+                    font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+                }
+            }
+        }
+    }
+}

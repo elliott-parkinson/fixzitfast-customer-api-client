@@ -36,10 +36,15 @@ export namespace TestimonialsBanner
         async componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
-            this.TestimonialsStore =  Dependencies.of("fixzitfast-customer-store").get<any>("testimonials");
+            
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("customers"))
+            {
+                this.TestimonialsStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("testimonials");
 
-            let testimonials = await this.TestimonialsStore.GetFeaturedTestimonials();
-            this.SetTestimonials(testimonials);
+                let testimonials = await this.TestimonialsStore?.GetFeatured();
+                this.SetTestimonials(testimonials);
+            }
+
         }
 
         @action SetTestimonials(testimonials: any)
@@ -56,10 +61,9 @@ export namespace TestimonialsBanner
                     </Column>
                     <Column lg={6} className="vertical-center p-0">
                         <Row className="testimonials-block w-100">
-                            {this.TestimonialsList.map( testimonial => <Column md={4} sm={12} xs={12} key={testimonial.Id} className="p-1">
+                            {this.TestimonialsList?.map( testimonial => <Column md={4} sm={12} xs={12} key={testimonial.Id} className="p-1">
                                 <Card className="testimonial-card">
                                     <CardBody className="text-center">
-                                        D
                                         <NewLine />
                                         <NewLine />
                                         <Header size="xs">

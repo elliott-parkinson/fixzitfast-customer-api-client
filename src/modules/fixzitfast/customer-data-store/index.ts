@@ -14,12 +14,15 @@ export namespace CustomerDataStore
     /* On Login */
     when( () => store.Account.LoggedIn == false, async () =>
     {
+        store.Account.Store();
+        
         // check notifications
     });
 
     /* On Logout */
     when( () => store.Account.LoggedIn == false, async () =>
     {
+        store.Account.Store();
         store.Bookings.Clear();
     });
 

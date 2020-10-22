@@ -1,0 +1,112 @@
+.appstore-icon {
+    max-height: 64px;
+    max-width: 100%;
+    margin: 14px;
+    
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+}
+
+footer {
+    background-color: rgb(64, 72, 90);
+    color: white;
+    
+    font-family: 'muli-semibold', 'Open Sans', sans-serif !important;
+    font-size: 18px;
+
+    padding-top: 64px;
+    padding-bottom: 64px;
+
+    .logo {
+        h4 {
+            font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+            font-size: 28px;
+
+        }
+    }
+
+    
+
+    .nav-link {
+        font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+        color: white;
+
+        &:hover {
+            color: #ff9505;
+        }
+    }
+
+
+
+    .contact-area {
+        h4 {
+            font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+            margin-bottom: 18px;
+        }
+
+        p {
+            font-family: 'muli-extra-light', 'Open Sans', sans-serif !important;
+            margin-bottom: 18px;
+            color: rgb(232, 233, 235);
+        }
+    }
+
+    .social-links {
+        margin-top: 48px;
+        line-height: 2.2em;
+        text-align: right;
+
+        margin-left: 0px;
+        margin-right: 0px;
+        
+        .social-link {
+            margin-left: 16px;
+            margin-right: 16px;
+
+            &:first-child {
+                margin-left: 0px;
+            }
+            &:last-child {
+                margin-right: 0px;
+            }
+
+            i {
+                font-size: 3em;
+            }
+        }
+    }
+
+    hr {
+        border-color: rgb(89,96, 111);
+        border-width: 2px;
+    }
+
+    .terms-links {
+        padding-left: 0px;
+        padding-right: 0px;
+
+        .nav-item {
+            &:first-child {
+                padding-left: 0px;
+            }
+            padding-left: 16px;
+            padding-right: 16px;
+            
+            font-size: 16px;
+            color: white;
+
+            .nav-link {
+                font-family: 'muli', 'Open Sans', sans-serif !important;
+                color: white;
+            }
+
+            &:hover {
+                .nav-link {
+                    color: #ff9505;
+                }
+            }
+        }
+    }
+}
