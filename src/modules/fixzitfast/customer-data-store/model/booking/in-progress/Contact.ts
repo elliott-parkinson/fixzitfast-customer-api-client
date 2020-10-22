@@ -12,6 +12,17 @@ export class Contact
     
     @action Set(name: string, email: string, phone: string)
 	{
+		this.Name = name;
+		this.Email = email;
+		this.PhoneNumber = phone;
+	}
 
+	Get()
+	{
+		return {
+			Name: this.Name,
+			Email: this.Email,
+			PhoneNumber: this.PhoneNumber,
+		}
 	}
 }

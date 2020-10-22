@@ -37,7 +37,10 @@ export namespace PaymentDetails
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-            bookingStore.SetPaymentCard(null, this.CardType, this.CardName, this.CardNumber, this.Expiry, this.CCV);
+            bookingStore.InProgress.SetPaymentCard(null, this.CardType, this.CardName, this.CardNumber, this.Expiry, this.CCV);
+
+            let router = Dependencies.of("store").get<any>("routes");
+            router.Go("/booking/create/payment");
         }
 
     }
@@ -60,15 +63,15 @@ export namespace PaymentDetails
         render() {
             return <Container>
                 <Row>
-                    <Column md={9} x={12}>
+                    <Column md={9} sm={12}>
                         <CreateBookingStepper.Component position={2} onBack={e => this.Router.Back()}/>
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
                             <CardBody>
-                                <Header size="sm">Choose a payment option</Header>
-                                <Form onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                                <Form className="fixzitfast-form" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                                    <Header size="sm">Payment Details</Header>
 
-                                    <Header size="md">Add Card</Header>
+                                    {/* <Header size="md">Add Card</Header> */}
 
                                     <FormGroup>
                                         <Label>
@@ -76,9 +79,9 @@ export namespace PaymentDetails
                                         </Label>
                                         <InputGroup>
                                             <InputGroupAddon addonType="prepend">
-                                                <Button disabled>
+                                                <div className="addon-icon">
                                                     <i className="fas fa-credit-card" />
-                                                </Button>
+                                                </div>
                                             </InputGroupAddon>
 
                                             <Input type="select" onChange={e => this.Form.CardType = e.target.value}>
@@ -127,7 +130,7 @@ export namespace PaymentDetails
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12}>
+                    <Column md={3} xs={12} className="d-none d-lg-block">
                         <OrderSummary.Component 
                             service={this.BookingStore?.CurrentBooking?.Service}
                             location={this.BookingStore?.CurrentBooking?.Location}

@@ -33,7 +33,10 @@ export class InProgressBooking
     @Type(() => Contact)
     @observable Contact: Contact = new Contact;
     
-    // payment card
+    @action SetPaymentCard(cardId: string, type: string, name: string, cardNumber: string, expiry: string, ccv: string)
+	{
+
+    }
 
 
     @action Clear()
@@ -49,5 +52,26 @@ export class InProgressBooking
     @action Complete()
 	{
 
-	}
+    }
+    
+    Store()
+    {
+        let storage = window.localStorage;
+		storage.setItem('fixzitfast.bookings.current',JSON.stringify( serialize(this) ));
+    }
+
+    @action Load()
+    {
+		let storage = window.localStorage;
+		
+		let stored: any = storage.getItem('fixzitfast.bookings.current');
+		if (stored != undefined)
+		{
+            this.Service = deserialize(Service, JSON.parse(stored).Service );
+            this.Location = deserialize(Address, JSON.parse(stored).Location );
+            this.Details = deserialize(Details, JSON.parse(stored).Details );
+            this.Time = deserialize(Time, JSON.parse(stored).Time );
+            this.Contact = deserialize(Contact, JSON.parse(stored).Contact );
+		}
+    }
 }

@@ -1,6 +1,7 @@
+import Dependencies, { Service } from "typedi";
+
 import * as React from "react";
 import { Redirect } from "react-router-dom";
-import Dependencies, { Service } from "typedi";
 
 import { 
     Alert,
@@ -25,7 +26,6 @@ export namespace SetDetails
 {
     export class DetailsForm
     {
-        @observable Type = "fix";
         @observable Details = "";
         @observable Files = [];
         
@@ -76,7 +76,8 @@ export namespace SetDetails
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-            bookingStore.InProgress.Details.Set(this.Type, this.Details);
+            bookingStore.InProgress.Details.Set(this.Details);
+            bookingStore?.InProgress.Store();
 
             let router = Dependencies.of("store").get<any>("routes");
             router.Go("/booking/create/contact");
@@ -95,6 +96,9 @@ export namespace SetDetails
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
             this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+
+            let details = this.BookingStore.InProgress.Details.Get();
+            this.Form.Details = details.Description;
         }
     
         render() {
@@ -111,7 +115,7 @@ export namespace SetDetails
                                     <Header size="md">What's the problem?</Header>
                                     
                                     <FormGroup tag="fieldset">
-                                        <Input type="textarea" rows={8} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
+                                        <Input type="textarea" rows={6} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
                                     </FormGroup>
 
                                     <FormGroup tag="fieldset">
@@ -128,6 +132,8 @@ export namespace SetDetails
                                             onSelect={event => this.Form.SelectFile(event)}
                                         >
                                             <React.Fragment>
+                                                <i className="fas fa-camera" /> 
+                                                <NewLine />
                                                 Drag here to upload or choose an image
                                             </React.Fragment>
                                         </Dropzone>
@@ -138,7 +144,7 @@ export namespace SetDetails
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12}>
+                    <Column md={3} x={12} className="d-none d-lg-block">
                         <OrderSummary.Component 
                             service={this.BookingStore?.CurrentBooking?.Service}
                             location={this.BookingStore?.CurrentBooking?.Location}

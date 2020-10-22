@@ -1,9 +1,15 @@
+import Dependencies, { Service } from "typedi";
+
 import * as React from "react";
+
+import { observer } from "mobx-react";
+import { observable, computed, action } from "mobx";
 
 import { 
     Fragment,
     Button,
-    Header, NewLine
+    Header, NewLine, Paragraph,
+    Row, Column
 } from "../../../../Theme";
 
 
@@ -20,19 +26,80 @@ export namespace OrderSummary
         onChangeLocation?: Function;
     }
 
+    @observer
     export class Component extends React.Component<IViewProps>
     {
+        @observable Router: any;
+        @observable BookingStore: any;
+        @observable Booking: any;
+
+        componentDidMount()
+        {
+            this.Router = Dependencies.of("store").get<any>("routes");
+            this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+            this.BookingStore.InProgress.Load();
+            this.Booking = this.BookingStore.InProgress;
+        }
+
         render() {
-            return <Fragment>
+            return <div className="summary-area">
                 <Header size="xs">Your Order Summary</Header>
 
-                { this.props.location && <Fragment>
-                    Location
+                { this.Booking?.Location.Line1 != "" && <Fragment>
+                    <Row className="summary-header">
+                        <Column xs={7}>
+                            <Header>
+                                Location
+                            </Header>
+                        </Column>
+                        <Column xs={5} className="text-right">
+                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/location") }>
+                                Change
+                            </Button>
+                        </Column>
+                    </Row>
+                    <Paragraph><i className="fas fa-map-marker-alt" /> &nbsp; { [this.Booking?.Location.Line1, this.Booking?.Location.Line2, this.Booking?.Location.Line3, this.Booking?.Location.Town, this.Booking?.Location.County, this.Booking?.Location.Postcode].filter(n => n).join(", ") }</Paragraph>
                     <NewLine />
-                    <i className="fas fa-map-marker-alt" /> &nbsp; { [this.props.location.Line1, this.props.location.Line2, this.props.location.Line3, this.props.location.Town, this.props.location.County, this.props.location.Postcode].filter(n => n).join(", ") }
+                    <NewLine />
                 </Fragment> }
-                <NewLine />
-                <NewLine />
+
+                { this.Booking?.Details.Description != "" && <Fragment>
+                    <Row className="summary-header">
+                        <Column xs={7}>
+                            <Header>
+                                Job Details
+                            </Header>
+                        </Column>
+                        <Column xs={5} className="text-right">
+                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/details") }>
+                                Change
+                            </Button>
+                        </Column>
+                    </Row>
+                    <Paragraph>{this.Booking?.Details.Description}</Paragraph>
+                    <NewLine />
+                    <NewLine />
+                </Fragment> }
+
+                { this.Booking?.Contact.Name != "" && <Fragment>
+                    <Row className="summary-header">
+                        <Column xs={7}>
+                            <Header>
+                                Contact Details
+                            </Header>
+                        </Column>
+                        <Column xs={5} className="text-right">
+                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/contact") }>
+                                Change
+                            </Button>
+                        </Column>
+                    </Row>
+                    <Paragraph>{this.Booking?.Contact.Name}</Paragraph>
+                    <Paragraph>{this.Booking?.Contact.Email}</Paragraph>
+                    <Paragraph>{this.Booking?.Contact.PhoneNumber}</Paragraph>
+                    <NewLine />
+                    <NewLine />
+                </Fragment> }
 
                 { this.props.service && <Fragment>
                     Service Summary
@@ -44,7 +111,7 @@ export namespace OrderSummary
                     <hr />
 
                 </Fragment> }
-            </Fragment>;
+            </div>;
         }
     }
 }

@@ -41,6 +41,9 @@ export default class Routes extends React.Component<any>
 	componentDidMount()
 	{
 		this.Router =  Dependencies.of("store").get<any>("routes");
+
+		let bookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+        bookingStore.InProgress.Load();
 	}
 
 	@computed get ShowStepper()

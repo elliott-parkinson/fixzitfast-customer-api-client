@@ -41,7 +41,12 @@ export namespace DateAndTime
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-            bookingStore.SetTimeDetails(this.Day, this.HourBlock, this.Agree);
+            // bookingStore.SetTimeDetails(this.Day, this.HourBlock, this.Agree);
+
+            
+
+            let router = Dependencies.of("store").get<any>("routes");
+            router.Go("/booking/create/paymentdetails");
         }
 
     }
@@ -63,7 +68,7 @@ export namespace DateAndTime
         render() {
             return <Container>
                 <Row>
-                    <Column md={9} x={12}>
+                    <Column md={9} xs={12}>
                         <CreateBookingStepper.Component position={2} onBack={e => this.Router.Back()}/>
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
@@ -84,6 +89,7 @@ export namespace DateAndTime
                                             new Date("Tue Oct 27 2020 16:00:00 GMT+0100"),
                                             new Date("Tue Oct 27 2020 17:00:00 GMT+0100"),
                                             new Date("Tue Oct 27 2020 18:00:00 GMT+0100"),
+
                                             new Date("Wed Oct 28 2020 16:00:00 GMT+0100"),
                                             new Date("Wed Oct 28 2020 17:00:00 GMT+0100"),
                                             new Date("Wed Oct 28 2020 18:00:00 GMT+0100"),
@@ -116,7 +122,7 @@ export namespace DateAndTime
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12}>
+                    <Column md={3} xs={12} className="d-none d-lg-block">
                         <OrderSummary.Component 
                             service={this.BookingStore?.CurrentBooking?.Service}
                             location={this.BookingStore?.CurrentBooking?.Location}

@@ -7,15 +7,21 @@ import { Skip, Type } from "serializer.ts/Decorators";
 
 export class Details
 {
-	@observable Type: string = "";
     @observable Description: string = "";
     
     @Skip()
     @observable Files: string[] = [];
     
-    @action Set(type: string, description: string)
+    @action Set(description: string)
 	{
+		this.Description = description;
+	}
 
+	Get()
+	{
+		return {
+			Description: this.Description,
+		}	
 	}
 
 	@action UploadFile(id: string, url: string)

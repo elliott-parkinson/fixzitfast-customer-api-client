@@ -47,7 +47,7 @@ export namespace SelectLocation
             return this.Search == "";
         }
 
-        @action GetStarted()
+        @action async GetStarted()
         {
             if (this.Search.indexOf("EH") === -1)
             {
@@ -55,8 +55,10 @@ export namespace SelectLocation
             }
             else
             {
+                let address = await this.LocationStore.GetAddressesFromPostcode(this.Search);
                 this.Error = "";
-                this.BookingStore.InProgress.Location.Set("", "", "line3", "town", "county", "postcode");
+                this.BookingStore.InProgress.Location.Set(address[0].Line1, address[0].Line2, address[0].Line3, address[0].Town, address[0].County, address[0].Postcode);
+                this.BookingStore?.InProgress.Store();
                 this.Router.Go("/booking/create/details");
             }
         }

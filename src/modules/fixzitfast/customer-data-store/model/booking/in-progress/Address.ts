@@ -20,11 +20,22 @@ export class Address
 
     @action SetCoordinates(latitude: number, longitude: number)
 	{
-
+		this.Latitude = latitude;
+		this.Longitude = longitude;
 	}
         
     @action Set(line1: string, line2: string, line3: string, town: string, county: string, postcode: string)
 	{
+		this.Line1 = line1;
+		this.Line2 = line2;
+		this.Line3 = line3;
+		this.Town = town;
+		this.County = county;
+		this.Postcode = postcode;
+	}
 
+	Get()
+	{
+		
 	}
 }

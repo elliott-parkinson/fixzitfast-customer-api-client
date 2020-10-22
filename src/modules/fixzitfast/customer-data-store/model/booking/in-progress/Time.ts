@@ -9,13 +9,13 @@ export class Time
     @Type(() => Date)
 	@observable Date: Date = null;
     
-    @observable TimeSlotId: string = "";
     @observable TimeSlotText: string = "";
     
 	@observable Agree: boolean = false;
         
-    @action Set(date: Date, timeSlotId: string, timeSlotText: string, agree: boolean)
+    @action Set(date: Date, agree: boolean)
 	{
+		this.Date = date;
 
 	}
 }

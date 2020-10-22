@@ -4,7 +4,7 @@ import {
     Fragment,
     Button,
     Header,
-    Block, Row, Column
+    Block, Row, Column, NewLine
 } from "../../../../Theme";
 
 
@@ -23,7 +23,7 @@ export namespace CreateBookingStepper
     export class Component extends React.Component<IViewProps>
     {
         render() {
-            return <Block>
+            return <div>
                 <Row className="booking-form-stepper">
                     <Column md={3} xs={12} className="text-center">
                         <Button color="primary" outline onClick={this.props.onBack}>
@@ -77,7 +77,8 @@ export namespace CreateBookingStepper
                         />
                     </Column>
                 </Row>
-            </Block>;
+                <NewLine />
+            </div>;
         }
     }
 }

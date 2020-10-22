@@ -39,7 +39,8 @@ export namespace SetContact
         @action async Submit()
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-            bookingStore.InProgress.Contact.Set(this.Name, this.PhoneNumber, this.Email);
+            bookingStore.InProgress.Contact.Set(this.Name, this.Email, this.PhoneNumber);
+            bookingStore?.InProgress.Store();
 
             let router = Dependencies.of("store").get<any>("routes");
             router.Go("/booking/create/times");
@@ -58,6 +59,12 @@ export namespace SetContact
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
             this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+
+            let details = this.BookingStore.InProgress.Contact.Get();
+
+            this.Form.Name = details.Name;
+            this.Form.PhoneNumber = details.PhoneNumber;
+            this.Form.Email = details.Email;
         }
     
         render() {
@@ -85,14 +92,14 @@ export namespace SetContact
                                         <Label>
                                             Phone Number (Required)
                                         </Label>
-                                        <Input type="text" required placeholder="eg: 07959 484858" value={this.Form.PhoneNumber} onChange={ e => this.Form.PhoneNumber = e.target.value } />{' '}
+                                        <Input type="tel" required placeholder="eg: 07959 484858" value={this.Form.PhoneNumber} onChange={ e => this.Form.PhoneNumber = e.target.value } />{' '}
                                     </FormGroup>
 
                                     <FormGroup tag="fieldset">
                                         <Label>
                                             Email (Required)
                                         </Label>
-                                        <Input type="text" required placeholder="Enter Email" value={this.Form.Email} onChange={ e => this.Form.Email = e.target.value } />{' '}
+                                        <Input type="email" required placeholder="Enter Email" value={this.Form.Email} onChange={ e => this.Form.Email = e.target.value } />{' '}
                                     </FormGroup>
 
                                     <Button color="primary" block>See Pricing</Button>
@@ -100,7 +107,7 @@ export namespace SetContact
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12}>
+                    <Column md={3} x={12} className="d-none d-lg-block">
                         <OrderSummary.Component 
                             service={this.BookingStore?.CurrentBooking?.Service}
                             location={this.BookingStore?.CurrentBooking?.Location}
