@@ -9,8 +9,8 @@ import { Skip, Type } from "serializer.ts/Decorators";
 export class Time
 {
     @Type(() => Date)
-	@observable DateId: number = null;
 	@observable Date: Date = null;
+	@observable DateId: number = null;
     
     @observable TimeSlotText: string = "";
     
@@ -26,6 +26,13 @@ export class Time
 
 	@action SetTimeSlot()
 	{
-		this.TimeSlotText = moment(this.Date).format('h:mm A MMMM, Do YYYY');
+		if (this.DateId != null)
+		{
+			this.TimeSlotText = moment(this.Date).format('h:mm A MMMM, Do YYYY');
+		}
+		else
+		{
+			this.TimeSlotText = "";
+		}
 	}
 }

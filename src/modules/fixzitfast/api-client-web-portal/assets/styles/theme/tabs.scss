@@ -1,0 +1,26 @@
+
+
+.nav.nav-tabs {
+    border-bottom: none;
+    
+    .nav-item {
+        color: #202a3d;
+        border-bottom: 2px transparent;
+
+        .nav-link {
+            color: #202a3d;
+            
+            font-family: 'muli-semibold', 'Open Sans', sans-serif !important;
+        }
+
+        &.active {
+            border-bottom: 2px solid #ff9505;
+            
+            .nav-link {
+                color: #ff9505;
+                
+                font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+            }
+        }
+    }
+}

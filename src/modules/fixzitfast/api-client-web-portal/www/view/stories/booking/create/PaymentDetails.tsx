@@ -21,6 +21,8 @@ import { observable, computed, action } from "mobx";
 import { PaymentStatus } from "../../../../../../react-components";
 import { OrderSummary } from "./components/OrderSummary";
 import { CreateBookingStepper } from "./components/CreateBookingStepper";
+import { AuthenticationModal } from "../../../components/AuthenticationModal";
+import { RequireAuthentication } from "../../../components/RequireAuthentication";
 
 export namespace PaymentDetails
 {
@@ -62,6 +64,7 @@ export namespace PaymentDetails
     
         render() {
             return <Container>
+                <RequireAuthentication.Component />
                 <Row>
                     <Column md={9} sm={12}>
                         <CreateBookingStepper.Component position={2} onBack={e => this.Router.Back()}/>

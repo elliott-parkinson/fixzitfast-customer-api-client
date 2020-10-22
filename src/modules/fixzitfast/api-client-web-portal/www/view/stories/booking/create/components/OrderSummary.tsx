@@ -101,7 +101,7 @@ export namespace OrderSummary
                     <NewLine />
                 </Fragment> }
 
-                { this.Booking?.Time.TimeSlotText != "" && <Fragment>
+                { this.Booking?.Time.Date && this.Booking?.Time.TimeSlotText != "" && <Fragment>
                     <Row className="summary-header">
                         <Column xs={7}>
                             <Header>
