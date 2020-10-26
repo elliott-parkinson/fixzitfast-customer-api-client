@@ -71,6 +71,26 @@ export namespace SelectService
             this.Router.Go("/booking/create/details");
         }
 
+        IsCategoryInSearch(category: any): boolean {
+            let categoryInSearch = this.FilterCategory == undefined || (this.FilterCategory && this.FilterCategory.Id == category.Id);
+            let services = this.GetServicesForCategory(category.Id);
+            
+            let serviceInSearch = false;
+            for (let service of services)
+            {
+                if (service.Name.toLowerCase().indexOf(this.FilterText.toLowerCase()) !== -1)
+                {
+                    serviceInSearch = true;
+                    break;
+                }
+            }
+
+            return categoryInSearch && serviceInSearch;
+        }
+
+        IsServiceInSearch(service: any): boolean {
+            return service.Name.toLowerCase().indexOf(this.FilterText.toLowerCase()) !== -1;
+        }
 
         GetPopularServices()
         {
@@ -135,7 +155,7 @@ export namespace SelectService
 
                     <Column lg={8} md={12}>
                         <div className="service-category-list">
-                            { this.FilterCategory == undefined &&
+                            { this.FilterCategory == undefined && this.FilterText == "" &&
                                 <div className="animate__animated animate__fadeIn animate__delay-02s">
                                     <Header size="xs">Most popular services</Header>
                                     <hr />
@@ -160,7 +180,7 @@ export namespace SelectService
                             }
                             <div className="animate__animated animate__fadeIn animate__delay-04s">
                                 {this.Categories.map( category => <Fragment key={category.Id}>
-                                    { (this.FilterCategory == undefined || (this.FilterCategory && this.FilterCategory.Id == category.Id)) && <Fragment>
+                                    { this.IsCategoryInSearch(category) && <Fragment>
                                         <Header size="xs"><ServiceCategoryIcon.Component src={category.IconUrl} />  &nbsp; {category.Name}</Header>
                                         <hr />
                                         { this.GetServicesForCategory(category.Id).length == 0 && <Alert color="info">
@@ -169,7 +189,7 @@ export namespace SelectService
                                         
                                         <Row className="service-list">
                                             { this.GetServicesForCategory(category.Id).map( service => 
-                                                <Column key={service.Id} className="p-1">
+                                                this.IsServiceInSearch(service) && <Column key={service.Id} className="p-1">
                                                     <ServiceCard.Component
                                                         name={service.Name}
                                                         description={service.Description}
