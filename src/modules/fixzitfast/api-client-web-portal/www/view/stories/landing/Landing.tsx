@@ -120,12 +120,15 @@ export namespace Landing
 
                             { this.ServicesStore &&
                                 <Form>
-                                    <FormGroup>
+                                    <FormGroup className="d-none d-md-block">
                                         <ServicesTypeAhead.Component text="Get Started" onClick={ (service, category) => { this.BookService(service, category); }} />
                                     </FormGroup>
 
-                                    <FormGroup>
+                                    <FormGroup className="d-none d-md-block">
                                         <Button color="secondary" onClick={e => this.ViewServices()}>See all Services</Button>
+                                    </FormGroup>
+                                    <FormGroup className="d-block d-md-none">
+                                        <Button color="primary" block onClick={e => this.ViewServices()}>Get Started</Button>
                                     </FormGroup>
                                 </Form>
                             }

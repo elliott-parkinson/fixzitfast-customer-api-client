@@ -3,9 +3,18 @@
 
 .main-hero {
     background-color: white;
+
     .row {
         > div {
-            min-height: calc(100vh - 228px);
+            min-height: calc(100vh - 258px);
+
+            @media (max-width: 991.98px) {
+                min-height: calc(40vh);
+            }
+
+            @media (max-width: 575.98px) {
+                min-height: calc(35vh);
+            }
         }
 
         .van-image-container {
