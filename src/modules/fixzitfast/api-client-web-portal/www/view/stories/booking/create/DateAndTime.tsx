@@ -154,7 +154,7 @@ export namespace DateAndTime
                                 <Header size="sm"><small><i className="fas fa-calendar" style={{ color: "#ff9505" }} /> &nbsp; { moment(this.Form.Date).format('MMMM, Do YYYY') }</small></Header>
                                 <Header size="sm"><small><i className="fas fa-clock" style={{ color: "#ff9505" }} /> &nbsp; { moment(this.Form.Date).format('h:mm A') }</small></Header>
                                 <NewLine />
-                                <Header size="md"><i className="fas fa-pound-sign" /> { this.Form.Price }</Header>
+                                <Header size="md">£ { this.Form.Price }</Header>
                             </Column>
                         </Row>
                     </Fragment> }

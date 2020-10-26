@@ -49,7 +49,7 @@ export class App extends React.PureComponent<any>
 				<MobileHeaderBar.Component />
 			}
 
-			<div className="content">
+			<div id="content" className="content">
 				<Routes />
 				<Footer.Component />
 

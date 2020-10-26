@@ -138,8 +138,7 @@ export default class Routes extends React.Component<any>
 					</Column>
 					<Column md={this.ShowSummary ? 3 : 12} xs={12} className={"wizard-sidebar animate__animated animate__fadeInRight animate__faster d-none d-md-block " + (this.ShowSummary ? "" : "w-0 h-0")}>
 						<OrderSummary.Component 
-							service={this.BookingStore?.CurrentBooking?.Service}
-							location={this.BookingStore?.CurrentBooking?.Location}
+							
 						/>
 					</Column>
 				</Row>

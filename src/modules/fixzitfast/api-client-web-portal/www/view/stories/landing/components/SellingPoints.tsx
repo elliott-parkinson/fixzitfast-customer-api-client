@@ -34,7 +34,7 @@ export namespace SellingPoints
                             </Paragraph>
 
                             { this.props.showButtons &&
-                                <Button color="primary" outline onClick={this.props.onClick}>Book now</Button>
+                                <Button color="primary" onClick={this.props.onClick}>Book now</Button>
                             }
                         </Column>
                         <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-06s">
@@ -47,7 +47,7 @@ export namespace SellingPoints
                             </Paragraph>
 
                             { this.props.showButtons &&
-                                <Button color="primary" outline onClick={this.props.onClick}>Book now</Button>
+                                <Button color="primary" onClick={this.props.onClick}>Book now</Button>
                             }
                         </Column>
                         <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-08s">
@@ -60,7 +60,7 @@ export namespace SellingPoints
                             </Paragraph>
 
                             { this.props.showButtons &&
-                                <Button color="primary" outline onClick={this.props.onClick}>Book now</Button>
+                                <Button color="primary" onClick={this.props.onClick}>Book now</Button>
                             }
                         </Column>
                     </Row>

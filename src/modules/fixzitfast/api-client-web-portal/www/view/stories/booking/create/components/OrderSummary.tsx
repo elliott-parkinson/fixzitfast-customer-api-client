@@ -45,24 +45,25 @@ export namespace OrderSummary
             return <div className="summary-area">
                 <Header size="xs">Your Order Summary</Header>
 
-                { this.Booking?.Location.Line1 != "" && <Fragment>
+                { this.Booking?.Service.Name != "" && <Fragment>
                     <Row className="summary-header">
                         <Column xs={7}>
                             <Header>
-                                Location
+                                Service Summary
                             </Header>
                         </Column>
                         <Column xs={5} className="text-right">
-                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/location") }>
+                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/contact") }>
                                 Change
                             </Button>
                         </Column>
                     </Row>
-                    <Paragraph><i className="fas fa-map-marker-alt" style={{ color: "#ff9505" }}/> &nbsp; { [this.Booking?.Location.Line1, this.Booking?.Location.Line2, this.Booking?.Location.Line3, this.Booking?.Location.Town, this.Booking?.Location.County, this.Booking?.Location.Postcode].filter(n => n).join(", ") }</Paragraph>
+                    <Paragraph>{this.Booking?.Service.CategoryName}, {this.Booking?.Service.Name}</Paragraph>
+                    <Paragraph className="note">Please be aware that you will be charged until the job is completed.</Paragraph>
                     <NewLine />
                     <NewLine />
                 </Fragment> }
-
+                
                 { this.Booking?.Details.Description != "" && <Fragment>
                     <Row className="summary-header">
                         <Column xs={7}>
@@ -81,22 +82,20 @@ export namespace OrderSummary
                     <NewLine />
                 </Fragment> }
 
-                { this.Booking?.Contact.Name != "" && <Fragment>
+                { this.Booking?.Location.Line1 != "" && <Fragment>
                     <Row className="summary-header">
                         <Column xs={7}>
                             <Header>
-                                Contact Details
+                                Location
                             </Header>
                         </Column>
                         <Column xs={5} className="text-right">
-                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/contact") }>
+                            <Button color="link" onClick={ e => this.Router.Go("/booking/create/location") }>
                                 Change
                             </Button>
                         </Column>
                     </Row>
-                    <Paragraph><i className="fas fa-user" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Name}</Paragraph>
-                    <Paragraph><i className="fas fa-envelope" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Email}</Paragraph>
-                    <Paragraph><i className="fas fa-phone" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.PhoneNumber}</Paragraph>
+                    <Paragraph><i className="fas fa-map-marker-alt" style={{ color: "#ff9505" }}/> &nbsp; { [this.Booking?.Location.Line1, this.Booking?.Location.Line2, this.Booking?.Location.Line3, this.Booking?.Location.Town, this.Booking?.Location.County, this.Booking?.Location.Postcode].filter(n => n).join(", ") }</Paragraph>
                     <NewLine />
                     <NewLine />
                 </Fragment> }
@@ -119,13 +118,11 @@ export namespace OrderSummary
                     <NewLine />
                 </Fragment> }
 
-
-
-                { this.Booking?.Service.Name != "" && <Fragment>
+                { this.Booking?.Contact.Name != "" && <Fragment>
                     <Row className="summary-header">
                         <Column xs={7}>
                             <Header>
-                                Service Summary
+                                Contact Details
                             </Header>
                         </Column>
                         <Column xs={5} className="text-right">
@@ -134,8 +131,9 @@ export namespace OrderSummary
                             </Button>
                         </Column>
                     </Row>
-                    <Paragraph>{this.Booking?.Service.CategoryName}, {this.Booking?.Service.Name}</Paragraph>
-                    <Paragraph className="note">Please be aware that you will be charged until the job is completed.</Paragraph>
+                    <Paragraph><i className="fas fa-user" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Name}</Paragraph>
+                    <Paragraph><i className="fas fa-envelope" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Email}</Paragraph>
+                    <Paragraph><i className="fas fa-phone" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.PhoneNumber}</Paragraph>
                     <NewLine />
                     <NewLine />
                 </Fragment> }

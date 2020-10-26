@@ -1,0 +1,56 @@
+{
+	"name": "Fixzitfast",
+	"short_name": "fixzitfast-site",
+	"start_url": "./",
+	"display": "standalone",
+	"theme_color": "#ff9505",
+	"description": ".",
+	"icons": [
+		{
+			"src": "../../assets/images/icon-64.png",
+			"sizes": "64x64",
+			"type": "image/png"
+		},
+		{
+			"src": "../../assets/images/icon-96.png",
+			"sizes": "96x96",
+			"type": "image/png"
+		},
+		{
+			"src": "../../assets/images/icon-128.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "../../assets/images/icon-144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "New Booking",
+			"description": "Create a new booking",
+			"icons": [{ "src": "../../assets/images/shortcuts/booking.svg"}],
+			"url": "/booking/create"
+		},
+		{
+			"name": "Bookings",
+			"description": "Your bookings",
+			"src": "../../assets/images/shortcuts/booking.svg",
+			"url": "/booking/list"
+		},
+		{
+			"name": "My Account",
+			"description": "View and edit your account",
+			"src": "../../assets/images/shortcuts/account.svg",
+			"url": "/account"
+		},
+		{
+			"name": "Notifications",
+			"description": "View and edit your notifications",
+			"src": "../../assets/images/shortcuts/notifications.svg",
+			"url": "/notifications"
+		}
+	]
+}

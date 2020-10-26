@@ -44,10 +44,11 @@ export class RouteService
 	}
 
 	public scrollToTop() {
-		const c = document.documentElement.scrollTop || document.body.scrollTop;
+		const content = document.getElementById("content");
+		const c = content.scrollTop || document.body.scrollTop;
 		if (c > 0) {
 			window.requestAnimationFrame( a => this.scrollToTop() );
-			window.scrollTo(0, c - c / 8);
+			content.scrollTo(0, c - c / 8);
 		}
 	}
 

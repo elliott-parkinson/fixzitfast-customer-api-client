@@ -92,7 +92,7 @@ export namespace Landing
         @action BookService(service: any, category: any)
         {
             this.BookingStore?.Create(service.Id, service.Name, category.Id, category.Name);
-            this.Router.Go("/booking/create/services");
+            this.Router.Go("/booking/create/details");
         }
 
         @action ViewServices()
