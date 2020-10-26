@@ -42,7 +42,6 @@ export class App extends React.PureComponent<any>
 	}
 
 	render() {
-		console.log("View re-render");
 		return <Fragment>
 			<NavigationBar.Component />
 			{ this.Site &&

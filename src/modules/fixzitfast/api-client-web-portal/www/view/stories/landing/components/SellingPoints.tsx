@@ -24,7 +24,7 @@ export namespace SellingPoints
             return <div className="selling-points">
                 <Container>
                     <Row>
-                        <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-04s">
+                        <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-00s">
                             <img src ={require("../../../../../assets/images/selling-points/professionals.png")} />
                             <br />
                             <br />
@@ -37,7 +37,7 @@ export namespace SellingPoints
                                 <Button color="primary" onClick={this.props.onClick}>Book now</Button>
                             }
                         </Column>
-                        <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-06s">
+                        <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-01s">
                             <img src ={require("../../../../../assets/images/selling-points/schedule.png")} />
                             <br />
                             <br />
@@ -50,7 +50,7 @@ export namespace SellingPoints
                                 <Button color="primary" onClick={this.props.onClick}>Book now</Button>
                             }
                         </Column>
-                        <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-08s">
+                        <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-02s">
                             <img src ={require("../../../../../assets/images/selling-points/speed.png")} />
                             <br />
                             <br />

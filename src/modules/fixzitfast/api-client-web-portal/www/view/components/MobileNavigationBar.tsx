@@ -32,7 +32,7 @@ export namespace MobileNavigationBar
         }
     
         render() {
-            return <Nav justified className="text-center bottom-navbar animate__animated animate__fadeInUp d-flex d-sm-none">
+            return <Nav justified className="text-center bottom-navbar animate__animated animate__fadeInUp animate__faster d-flex d-sm-none">
                     <NavItem active={(this.Routes?.Location?.indexOf( "/booking/create/services" ) !== -1) ? true : undefined}>
                         <NavLink href="/booking/create/services" onClick={ e => { e.preventDefault(); this.Routes.Go("/booking/create/services"); return false; }}>
                             <i className="fas fa-briefcase" />

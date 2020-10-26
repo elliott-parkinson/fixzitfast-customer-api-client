@@ -31,7 +31,7 @@ export namespace NavigationBar
         }
     
         render() {
-            return <Navbar color="light" light expand="md" className="top-navbar animate__animated animate__fadeInDown d-none d-sm-flex">
+            return <Navbar color="light" light expand="md" className="top-navbar animate__animated animate__fadeInDown animate__faster d-none d-sm-flex">
             <Container>
                 <NavbarBrand href="/" onClick={ e => { e.preventDefault(); this.Routes.Go("/"); return false; }}>
                     <img src={require("../../../assets/images/site-logo.png")} />
