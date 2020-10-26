@@ -79,7 +79,7 @@ export namespace ServicesTypeAhead
                     id="basic-typeahead-single"
                     onChange={e => this.SelectService(e[0]) }
                     options={this.ServicesTypeaheadList}
-                    placeholder="Type the service that you need."
+                    placeholder="What service are you looking for?"
                     selected={null}
                     labelKey={service => this.renderServiceName(service)}
                     renderMenuItemChildren={service => this.renderServiceName(service)}

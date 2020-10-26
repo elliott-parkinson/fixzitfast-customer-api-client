@@ -77,7 +77,7 @@ export namespace Payment
         render() {
             return <Container>
                 <Row >
-                    <Column md={(this.Status == "none" || this.Status == "failed") ? 9 : 12} x={12}className="p-5">
+                    <Column md={(this.Status == "none" || this.Status == "failed") ? 9 : 12} xs={12}className="p-5">
                         { (this.Status == "none" || this.Status == "failed") &&
                             <CreateBookingStepper.Component position={3} onBack={e => this.Router.Back()}/>
                         }
@@ -111,7 +111,7 @@ export namespace Payment
                         }
                     </Column>
                     
-                    <Column md={(this.Status == "none" || this.Status == "failed") ? 3 : 0} x={12} className={(this.Status == "none" || this.Status == "failed") ? "" : "d-none"}>
+                    <Column md={(this.Status == "none" || this.Status == "failed") ? 3 : 0} xs={12} className={(this.Status == "none" || this.Status == "failed") ? "" : "d-none"}>
                         <OrderSummary.Component 
                             service={this.BookingStore?.CurrentBooking?.Service}
                             location={this.BookingStore?.CurrentBooking?.Location}

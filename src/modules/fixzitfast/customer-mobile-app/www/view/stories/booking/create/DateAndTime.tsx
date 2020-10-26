@@ -61,7 +61,7 @@ export namespace DateAndTime
         render() {
             return <Container>
                 <Row>
-                    <Column md={9} x={12}>
+                    <Column md={9} xs={12}>
                         <CreateBookingStepper.Component position={2} onBack={e => this.Router.Back()}/>
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
@@ -115,7 +115,7 @@ export namespace DateAndTime
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12}>
+                    <Column md={3} xs={12}>
                         <OrderSummary.Component 
                             service={this.BookingStore?.CurrentBooking?.Service}
                             location={this.BookingStore?.CurrentBooking?.Location}

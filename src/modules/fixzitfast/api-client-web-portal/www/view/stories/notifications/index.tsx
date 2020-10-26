@@ -44,14 +44,12 @@ export default class Routes extends React.Component<any>
 	render() {
         let match = this.props.match.url;
 
-		return <Container>
-			<Row>
+		return <Container className="h-100">
+			<Row className="h-100">
 				<Column sm={12} md={12} className="fill-area">
-					<Header size="xl" className="page-header">Notifications</Header>
-					
 					<Card className="animate__animated animate__fadeIn animate__delay-02s">
 						<CardBody className="p-4 m-4 full-center">
-							<img className="p-4 m-0" style={{maxWidth: "260px"}} src={require("../../../../assets/images/icons/upcoming.png")} />
+							<img className="p-4 m-0" style={{maxWidth: "260px"}} src={require("../../../../assets/images/icons/illustration-3.svg")} />
 							<NewLine />
 							<NewLine />
 							<Paragraph className="text-center text-lighter" style={{maxWidth: "260px", marginLeft: "auto", marginRight: "auto"}}>
@@ -61,6 +59,7 @@ export default class Routes extends React.Component<any>
 							</Paragraph>
 						</CardBody>
 					</Card>
+					<NewLine />
 				</Column>
 			</Row>
 		</Container>;

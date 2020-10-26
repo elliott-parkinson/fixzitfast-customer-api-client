@@ -114,7 +114,7 @@ export default class Routes extends React.Component<any>
 		return <Fragment>
 			<Container>
 				<Row>
-					<Column md={this.ShowSummary ? 9 : 12} x={12}>
+					<Column md={this.ShowSummary ? 9 : 12} xs={12}>
 						{ this.ShowStepper &&
 							<CreateBookingStepper.Component className="animate__animated animate__fadeInDown animate__faster" position={this.StepperPosition} onBack={e => this.Router.Back()}/>
 						}

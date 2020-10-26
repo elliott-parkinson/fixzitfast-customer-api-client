@@ -61,10 +61,13 @@ html {
     
 
     .nav-item {
+        border-bottom: 4px solid transparent;
+        color: #c7c7c8;
+
         .nav-link {
-            padding-top: 12px;
-            padding-bottom: 28px;
-            color: #202a3d;
+            color: #c7c7c8;
+            padding-top: 14px;
+            padding-bottom: 20px;
             font-size: 12px;
 
             @media (max-width: 320px) {
@@ -89,6 +92,15 @@ html {
             
             &:hover {
                 color: #ff9505;
+            }
+        }
+
+        &.active {
+            border-bottom-color: #ff9505;
+
+            .nav-link {
+                color: #202a3d;
+                font-family: 'muli-bold', 'Open Sans', sans-serif !important;
             }
         }
         
@@ -134,10 +146,16 @@ html {
     .fill-area {
         display: flex;
         flex-direction: column;
-        ;
+
+        .nav-tabs {
+            margin-bottom: 0px;
+        }
+        
         .card {
             flex-grow: 1;
+            overflow-y: hidden;
             margin-bottom: 22px;
+            margin-top: 22px;
         }
     }
 }
@@ -180,12 +198,19 @@ html {
     }
     .nav-link {
         color: #202a3d;
+        border-bottom: 2px solid transparent;
 
         @media (max-width: 778px) {
             padding-right: 20px !important;
             padding-left: 20px !important;
             margin-right: 0px !important;
             margin-left: 0px !important;
+        }
+
+        &.active {
+            font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+            border-bottom-color: #ff9505;
+
         }
 
         &.highlighted {
@@ -198,8 +223,38 @@ html {
     }
 }
 .navbar-brand {
+    @media (max-width: 778px) {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
     img {
         height: 22px;
+    }
+}
+
+.service-category-filter-icons {
+    h2 {
+        margin-bottom: 22px;
+    }
+
+    input[type="text"] {
+        background-color: #e6e9f0;
+        border-color: transparent;
+        padding: 18px;
+
+        &::placeholder {
+            color: #8a8c90;
+            font-family: 'muli-bold', 'Open Sans', sans-serif !important;
+        }
+    }
+
+    .filter-row {
+        @media (max-width: 778px) {
+           overflow-x: auto;
+           overflow-y: hidden;
+           flex-wrap: nowrap;
+        }
     }
 }
 

@@ -7,12 +7,16 @@ export namespace ServiceCategoryIcon
     export interface IViewProps
     {
         src: string;
+        isService?: boolean;
     }
 
     export class Component extends React.Component<any>
     {
         render() {
-            return <img className="service-category-icon" src={this.props.src} />;
+            return <img
+                className={"service-category-icon " + (this.props.isService ? "service" : "") }
+                src={this.props.src}
+            />;
         }
     }
 }

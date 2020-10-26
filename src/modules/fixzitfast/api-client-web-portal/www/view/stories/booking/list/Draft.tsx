@@ -48,7 +48,7 @@ export namespace Draft
             return <Fragment>
                 <Card className="animate__animated animate__fadeIn animate__delay-02s">
                     <CardBody className="p-4 m-4 full-center">
-                        <img className="p-4 m-0" style={{maxWidth: "260px"}} src={require("../../../../../assets/images/icons/upcoming.png")} />
+                        <img className="p-4 m-0" style={{maxWidth: "260px"}} src={require("../../../../../assets/images/icons/illustration-2.svg")} />
                         <NewLine />
                         <NewLine />
                         <Paragraph className="text-center text-lighter" style={{maxWidth: "260px", marginLeft: "auto", marginRight: "auto"}}>

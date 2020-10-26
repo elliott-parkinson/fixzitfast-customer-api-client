@@ -53,7 +53,7 @@ export namespace SelectLocation
             return <Container>
                 <Header>Enter your location</Header>
                 <Row>
-                    <Column md={9} x={12}>
+                    <Column md={9} xs={12}>
                         <Form className="animate__animated animate__fadeIn animate__delay-02s">
                             <FormGroup>
                                 <InputGroup>
@@ -74,7 +74,7 @@ export namespace SelectLocation
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12} className="vertical-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
+                    <Column md={3} xs={12} className="vertical-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
                         <Block>
                            <i className="fas fa-images fa-5x" />
                         </Block>

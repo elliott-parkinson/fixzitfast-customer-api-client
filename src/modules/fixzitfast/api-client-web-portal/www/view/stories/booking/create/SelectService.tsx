@@ -38,7 +38,7 @@ export namespace SelectService
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
-            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Choose a service");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "");
             this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
             if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
@@ -104,17 +104,36 @@ export namespace SelectService
 
         render() {
             return <Container>
-                <Header size="xl">Choose a service</Header>
-                <Row>
-                    <Column md={9} x={12}>
-                        <Form className="animate__animated animate__fadeIn animate__delay-02s">
-                            <FormGroup>
-                                <InputGroup>
-                                    <ServicesTypeAhead.Component text="Book" onClick={ (service, category) => { this.BookService(service, category); }} />
-                                </InputGroup>
-                            </FormGroup>
-                        </Form>
+                <NewLine />
+                <Row style={{ flexDirection: "row-reverse" }}>
+                    <Column lg={4} md={12} className="animate__animated animate__fadeIn animate__faster">
+                        <div className="service-category-filter-icons">
+                            <Header size="lg">Need some help?</Header>
+                            <Row>
+                                <Column className="m-0">
+                                    <FormGroup>
+                                        <Input type="text" placeholder="What service are you looking for?" value={this.FilterText} onChange= { e => this.FilterText = e.target.value }/>
+                                    </FormGroup>
+                                </Column>
+                            </Row>
+                            <Row className="filter-row">
+                                { this.Categories.map( category => <Fragment key={category.Id}>
+                                    <Column className="m-1">
+                                        <ServiceIcon.Component
+                                            name={category.Name}
+                                            src={category.IconUrl}
+                                            selected={this.FilterCategory?.Id == category.Id}
 
+                                            onClick={e => this.SetFilterCategory(category)}
+                                        />
+                                    </Column> 
+                                </Fragment>)}
+                            </Row>
+                        </div>
+                        <NewLine />
+                    </Column>
+
+                    <Column lg={8} md={12}>
                         <div className="service-category-list">
                             { this.FilterCategory == undefined &&
                                 <div className="animate__animated animate__fadeIn animate__delay-02s">
@@ -122,7 +141,7 @@ export namespace SelectService
                                     <hr />
                                     <Row className="service-list">
                                         { this.GetPopularServices()?.map( service => 
-                                            <Column md={4} sm={6} xs={12} key={service.Id} className="p-1">
+                                            <Column key={service.Id} className="p-1">
                                                 <ServiceCard.Component
                                                     name={service.Name}
                                                     description={service.Description}
@@ -150,7 +169,7 @@ export namespace SelectService
                                         
                                         <Row className="service-list">
                                             { this.GetServicesForCategory(category.Id).map( service => 
-                                                <Column md={4} sm={6} xs={12} key={service.Id} className="p-1">
+                                                <Column key={service.Id} className="p-1">
                                                     <ServiceCard.Component
                                                         name={service.Name}
                                                         description={service.Description}
@@ -168,24 +187,6 @@ export namespace SelectService
                                     </Fragment> }
                                 </Fragment>)}
                             </div>
-                        </div>
-                    </Column>
-                    <Column md={3} x={12} className="animate__animated animate__fadeIn animate__faster d-none d-lg-inline-flex">
-                        <div className="service-category-filter-icons">
-                            <Header size="xs">Filter</Header>
-                            <Row>
-                                { this.Categories.map( category => <Fragment key={category.Id}>
-                                    <Column className="m-1">
-                                        <ServiceIcon.Component
-                                            name={category.Name}
-                                            src={category.IconUrl}
-                                            selected={this.FilterCategory?.Id == category.Id}
-
-                                            onClick={e => this.SetFilterCategory(category)}
-                                        />
-                                    </Column> 
-                                </Fragment>)}
-                            </Row>
                         </div>
                     </Column>
                 </Row>

@@ -142,7 +142,7 @@ export namespace SelectService
             return <Container>
                 <Header size="xl">Choose a service</Header>
                 <Row>
-                    <Column md={9} x={12}>
+                    <Column md={9} xs={12}>
                         <Form className="animate__animated animate__fadeIn animate__delay-02s">
                             <FormGroup>
                                 <InputGroup>
@@ -212,7 +212,7 @@ export namespace SelectService
                             </div>
                         </div>
                     </Column>
-                    <Column md={3} x={12} className="animate__animated animate__fadeIn animate__faster d-none d-lg-inline-flex">
+                    <Column md={3} xs={12} className="animate__animated animate__fadeIn animate__faster d-none d-lg-inline-flex">
                         <div className="service-category-filter-icons">
                             <Header size="xs">Filter</Header>
                             <Row>

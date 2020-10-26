@@ -73,7 +73,6 @@ export namespace Account
             return <Container>
                     { this.Store && this.Store.LoggedIn == false && <Redirect to={"/auth/login"} /> }
                     
-                    <Header size="xl">Account</Header>
                     <Row>
                         <Column sm={12} md={6}>
                             <NewLine />

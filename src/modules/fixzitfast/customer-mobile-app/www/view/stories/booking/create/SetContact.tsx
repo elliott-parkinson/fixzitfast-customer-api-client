@@ -62,7 +62,7 @@ export namespace SetContact
                 {/* this.BookingStore && this.BookingStore.CurrentBooking == undefined && <Redirect to={"/booking/create"} /> */}
 
                 <Row>
-                    <Column md={9} x={12}>
+                    <Column md={9} xs={12}>
                         <CreateBookingStepper.Component position={1} onBack={e => this.Router.Back()}/>
 
                         <Card className="animate__animated animate__fadeIn animate__delay-02s">
@@ -96,7 +96,7 @@ export namespace SetContact
                             </CardBody>
                         </Card>
                     </Column>
-                    <Column md={3} x={12}>
+                    <Column md={3} xs={12}>
                         <OrderSummary.Component 
                             service={this.BookingStore?.CurrentBooking?.Service}
                             location={this.BookingStore?.CurrentBooking?.Location}

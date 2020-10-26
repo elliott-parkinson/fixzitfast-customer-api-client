@@ -3,6 +3,7 @@ export default [
         Id: "12341",
         Name: "Make Table",
         IconUrl: "",
+        ImageUrl: require("../../api-client-web-portal/assets/images/icons/hand.png")
     },
     {
         Id: "12342",

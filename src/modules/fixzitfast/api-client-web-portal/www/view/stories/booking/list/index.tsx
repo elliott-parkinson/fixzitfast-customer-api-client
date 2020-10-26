@@ -84,10 +84,9 @@ export default class Routes extends React.Component<any>
 	render() {
         let match = this.props.match.url;
 
-		return <Container>
-			<Row>
+		return <Container className="h-100">
+			<Row className="h-100">
 				<Column sm={12} md={6} className="fill-area">
-					<Header size="xl" className="page-header">Bookings</Header>
 					<Tabs />
 					<Switch>
 						<Redirect path={match + "/"} exact to={match + "/upcoming"} />

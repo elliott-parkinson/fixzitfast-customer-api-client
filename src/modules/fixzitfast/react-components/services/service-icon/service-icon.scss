@@ -6,8 +6,10 @@
         &.active {
             .service-category-icon {
                 background-color: #ececf0;
+                border: 3px solid #ff9505;
             }
         }
+
         &:hover {
             cursor: pointer;
 

@@ -8,4 +8,10 @@
     max-width: 64px;
     
     margin-bottom: 0px;
+
+    &.service {
+        padding: 8px !important;
+        max-width: 48px;
+        background-color: #d3d9e4;
+    }
 }

@@ -17,6 +17,7 @@ import {
 } from "../../../../reactstrap/building-blocks";
 
 import "./service-card.scss";
+import { ServiceCategoryIcon } from "../service-category-icon";
 
 export namespace ServiceCard
 {
@@ -35,7 +36,9 @@ export namespace ServiceCard
         render() {
             return <Card className="service-card" onClick={this.props.onClick}>
                 <CardBody>
-                    <strong>{this.props.name}</strong>
+                    <Header size="xs">
+                        <ServiceCategoryIcon.Component src={this.props.src} isService/>  &nbsp; <span>{this.props.name}</span>
+                    </Header>
                     <NewLine />
                     {this.props.description}
                 </CardBody>
