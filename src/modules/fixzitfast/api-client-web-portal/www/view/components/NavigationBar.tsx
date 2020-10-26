@@ -31,14 +31,11 @@ export namespace NavigationBar
         }
     
         render() {
-            return <Navbar color="light" light expand="md" className="top-navbar animate__animated animate__fadeInDown">
+            return <Navbar color="light" light expand="md" className="top-navbar animate__animated animate__fadeInDown d-none d-sm-flex">
             <Container>
                 <NavbarBrand href="/" onClick={ e => { e.preventDefault(); this.Routes.Go("/"); return false; }}>
                     <img src={require("../../../assets/images/site-logo.png")} />
                 </NavbarBrand>
-
-                <Nav className="mr-auto" navbar>
-                </Nav>
 
                 { this.Account?.LoggedIn == true ?
                     <Fragment>
@@ -48,7 +45,7 @@ export namespace NavigationBar
                         <NavLink href="/auth/logout" onClick={ e => { e.preventDefault(); this.Account.Logout(); return false; }}>Sign out</NavLink>
                     </Fragment>
                 : this.Account != undefined && 
-                    <Nav navbar>
+                    <Nav navbar className="ml-auto">
                         <NavItem>
                             <NavLink href="/auth/login" onClick={ e => { e.preventDefault(); this.Routes.Go("/auth/login"); return false; }}>Sign in</NavLink>
                         </NavItem>

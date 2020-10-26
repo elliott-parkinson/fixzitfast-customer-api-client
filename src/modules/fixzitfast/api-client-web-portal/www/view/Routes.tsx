@@ -14,6 +14,7 @@ import { Account } from "./stories/account/Account";
 import { Landing } from "./stories/landing/Landing";
 import { Error404 } from "./stories/Error404";
 import { Contact } from "./stories/contact/Contact";
+import NotificationRoutes from "./stories/notifications";
 
 
 
@@ -35,6 +36,7 @@ export class Routes extends React.Component<any>
 			<Route path={"/booking"} component={ props => <BookingRoutes {...props}/> } />
 			<Route path={"/contact"} component={ props => <Contact.Screen {...props}/> } />
 			<Route path={"/terms"} component={ props => <TermsRoutes {...props}/> } />
+			<Route path={"/notifications"} component={ props => <NotificationRoutes {...props}/> } />
 
 			<Route component={ props => <Error404.Screen {...props}/> } />
 		</Switch>;

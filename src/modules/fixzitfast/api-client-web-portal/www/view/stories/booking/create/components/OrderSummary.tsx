@@ -67,7 +67,7 @@ export namespace OrderSummary
                     <Row className="summary-header">
                         <Column xs={7}>
                             <Header>
-                                Job Details
+                                Booking Details
                             </Header>
                         </Column>
                         <Column xs={5} className="text-right">

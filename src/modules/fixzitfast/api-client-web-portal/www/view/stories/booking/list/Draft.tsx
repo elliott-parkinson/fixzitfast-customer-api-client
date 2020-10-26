@@ -18,7 +18,7 @@ import {
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
 
-export namespace Past
+export namespace Draft
 {
     @observer
     export class Screen extends React.Component<any>
@@ -52,7 +52,7 @@ export namespace Past
                         <NewLine />
                         <NewLine />
                         <Paragraph className="text-center text-lighter" style={{maxWidth: "260px", marginLeft: "auto", marginRight: "auto"}}>
-                            No past bookings.
+                            No draft bookings.
                             <NewLine />
                             All the bookings you make will be shown here.
                         </Paragraph>

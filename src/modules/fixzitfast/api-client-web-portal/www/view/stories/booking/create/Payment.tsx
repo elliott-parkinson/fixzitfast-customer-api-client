@@ -55,6 +55,7 @@ export namespace Payment
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Payment");
             this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
         }
 
@@ -75,50 +76,35 @@ export namespace Payment
         }
     
         render() {
-            return <Container>
-                <Row >
-                    <Column md={(this.Status == "none" || this.Status == "failed") ? 9 : 12} xs={12}className="p-5">
-                        { (this.Status == "none" || this.Status == "failed") &&
-                            <CreateBookingStepper.Component position={3} onBack={e => this.Router.Back()}/>
-                        }
-
-                        { this.Status == "processing" || this.Status == "done" ?
+            return <Fragment>
+                { this.Status == "processing" || this.Status == "done" ?
+                    <Block className="p-5">
+                        <PaymentStatus.Component status={this.Status} />
+                    </Block>
+                :
+                    <Block>
+                        { this.Status == "failed" &&
                             <Block className="p-5">
                                 <PaymentStatus.Component status={this.Status} />
                             </Block>
-                        :
-                            <Block>
-                                { this.Status == "failed" &&
-                                    <Block className="p-5">
-                                        <PaymentStatus.Component status={this.Status} />
-                                    </Block>
-                                }
-                                <Block className="text-center">
-                                    { this.Status == "failed" ?
-                                        <Paragraph>Card payment failed, please check your bank details before trying again.</Paragraph>
-                                    :
-                                        <Paragraph>Your card will be charged if you proceed. Please confirm your order and payment amount before proceeding.</Paragraph>
-                                    }
-                                    { this.Status == "failed" &&
-                                        <Fragment>
-                                            <Button onClick={e => this.EditPaymentDetails()}>Edit Payment Details</Button>
-                                            &nbsp;
-                                        </Fragment>
-                                    }
-                                    <Button color="primary" onClick={e => this.ProcessPayment()}>Process Payment</Button>
-                                </Block>
-                            </Block>
                         }
-                    </Column>
-                    
-                    <Column md={(this.Status == "none" || this.Status == "failed") ? 3 : 0} xs={12} className={(this.Status == "none" || this.Status == "failed") ? "" : "d-none"}>
-                        <OrderSummary.Component 
-                            service={this.BookingStore?.CurrentBooking?.Service}
-                            location={this.BookingStore?.CurrentBooking?.Location}
-                        />
-                    </Column>
-                </Row>
-            </Container>;
+                        <Block className="text-center">
+                            { this.Status == "failed" ?
+                                <Paragraph>Card payment failed, please check your bank details before trying again.</Paragraph>
+                            :
+                                <Paragraph>Your card will be charged if you proceed. Please confirm your order and payment amount before proceeding.</Paragraph>
+                            }
+                            { this.Status == "failed" &&
+                                <Fragment>
+                                    <Button onClick={e => this.EditPaymentDetails()}>Edit Payment Details</Button>
+                                    &nbsp;
+                                </Fragment>
+                            }
+                            <Button color="primary" onClick={e => this.ProcessPayment()}>Process Payment</Button>
+                        </Block>
+                    </Block>
+                }
+            </Fragment>;
         }
     }
 }

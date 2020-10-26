@@ -19,7 +19,9 @@ export default class Routes extends React.Component<any>
 {
 	componentDidMount()
 	{
-        let routing: any = Dependencies.of("store").get("routes");
+		let routing: any = Dependencies.of("store").get("routes");
+		
+		Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "");
 	}
 
 	render() {

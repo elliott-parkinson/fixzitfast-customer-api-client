@@ -21,6 +21,7 @@ import {
 } from "../../../Theme";
 
 import { CreateBookingStepper } from "./components/CreateBookingStepper";
+import { OrderSummary } from "./components/OrderSummary";
 
 import { Error404 } from "../../Error404";
 import { SelectService } from "./SelectService";
@@ -37,46 +38,105 @@ import { PaymentDetails } from "./PaymentDetails";
 export default class Routes extends React.Component<any>
 {
 	@observable Router: any;
+	@observable BookingStore: any;
 
 	componentDidMount()
 	{
 		this.Router =  Dependencies.of("store").get<any>("routes");
 
-		let bookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
-        bookingStore.InProgress.Load();
+		this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+        this.BookingStore.InProgress.Load();
+	}
+
+	
+
+	@computed get ShowSummary()
+	{
+		if (this.props.location.pathname.indexOf("/services") !== -1) 		return false;
+		if (this.props.location.pathname.indexOf("/paymentdetails") !== -1) return true;
+		if (this.props.location.pathname.indexOf("/payment") !== -1) 		return false;
+
+		return true;
+	}
+	
+
+	@computed get ShowCard()
+	{
+		if (this.props.location.pathname.indexOf("services") !== -1)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	@computed get ShowStepper()
 	{
-		return false;
+		if (this.props.location.pathname.indexOf("/services") !== -1) 		return false;
+		if (this.props.location.pathname.indexOf("/paymentdetails") !== -1) return true;
+		if (this.props.location.pathname.indexOf("/payment") !== -1) 		return false;
+
+		return true;
 	}
 
 	@computed get StepperPosition()
 	{
-		return 0;
+		if (this.props.location.pathname.indexOf("/services") !== -1)		return 0;
+		if (this.props.location.pathname.indexOf("/details") !== -1)		return 0;
+		if (this.props.location.pathname.indexOf("/location") !== -1)		return 1;
+		if (this.props.location.pathname.indexOf("/times") !== -1)			return 2;
+		if (this.props.location.pathname.indexOf("/contact") !== -1)		return 3;
+		if (this.props.location.pathname.indexOf("/paymentdetails") !== -1)	return 4;
+		if (this.props.location.pathname.indexOf("/payment") !== -1)		return 4;
+
+		return 4;
+	}
+
+	renderRoutes() {
+		let match = this.props.match.url;
+		
+		return <Switch>
+			<Redirect path={match + "/"} exact to={match + "/services"} />
+
+			<Route path={match + "/services"} exact component={ props => <SelectService.Screen {...props}/> } />
+			<Route path={match + "/location"} exact component={ props => <SelectLocation.Screen {...props}/> } />
+			<Route path={match + "/details"} exact component={ props => <SetDetails.Screen {...props}/> } />
+			<Route path={match + "/contact"} exact component={ props => <SetContact.Screen {...props}/> } />
+			<Route path={match + "/times"} exact component={ props => <DateAndTime.Screen {...props}/> } />
+			<Route path={match + "/paymentdetails"} exact component={ props => <PaymentDetails.Screen {...props}/> } />
+			<Route path={match + "/payment"} exact component={ props => <Payment.Screen {...props}/> } />
+
+			<Route component={ props => <Error404.Screen {...props}/> } />
+		</Switch>;
 	}
 
 	render() {
-        let match = this.props.match.url;
-
 		return <Fragment>
-			{ this.ShowStepper &&
-				<CreateBookingStepper.Component position={this.StepperPosition} onBack={e => this.Router.Back()}/>
-			}
-
-			<Switch>
-				<Redirect path={match + "/"} exact to={match + "/services"} />
-
-				<Route path={match + "/services"} exact component={ props => <SelectService.Screen {...props}/> } />
-				<Route path={match + "/location"} exact component={ props => <SelectLocation.Screen {...props}/> } />
-				<Route path={match + "/details"} exact component={ props => <SetDetails.Screen {...props}/> } />
-				<Route path={match + "/contact"} exact component={ props => <SetContact.Screen {...props}/> } />
-				<Route path={match + "/times"} exact component={ props => <DateAndTime.Screen {...props}/> } />
-				<Route path={match + "/paymentdetails"} exact component={ props => <PaymentDetails.Screen {...props}/> } />
-				<Route path={match + "/payment"} exact component={ props => <Payment.Screen {...props}/> } />
-
-				<Route component={ props => <Error404.Screen {...props}/> } />
-			</Switch>;
+			<Container>
+				<Row>
+					<Column md={this.ShowSummary ? 9 : 12} x={12}>
+						{ this.ShowStepper &&
+							<CreateBookingStepper.Component className="animate__animated animate__fadeInDown animate__faster" position={this.StepperPosition} onBack={e => this.Router.Back()}/>
+						}
+						{ this.ShowCard ? 
+							<Card className="animate__animated animate__fadeIn animate__delay-02s">
+								<CardBody>
+									{ this.renderRoutes() }
+								</CardBody>
+							</Card>
+						:
+							this.renderRoutes()
+						}
+						<NewLine />
+					</Column>
+					<Column md={this.ShowSummary ? 3 : 12} xs={12} className={"animate__animated animate__fadeInRight animate__faster d-none d-md-block " + (this.ShowSummary ? "" : "w-0 h-0")}>
+						<OrderSummary.Component 
+							service={this.BookingStore?.CurrentBooking?.Service}
+							location={this.BookingStore?.CurrentBooking?.Location}
+						/>
+					</Column>
+				</Row>
+			</Container>
 		</Fragment>
 	}
 }

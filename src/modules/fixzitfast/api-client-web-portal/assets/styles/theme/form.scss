@@ -2,6 +2,10 @@
 form.fixzitfast-form {
     padding: 44px;
 
+    @media (max-width: 575.98px) {
+        padding: 10px;
+    }
+
     h2 {
         margin-bottom: 44px;
     }

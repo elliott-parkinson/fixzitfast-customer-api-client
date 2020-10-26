@@ -105,10 +105,7 @@ export namespace AuthenticationModal
         }
 
         render() {
-            return <Modal isOpen={this.props.isOpen} toggle={e => this.props.toggle()} className="">
-            <ModalHeader toggle={e => this.props.toggle()}>
-                
-            </ModalHeader>
+            return <Modal isOpen={this.props.isOpen} className="">
             <ModalBody>
                 <Nav justified tabs>
                     <NavItem active={this.SelectedTab == "signin"}>

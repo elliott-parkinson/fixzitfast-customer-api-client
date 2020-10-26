@@ -49,7 +49,7 @@ export namespace Upcoming
         render() {
             return <Fragment>
                 <Card className="animate__animated animate__fadeIn animate__delay-02s">
-                    <CardBody className="p-4 m-4 text-center">
+                    <CardBody className="p-4 m-4 full-center">
                         <img className="p-4 m-0" style={{maxWidth: "260px"}} src={require("../../../../../assets/images/icons/upcoming.png")} />
                         <NewLine />
                         <NewLine />

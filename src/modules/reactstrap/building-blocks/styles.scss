@@ -10,6 +10,17 @@ h2 {
 	font-weight: 700;
 }
 
+.w-0 {
+	width: 0px;
+    overflow-x: hidden;
+	transition: all 0.2s ease;
+}
+.h-0 {
+	height: 0px;
+    overflow-y: hidden;
+	transition: all 0.2s ease;
+}
+
 /* Loading */
 .currently-loading {
 	* {
@@ -374,7 +385,7 @@ h2 {
 	
 			min-width: 340px;
 
-			@media (max-width: 575px) {
+			@media (max-width: 575.98px) {
 				min-width: 100%;
 			}
 			

@@ -35,13 +35,10 @@ export namespace ServiceCard
         render() {
             return <Card className="service-card" onClick={this.props.onClick}>
                 <CardBody>
-                    <img className="p-0 m-0 w-100 h-100" style={{ objectFit: "cover" }} src={this.props.src} />
-                </CardBody>
-                <CardFooter>
                     <strong>{this.props.name}</strong>
                     <NewLine />
                     {this.props.description}
-                </CardFooter>
+                </CardBody>
             </Card>;
         }
     }

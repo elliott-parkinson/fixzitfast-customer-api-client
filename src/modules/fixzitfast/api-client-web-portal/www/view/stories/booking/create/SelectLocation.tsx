@@ -34,6 +34,7 @@ export namespace SelectLocation
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Set location");
             this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
             if (Dependencies.of("fixzitfast-customer-data-store").has<any>("location"))
@@ -49,7 +50,8 @@ export namespace SelectLocation
 
         @action async GetStarted()
         {
-            if (this.Search.indexOf("EH") === -1)
+
+            if (this.Search.toUpperCase().indexOf("EH") === -1)
             {
                 this.Error = "Sorry we are not in your area right now, please come back another time.";
             }
@@ -59,7 +61,7 @@ export namespace SelectLocation
                 this.Error = "";
                 this.BookingStore.InProgress.Location.Set(address[0].Line1, address[0].Line2, address[0].Line3, address[0].Town, address[0].County, address[0].Postcode);
                 this.BookingStore?.InProgress.Store();
-                this.Router.Go("/booking/create/details");
+                this.Router.Go("/booking/create/times");
             }
         }
 
@@ -70,46 +72,37 @@ export namespace SelectLocation
         }
     
         render() {
-            return <Container>
-                <Row>
-                    <Column sm={12} md={6}>
-                        <Header size="xl">Enter your location</Header>
-                        <NewLine />
-                        <Form className="animate__animated animate__fadeIn animate__delay-02s">
-                            <FormGroup>
-                                <InputGroup>
-                                    <Input type="text" placeholder="Enter address or postcode here" value={this.Search} onChange={e => this.Search = e.target.value} />
-                                    <InputGroupAddon addonType="prepend">
-                                        <Button color="primary"  disabled={ this.CanGetStarted != true ? undefined : true } onClick={e => { e.preventDefault(); this.GetStarted(); return false; }}>Get started</Button>
-                                    </InputGroupAddon>
-                                </InputGroup>
-                            </FormGroup>
+            return <Fragment>
+                <Form className="fixzitfast-form animate__animated animate__fadeIn animate__delay-02s">
+                    <Header size="md">Enter your location</Header>
+                    <NewLine />
+                    <FormGroup>
+                        <InputGroup>
+                            <Input type="text" placeholder="Enter address or postcode here" value={this.Search} onChange={e => this.Search = e.target.value} />
+                            <InputGroupAddon addonType="prepend">
+                                <Button color="primary"  disabled={ this.CanGetStarted != true ? undefined : true } onClick={e => { e.preventDefault(); this.GetStarted(); return false; }}>Get started</Button>
+                            </InputGroupAddon>
+                        </InputGroup>
+                    </FormGroup>
 
-                            { this.Error != "" && <FormGroup>
-                                <Alert color="danger">
-                                    <i className="fas fa-exclamation" /> &nbsp; Sorry we are not in your area right now, please come back another time.
-                                </Alert>
-                            </FormGroup> }
-                        </Form>
-                        
-                        <NewLine />
-
-                        <Card className="animate__animated animate__fadeIn animate__delay-04s">
-                            <CardBody>
-                                <Header size="md">Unsure? Let us find you!</Header>
-                                <NewLine />
-                                <Button color="primary" block onClick={e => this.FindLocation() }>Find my location</Button>
-                                <NewLine />
-                                <Paragraph>Note: Your browser will ask you for permission to know your location. You will need to press allow for this feature to work.</Paragraph>
-                                <Paragraph>Depending on your device this feature may not be accurate. Please verify the postcode is your own before getting your quote.</Paragraph>
-                            </CardBody>
-                        </Card>
-                    </Column>
-                    <Column sm={12} md={6} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex">
-                        <img className="p-0 m-0" src={require("../../../../../assets/images/bookings-bg.png")} />
-                    </Column>
-                </Row>
-            </Container>;
+                    { this.Error != "" && <FormGroup>
+                        <Alert color="danger">
+                            <i className="fas fa-exclamation" /> &nbsp; Sorry we are not in your area right now, please come back another time.
+                        </Alert>
+                    </FormGroup> }
+                
+                <NewLine />
+                </Form>
+                
+                <Form className="fixzitfast-form animate__animated animate__fadeIn animate__delay-02s">
+                    <Header size="md">Unsure? Let us find you!</Header>
+                    <NewLine />
+                    <Button color="primary" block onClick={e => this.FindLocation() }>Find my location</Button>
+                    <NewLine />
+                    <Paragraph>Note: Your browser will ask you for permission to know your location. You will need to press allow for this feature to work.</Paragraph>
+                    <Paragraph>Depending on your device this feature may not be accurate. Please verify the postcode is your own before getting your quote.</Paragraph>
+                </Form>
+            </Fragment>;
         }
     }
 }

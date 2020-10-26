@@ -1,5 +1,9 @@
+import Dependencies, { Service } from "typedi";
+
 import * as React from "react";
 
+import { observer } from "mobx-react";
+import { observable, computed, action } from "mobx";
 import { 
     Fragment,
     Button,
@@ -16,22 +20,30 @@ export namespace CreateBookingStepper
     export interface IViewProps
     {
         position: number;
+        className?: string;
 
         onBack?: Function;
     }
 
     export class Component extends React.Component<IViewProps>
     {
+        @observable Router: any;
+
+        componentDidMount()
+        {
+            this.Router = Dependencies.of("store").get<any>("routes");
+        }
+
         render() {
-            return <div>
+            return <div className={this.props.className}>
                 <Row className="booking-form-stepper">
-                    <Column md={3} xs={12} className="text-center">
-                        <Button color="primary" outline onClick={this.props.onBack}>
+                    <Column lg={2} md={3} className="text-center p-0 d-none d-md-flex">
+                        <Button color="primary" className="text-center p-3" outline onClick={this.props.onBack}>
                             <i className="fas fa-arrow-left" /> &nbsp;
                             Back
                         </Button>
                     </Column>
-                    <Column md={9} xs={12}>
+                    <Column lg={10} md={9} className="text-center p-0">
                         <Stepper
                             defaultBorderWidth={55}
                             size={24}
@@ -54,24 +66,29 @@ export namespace CreateBookingStepper
                             lineMarginOffset={0}
                             steps={[
                                 {
-                                    title: 'Details',
+                                    title: 'Booking',
                                     href: "#",
-                                    onClick: e => console.log(1)
+                                    onClick: e => this.Router.Go("/booking/create/details")
+                                },
+                                {
+                                    title: 'Location',
+                                    href: "#",
+                                    onClick: e => this.Router.Go("/booking/create/location")
+                                },
+                                {
+                                    title: 'Time',
+                                    href: "#",
+                                    onClick: e => this.Router.Go("/booking/create/times")
                                 },
                                 {
                                     title: 'Contact',
                                     href: "#",
-                                    onClick: e => console.log(2)
-                                },
-                                {
-                                    title: 'Times & Pricing',
-                                    href: "#",
-                                    onClick: e => console.log(3)
+                                    onClick: e => this.Router.Go("/booking/create/contact")
                                 },
                                 {
                                     title: 'Pay',
                                     href: "#",
-                                    onClick: e => console.log(4)
+                                    onClick: e => this.Router.Go("/booking/create/paymentdetails")
                                 }
                             ]}
                         />

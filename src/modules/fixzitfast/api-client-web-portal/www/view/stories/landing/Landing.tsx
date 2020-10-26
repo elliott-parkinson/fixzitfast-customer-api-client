@@ -9,7 +9,7 @@ import {
 	Form, FormGroup, Input, InputGroup, InputGroupAddon, Typeahead,
 	Header, Paragraph,
 	NewLine,
-    Nav, NavItem, NavLink,
+    Nav, NavItem, NavLink, Navbar, NavbarBrand,
     Row, Column
 } from "../../Theme";
 
@@ -46,6 +46,7 @@ export namespace Landing
         componentDidMount()
         {
             this.Router = Dependencies.of("store").get<any>("routes");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "");
 
             if (Dependencies.of("fixzitfast-customer-data-store").has<any>("bookings"))
             {
@@ -103,6 +104,13 @@ export namespace Landing
     
         render() {
             return <Fragment>
+                <Navbar color="light" className="topnav-mobile animate__animated animate__fadeInDown d-flex d-sm-none text-center">
+                    <Container className="text-center">
+                        <NavbarBrand className="m-auto" href="/" onClick={ e => { e.preventDefault(); this.Router.Go("/"); return false; }}>
+                            <img src={require("../../../../assets/images/site-logo.png")} />
+                        </NavbarBrand>
+                    </Container>
+                </Navbar>
                 <div className="main-hero">
                     <Row> 
                         <Column lg={2} xs={1} />

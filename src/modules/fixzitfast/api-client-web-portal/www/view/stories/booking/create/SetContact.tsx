@@ -43,7 +43,7 @@ export namespace SetContact
             bookingStore?.InProgress.Store();
 
             let router = Dependencies.of("store").get<any>("routes");
-            router.Go("/booking/create/times");
+            router.Go("/booking/create/paymentdetails");
         }
     }
     
@@ -58,6 +58,7 @@ export namespace SetContact
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Contact Details");
             this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
             let details = this.BookingStore.InProgress.Contact.Get();
@@ -68,53 +69,35 @@ export namespace SetContact
         }
     
         render() {
-            return <Container>
-                {/* this.BookingStore && this.BookingStore.CurrentBooking == undefined && <Redirect to={"/booking/create"} /> */}
+            return <Fragment>
+                <Form className="fixzitfast-form animate__animated animate__fadeIn animate__delay-02s" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                    <Header size="sm">Contact Details</Header>
+                    <Paragraph>Give us the contact details for this job. This is the number or email we will call if we need to get in touch.</Paragraph>
 
-                <Row>
-                    <Column md={9} x={12}>
-                        <CreateBookingStepper.Component position={1} onBack={e => this.Router.Back()}/>
+                    <FormGroup tag="fieldset">
+                        <Label>
+                            Name (Required)
+                        </Label>
+                        <Input type="text" required placeholder="Enter Full Name" value={this.Form.Name} onChange={ e => this.Form.Name = e.target.value } />{' '}
+                    </FormGroup>
 
-                        <Card className="animate__animated animate__fadeIn animate__delay-02s">
-                            <CardBody>
-                                <Form className="fixzitfast-form" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
-                                    <Header size="sm">Contact Details</Header>
-                                    <Paragraph>Give us the contact details for this job. This is the number or email we will call if we need to get in touch.</Paragraph>
-     
-                                    <FormGroup tag="fieldset">
-                                        <Label>
-                                            Name (Required)
-                                        </Label>
-                                        <Input type="text" required placeholder="Enter Full Name" value={this.Form.Name} onChange={ e => this.Form.Name = e.target.value } />{' '}
-                                    </FormGroup>
+                    <FormGroup tag="fieldset">
+                        <Label>
+                            Phone Number (Required)
+                        </Label>
+                        <Input type="tel" required placeholder="eg: 07959 484858" value={this.Form.PhoneNumber} onChange={ e => this.Form.PhoneNumber = e.target.value } />{' '}
+                    </FormGroup>
 
-                                    <FormGroup tag="fieldset">
-                                        <Label>
-                                            Phone Number (Required)
-                                        </Label>
-                                        <Input type="tel" required placeholder="eg: 07959 484858" value={this.Form.PhoneNumber} onChange={ e => this.Form.PhoneNumber = e.target.value } />{' '}
-                                    </FormGroup>
+                    <FormGroup tag="fieldset">
+                        <Label>
+                            Email (Required)
+                        </Label>
+                        <Input type="email" required placeholder="Enter Email" value={this.Form.Email} onChange={ e => this.Form.Email = e.target.value } />{' '}
+                    </FormGroup>
 
-                                    <FormGroup tag="fieldset">
-                                        <Label>
-                                            Email (Required)
-                                        </Label>
-                                        <Input type="email" required placeholder="Enter Email" value={this.Form.Email} onChange={ e => this.Form.Email = e.target.value } />{' '}
-                                    </FormGroup>
-
-                                    <Button color="primary" block>See Pricing</Button>
-                                </Form>
-                            </CardBody>
-                        </Card>
-                    </Column>
-                    <Column md={3} x={12} className="d-none d-lg-block">
-                        <OrderSummary.Component 
-                            service={this.BookingStore?.CurrentBooking?.Service}
-                            location={this.BookingStore?.CurrentBooking?.Location}
-                        />
-                    </Column>
-                </Row>
-            </Container>;
+                    <Button color="primary" block>Go to Payment</Button>
+                </Form>
+            </Fragment>;
         }
     }
 }

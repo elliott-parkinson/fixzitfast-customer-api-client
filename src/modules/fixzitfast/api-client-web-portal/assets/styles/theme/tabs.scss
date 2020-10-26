@@ -2,23 +2,43 @@
 
 .nav.nav-tabs {
     border-bottom: none;
+    margin-top: 12px;
+    margin-bottom: 12px;
     
     .nav-item {
-        color: #202a3d;
+        color: #c7c7c8;
         border-bottom: 2px transparent;
 
         .nav-link {
-            color: #202a3d;
-            
+            color: #c7c7c8;
             font-family: 'muli-semibold', 'Open Sans', sans-serif !important;
+            
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+
+            &:hover {
+                border-top: 0px;
+                border-left: 0px;
+                border-right: 0px;
+            }
+        }
+
+        &:hover {
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+
+            .nav-link {
+                color: #ff9505;
+            }
         }
 
         &.active {
             border-bottom: 2px solid #ff9505;
             
             .nav-link {
-                color: #ff9505;
-                
+                color: #202a3d;
                 font-family: 'muli-bold', 'Open Sans', sans-serif !important;
             }
         }

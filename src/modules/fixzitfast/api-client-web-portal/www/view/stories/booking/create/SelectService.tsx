@@ -38,6 +38,7 @@ export namespace SelectService
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Choose a service");
             this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
             if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
@@ -67,7 +68,7 @@ export namespace SelectService
         {
             this.BookingStore?.Create(service.Id, service.Name, category.Id, category.Name);
             this.BookingStore?.InProgress.Store();
-            this.Router.Go("/booking/create/location");
+            this.Router.Go("/booking/create/details");
         }
 
 
@@ -115,31 +116,33 @@ export namespace SelectService
                         </Form>
 
                         <div className="service-category-list">
-                            <div className="animate__animated animate__fadeIn animate__delay-02s">
-                                <Header size="xs">Most popular services</Header>
-                                <hr />
-                                <Row className="service-list">
-                                    { this.GetPopularServices()?.map( service => 
-                                        <Column md={4} sm={6} xs={12} key={service.Id} className="p-1">
-                                            <ServiceCard.Component
-                                                name={service.Name}
-                                                description={service.Description}
-                                                src={service.ImageUrl}
+                            { this.FilterCategory == undefined &&
+                                <div className="animate__animated animate__fadeIn animate__delay-02s">
+                                    <Header size="xs">Most popular services</Header>
+                                    <hr />
+                                    <Row className="service-list">
+                                        { this.GetPopularServices()?.map( service => 
+                                            <Column md={4} sm={6} xs={12} key={service.Id} className="p-1">
+                                                <ServiceCard.Component
+                                                    name={service.Name}
+                                                    description={service.Description}
+                                                    src={service.ImageUrl}
 
-                                                onClick={e => this.BookService(service, this.GetCategory(service.CategoryId))}
-                                            />
-                                        </Column>
-                                    )}
-                                </Row>
+                                                    onClick={e => this.BookService(service, this.GetCategory(service.CategoryId))}
+                                                />
+                                            </Column>
+                                        )}
+                                    </Row>
 
-                                <NewLine />
-                                <NewLine />
-                                <NewLine />
-                            </div>
+                                    <NewLine />
+                                    <NewLine />
+                                    <NewLine />
+                                </div>
+                            }
                             <div className="animate__animated animate__fadeIn animate__delay-04s">
                                 {this.Categories.map( category => <Fragment key={category.Id}>
-                                    { (this.FilterCategory== undefined || (this.FilterCategory && this.FilterCategory.Id == category.Id)) && <Fragment>
-                                        <Header size="xs">{category.Name}</Header>
+                                    { (this.FilterCategory == undefined || (this.FilterCategory && this.FilterCategory.Id == category.Id)) && <Fragment>
+                                        <Header size="xs"><ServiceCategoryIcon.Component src={category.IconUrl} />  &nbsp; {category.Name}</Header>
                                         <hr />
                                         { this.GetServicesForCategory(category.Id).length == 0 && <Alert color="info">
                                             <strong>Error: </strong> No services exist for this category.

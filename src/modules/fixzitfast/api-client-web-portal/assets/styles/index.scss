@@ -23,16 +23,16 @@
 
 html {
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 }
 
 body {
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 
 	.app {
 		width: 100%;
-		height: 100%;
+		height: 100vh;
 
 		display: inline-flex;
 		flex-direction: column;
@@ -42,16 +42,18 @@ body {
 		}
 	
 		> .content {
-			flex: 1 0 auto;
+			flex: 1 1 auto;
 
 			:only-child {
 				min-height: 100%;
 			}
+
+			> footer {
+				flex-shrink: 0;
+				flex-grow: 1;
+			}
 		}
 	
-		> footer {
-			flex-shrink: 0;
-		}
 	}
 
 	

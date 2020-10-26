@@ -80,7 +80,7 @@ export namespace SetDetails
             bookingStore?.InProgress.Store();
 
             let router = Dependencies.of("store").get<any>("routes");
-            router.Go("/booking/create/contact");
+            router.Go("/booking/create/location");
         }
 
     }
@@ -95,6 +95,7 @@ export namespace SetDetails
         componentDidMount()
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Booking Details");
             this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
             let details = this.BookingStore.InProgress.Details.Get();
@@ -102,56 +103,38 @@ export namespace SetDetails
         }
     
         render() {
-            return <Container>
-                {/* this.BookingStore && this.BookingStore.CurrentBooking == undefined && <Redirect to={"/booking/create"} /> */}
+            return <Fragment>
+                <Form className="fixzitfast-form animate__animated animate__fadeIn animate__delay-02s" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
+                    <Header size="md">What's the problem?</Header>
+                    
+                    <FormGroup tag="fieldset">
+                        <Input type="textarea" rows={6} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
+                    </FormGroup>
 
-                <Row>
-                    <Column md={9} x={12}>
-                        <CreateBookingStepper.Component position={0} onBack={e => this.Router.Back()}/>
+                    <FormGroup tag="fieldset">
+                        <NewLine />
+                        <Paragraph>Show us the problem by uploading a photo.</Paragraph>
+                        { this.Form.Files.length >= 0 && <Fragment>
+                            { this.Form.Files.map( file => 
+                                <Card style={{ width: "96px", height: "96px" }} >
+                                    <img src={file} style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                                </Card>
+                                )}
+                        </Fragment>}
+                        <Dropzone accept="image/*" 
+                            onSelect={event => this.Form.SelectFile(event)}
+                        >
+                            <React.Fragment>
+                                <i className="fas fa-camera" /> 
+                                <NewLine />
+                                Drag here to upload or choose an image
+                            </React.Fragment>
+                        </Dropzone>
+                    </FormGroup>
 
-                        <Card className="animate__animated animate__fadeIn animate__delay-02s">
-                            <CardBody>
-                                <Form className="fixzitfast-form" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
-                                    <Header size="md">What's the problem?</Header>
-                                    
-                                    <FormGroup tag="fieldset">
-                                        <Input type="textarea" rows={6} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
-                                    </FormGroup>
-
-                                    <FormGroup tag="fieldset">
-                                        <NewLine />
-                                        <Paragraph>Show us the problem by uploading a photo.</Paragraph>
-                                        { this.Form.Files.length >= 0 && <Fragment>
-                                            { this.Form.Files.map( file => 
-                                                <Card style={{ width: "96px", height: "96px" }} >
-                                                    <img src={file} style={{ maxWidth: "100%", maxHeight: "100%" }} />
-                                                </Card>
-                                             )}
-                                        </Fragment>}
-                                        <Dropzone accept="image/*" 
-                                            onSelect={event => this.Form.SelectFile(event)}
-                                        >
-                                            <React.Fragment>
-                                                <i className="fas fa-camera" /> 
-                                                <NewLine />
-                                                Drag here to upload or choose an image
-                                            </React.Fragment>
-                                        </Dropzone>
-                                    </FormGroup>
-
-                                    <Button color="primary" block>Confirm Details</Button>
-                                </Form>
-                            </CardBody>
-                        </Card>
-                    </Column>
-                    <Column md={3} x={12} className="d-none d-lg-block">
-                        <OrderSummary.Component 
-                            service={this.BookingStore?.CurrentBooking?.Service}
-                            location={this.BookingStore?.CurrentBooking?.Location}
-                        />
-                    </Column>
-                </Row>
-            </Container>;
+                    <Button color="primary" block>Confirm Details</Button>
+                </Form>
+            </Fragment>;
         }
     }
 }

@@ -62,8 +62,9 @@ export namespace Account
 
         async componentDidMount()
         {
-            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
             this.Routes = Dependencies.of("store").get<any>("routes");
+            Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "My Account");
+            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
 
             let accountStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
         }
