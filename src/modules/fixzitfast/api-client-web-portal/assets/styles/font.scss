@@ -177,6 +177,14 @@ html {
         color: #202a3d;
     }
 
+    .nav {
+        flex-wrap: nowrap;
+
+        @media (max-width: 778px) {
+            margin-top: 12px;
+        }
+    }
+
     .nav-item {
         @media (max-width: 778px) {
             padding-right: 0px !important;
@@ -185,6 +193,11 @@ html {
 
         &.highlighted {
             .nav-link {
+                @media (max-width: 991.98px) {
+                    padding-right: 12px !important;
+                    padding-left: 12px !important;
+                }
+
                 margin-left: 18px;
                 margin-right: 6px;
                 padding-left: 32px;
