@@ -89,15 +89,17 @@ export namespace Landing
         }
 
 
-        @action BookService(service: any, category: any)
+        @action BookCategory(category: any)
         {
-            this.BookingStore?.Create(service.Id, service.Name, category.Id, category.Name);
+            this.BookingStore?.Create(category.Id, category.Name, category.EngineerType);
+            this.BookingStore?.InProgress.Store();
             this.Router.Go("/booking/create/details");
         }
 
         @action ViewServices()
         {
             this.BookingStore?.Create();
+            this.BookingStore?.InProgress.Store();
             this.Router.Go("/booking/create/services");
         }
         
@@ -121,7 +123,7 @@ export namespace Landing
                             { this.ServicesStore &&
                                 <Form>
                                     <FormGroup className="d-none d-md-block">
-                                        <ServicesTypeAhead.Component text="Get Started" onClick={ (service, category) => { this.BookService(service, category); }} />
+                                        <ServicesTypeAhead.Component text="Get Started" onClick={ (category) => { this.BookCategory(category); }} />
                                     </FormGroup>
 
                                     <FormGroup className="d-none d-md-block">

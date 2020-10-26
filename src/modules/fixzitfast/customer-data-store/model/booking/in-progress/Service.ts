@@ -12,12 +12,20 @@ export class Service
     
 	@observable CategoryId: string = "";
     @observable CategoryName: string = "";
+    @observable CategoryType: string = "";
+    
+
         
-    @action Set(id: string, name: string, categoryId: string, categoryName: string)
+    @action Set(id: string, name: string)
 	{
         this.Id = id;
         this.Name = name;
+    }
+    
+    @action SetCategory(categoryId: string, categoryName: string, categoryType: string)
+	{
         this.CategoryId = categoryId;
         this.CategoryName = categoryName;
+        this.CategoryType = categoryType;
 	}
 }

@@ -43,13 +43,13 @@ export class Bookings
         return this.List.List.filter(item => item.Type == BOOKINGTYPES.PAST);
     }
 
-    @action Create(serviceId?: string, serviceName?: string, categoryId?: string, categoryName?: string)
+    @action Create(categoryId: string, categoryName: string, categoryType: string)
     {
         this.InProgress = new InProgressBooking;
 
-        if (serviceId)
+        if (categoryId)
         {
-            this.InProgress.Service.Set(serviceId, serviceName, categoryId, categoryName);
+            this.InProgress.Service.SetCategory(categoryId, categoryName, categoryType);
         }
     }
 

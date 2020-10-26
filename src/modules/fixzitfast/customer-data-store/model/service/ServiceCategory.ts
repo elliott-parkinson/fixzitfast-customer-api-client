@@ -5,6 +5,8 @@ export class ServiceCategory
 {
 	@observable Id = "";
 	@observable ParentId = "";
+
+	@observable EngineerType = "Unknown";
 	
 	@observable Name = "";
 	@observable IconUrl = "";

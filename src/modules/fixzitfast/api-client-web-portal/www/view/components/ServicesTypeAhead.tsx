@@ -16,11 +16,7 @@ export namespace ServicesTypeAhead
     export class Component extends React.Component<any>
     {
         @observable ServicesStore: any;
-
-        @observable SelectedService: any;
         @observable SelectedCategory: any;
-
-        @observable Services: any = [];
         @observable Categories: any = [];
 
         componentDidMount()
@@ -35,23 +31,18 @@ export namespace ServicesTypeAhead
 
         @action async UpdateServiceData()
         {
-            this.Services = await this.ServicesStore.Services.List;
             this.Categories = await this.ServicesStore.Categories.List;
         }
 
-        @computed get ServicesTypeaheadList()
+        @computed get TypeaheadList()
         {
             let list = [];
-            this.Services?.forEach( service =>
-                list.push(service.Id.toString())
+            console.log(this.Categories);
+            this.Categories?.forEach( category =>
+                list.push(category.Id)
             );
 
             return list;
-        }
-
-        GetService(id: string)
-        {
-            return this.Services.find( service => service.Id == id);
         }
 
         GetCategory(id: string)
@@ -59,33 +50,24 @@ export namespace ServicesTypeAhead
             return this.Categories.find( category => category.Id == id);
         }
 
-        @action SelectService(id: string)
+        @action Select(id: string)
         {
-            this.SelectedService = this.GetService(id);
-            this.SelectedCategory = this.GetCategory(this.SelectedService.CategoryId);
+            this.SelectedCategory = this.GetCategory(id);
         }
-
-        renderServiceName(service): string {
-            let name = this.GetService(service).Name;
-            let categoryName = this.GetCategory(this.GetService(service).CategoryId)?.Name;
-
-            return categoryName + " - " + name;
-        }
-
     
         render() {
             return <InputGroup>
                 <Typeahead
                     id="basic-typeahead-single"
-                    onChange={e => this.SelectService(e[0]) }
-                    options={this.ServicesTypeaheadList}
+                    onChange={e => this.Select(e[0]) }
+                    options={this.TypeaheadList}
                     placeholder="What service are you looking for?"
                     selected={null}
-                    labelKey={service => this.renderServiceName(service)}
-                    renderMenuItemChildren={service => this.renderServiceName(service)}
+                    labelKey={id => this.GetCategory(id).EngineerType}
+                    renderMenuItemChildren={id => this.GetCategory(id).EngineerType}
                 />
                 <InputGroupAddon addonType="prepend">
-                    <Button color="primary" disabled={ this.SelectedService != undefined ? undefined : true } onClick={e => { e.preventDefault(); this.props.onClick(this.SelectedService, this.SelectedCategory); return false; }}>{ this.props.text }</Button>
+                    <Button color="primary" disabled={ this.SelectedCategory != undefined ? undefined : true } onClick={e => { e.preventDefault(); this.props.onClick(this.SelectedCategory); return false; }}>{ this.props.text }</Button>
                 </InputGroupAddon>
             </InputGroup>;
         }

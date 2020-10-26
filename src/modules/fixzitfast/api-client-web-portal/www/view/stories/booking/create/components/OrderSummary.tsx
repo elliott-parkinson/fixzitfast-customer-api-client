@@ -37,9 +37,11 @@ export namespace OrderSummary
         {
             this.Router = Dependencies.of("store").get<any>("routes");
             this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+
             this.BookingStore.InProgress.Load();
             this.Booking = this.BookingStore.InProgress;
         }
+
 
         render() {
             return <div className="summary-area">

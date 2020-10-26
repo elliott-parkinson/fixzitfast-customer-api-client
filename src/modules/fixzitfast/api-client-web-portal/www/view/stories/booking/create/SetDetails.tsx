@@ -18,7 +18,7 @@ import {
 
 import { observer } from "mobx-react";
 import { observable, computed, action } from "mobx";
-import { ServiceCard, ServiceIcon } from "../../../../../../react-components";
+import { ServiceCard, ServiceCategoryIcon, ServiceIcon } from "../../../../../../react-components";
 import { OrderSummary } from "./components/OrderSummary";
 import { CreateBookingStepper } from "./components/CreateBookingStepper";
 
@@ -26,15 +26,12 @@ export namespace SetDetails
 {
     export class DetailsForm
     {
+        @observable CategoryName = "";
+        @observable CategoryType = "";
         @observable Details = "";
         @observable Files = [];
         
         @observable Errors = [];
-
-        @action SetType(type: string)
-        {
-            this.Type = type;
-        }
 
         ProcessImage(img: any, fileString: any, maxSize: number = 1200): string
 		{
@@ -89,6 +86,8 @@ export namespace SetDetails
     {
         @observable Router: any;
         @observable BookingStore: any;
+        @observable ServicesStore: any;
+        @observable Categories: any = [];
 
         @observable Form = new DetailsForm;
 
@@ -96,16 +95,39 @@ export namespace SetDetails
         {
             this.Router =  Dependencies.of("store").get<any>("routes");
             Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Booking Details");
-            this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+            this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+
+            
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
+            {
+                this.ServicesStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("services");
+            }
 
             let details = this.BookingStore.InProgress.Details.Get();
+            let service = this.BookingStore.InProgress.Service;
             this.Form.Details = details.Description;
+            this.Form.CategoryName = service.CategoryName;
+            this.Form.CategoryType = service.CategoryType;
+            this.UpdateServiceData();
+        }
+
+        @action async UpdateServiceData()
+        {
+            this.Categories = await this.ServicesStore.Categories.List;
+        }
+
+        
+        GetCategory(id: string)
+        {
+            return this.Categories.find( category => category.Id == id);
         }
     
         render() {
             return <Fragment>
                 <Form className="fixzitfast-form animate__animated animate__fadeIn animate__delay-02s" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
-                    <Header size="md">What's the problem?</Header>
+                    <Header size="sm"><ServiceCategoryIcon.Component src={this.GetCategory(this.BookingStore?.InProgress?.Service.CategoryId)?.IconUrl} />  &nbsp; Booking, {this.BookingStore?.InProgress?.Service.CategoryType}</Header>
+                    <NewLine />
+                    <Header size="md">How can we help you?</Header>
                     
                     <FormGroup tag="fieldset">
                         <Input type="textarea" rows={6} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}

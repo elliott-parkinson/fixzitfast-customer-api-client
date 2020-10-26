@@ -102,7 +102,8 @@
                     }
 
                     .rbt-menu.dropdown-menu.show {
-                        min-height: 280px;
+                        min-height: min-content;
+                        height: auto;
                         margin-top: -5px;
                         z-index: 500 !important;
 
