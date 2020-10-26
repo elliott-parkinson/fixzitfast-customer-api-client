@@ -82,6 +82,7 @@ export namespace ServicesBanner
                                 <ServiceCard.Component
                                     name={service.Name}
                                     description={service.Description}
+                                    src={service.ImageUrl}
 
                                     onClick={e => this.props.onBook(service, undefined)}
                                 />
