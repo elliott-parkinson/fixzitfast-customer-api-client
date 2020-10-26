@@ -32,8 +32,32 @@ import { Payment } from "./Payment";
 import { DateAndTime } from "./DateAndTime";
 import { PaymentDetails } from "./PaymentDetails";
 
-
 @withRouter
+@observer
+export class WizardRoutes extends React.Component<any>
+{
+	render() {
+		let match = this.props.match.url;
+		
+		return <div className="wizard-routes animate__animated animate__fadeIn animate__delay-02s">
+			<Switch>
+				<Redirect path={match + "/"} exact to={match + "/services"} />
+
+				<Route path={match + "/services"} exact component={ props => <SelectService.Screen {...props}/> } />
+				<Route path={match + "/location"} exact component={ props => <SelectLocation.Screen {...props}/> } />
+				<Route path={match + "/details"} exact component={ props => <SetDetails.Screen {...props}/> } />
+				<Route path={match + "/contact"} exact component={ props => <SetContact.Screen {...props}/> } />
+				<Route path={match + "/times"} exact component={ props => <DateAndTime.Screen {...props}/> } />
+				<Route path={match + "/paymentdetails"} exact component={ props => <PaymentDetails.Screen {...props}/> } />
+				<Route path={match + "/payment"} exact component={ props => <Payment.Screen {...props}/> } />
+
+				<Route component={ props => <Error404.Screen {...props}/> } />
+			</Switch>
+		</div>;
+	}
+}
+
+
 @observer
 export default class Routes extends React.Component<any>
 {
@@ -92,44 +116,27 @@ export default class Routes extends React.Component<any>
 		return 4;
 	}
 
-	renderRoutes() {
-		let match = this.props.match.url;
-		
-		return <Switch>
-			<Redirect path={match + "/"} exact to={match + "/services"} />
-
-			<Route path={match + "/services"} exact component={ props => <SelectService.Screen {...props}/> } />
-			<Route path={match + "/location"} exact component={ props => <SelectLocation.Screen {...props}/> } />
-			<Route path={match + "/details"} exact component={ props => <SetDetails.Screen {...props}/> } />
-			<Route path={match + "/contact"} exact component={ props => <SetContact.Screen {...props}/> } />
-			<Route path={match + "/times"} exact component={ props => <DateAndTime.Screen {...props}/> } />
-			<Route path={match + "/paymentdetails"} exact component={ props => <PaymentDetails.Screen {...props}/> } />
-			<Route path={match + "/payment"} exact component={ props => <Payment.Screen {...props}/> } />
-
-			<Route component={ props => <Error404.Screen {...props}/> } />
-		</Switch>;
-	}
-
 	render() {
 		return <Fragment>
 			<Container>
 				<Row>
-					<Column md={this.ShowSummary ? 9 : 12} xs={12}>
-						{ this.ShowStepper &&
+					<Column md={this.ShowSummary ? 9 : 12} xs={12} className="wizard-main">
+						<div className={"wizard-steps " + (this.ShowStepper ? "" : "d-none")}>
 							<CreateBookingStepper.Component className="animate__animated animate__fadeInDown animate__faster" position={this.StepperPosition} onBack={e => this.Router.Back()}/>
-						}
+						</div>
+
 						{ this.ShowCard ? 
-							<Card className="animate__animated animate__fadeIn animate__delay-02s">
+							<Card className="">
 								<CardBody>
-									{ this.renderRoutes() }
+									<WizardRoutes />
 								</CardBody>
 							</Card>
 						:
-							this.renderRoutes()
+							<WizardRoutes />
 						}
 						<NewLine />
 					</Column>
-					<Column md={this.ShowSummary ? 3 : 12} xs={12} className={"animate__animated animate__fadeInRight animate__faster d-none d-md-block " + (this.ShowSummary ? "" : "w-0 h-0")}>
+					<Column md={this.ShowSummary ? 3 : 12} xs={12} className={"wizard-sidebar animate__animated animate__fadeInRight animate__faster d-none d-md-block " + (this.ShowSummary ? "" : "w-0 h-0")}>
 						<OrderSummary.Component 
 							service={this.BookingStore?.CurrentBooking?.Service}
 							location={this.BookingStore?.CurrentBooking?.Location}
