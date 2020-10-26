@@ -24,10 +24,8 @@ import { NotificationsOverlay } from "./components/NotificationsOverlay";
 import { Footer } from "./components/Footer";
 import { MobileHeaderBar } from "./components/MobileHeaderBar";
 
-
-@withRouter
 @observer
-export class App extends React.Component<any>
+export class App extends React.PureComponent<any>
 {
 	@observable Routes;
 	@observable Site;
@@ -36,22 +34,15 @@ export class App extends React.Component<any>
 
 	async componentDidMount()
 	{
-		Dependencies.of("store").has("routes") && Dependencies.of("store").get<any>("routes").SetHistory(this.props.history);
 		Dependencies.of("store").has("site") && (this.Site = Dependencies.of("store").get<any>("site"));
 
 		this.Routes = Dependencies.of("store").get<any>("routes");
 		this.Modals = Dependencies.of("store").get<any>("modals");
 		this.Notifications = Dependencies.of("store").get<any>("notifications");
-
-		this.Init();
-	}
-
-	@action async Init()
-	{
-		
 	}
 
 	render() {
+		console.log("View re-render");
 		return <Fragment>
 			<NavigationBar.Component />
 			{ this.Site &&

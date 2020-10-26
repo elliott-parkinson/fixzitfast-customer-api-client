@@ -11,14 +11,12 @@ import CreateRoutes from "./create";
 import ListRoutes from "./list";
 import { Error404 } from "../Error404";
 
-
 @withRouter
-@observer
 export default class Routes extends React.Component<any>
 {
-	componentDidMount()
+	shouldComponentUpdate(oldProps)
 	{
-        let routing: any = Dependencies.of("store").get("routes");
+		return !(this.props.location.pathname.indexOf( oldProps.location.pathname.slice(0, 4) === 0));
 	}
 
 	render() {

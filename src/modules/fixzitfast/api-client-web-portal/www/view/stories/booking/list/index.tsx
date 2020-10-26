@@ -65,38 +65,37 @@ export class Tabs extends React.Component<any>
 	}
 }
 
+export class Routes extends React.PureComponent<any>
+{
+	render() {
+		let match = this.props.match.url;
+		
+		return <Switch>
+			<Redirect path={match + "/"} exact to={match + "/upcoming"} />
 
-@withRouter
-@observer
-export default class Routes extends React.Component<any>
-{        
-	@observable Routes: any;
-	@observable BookingStore: any;
+			<Route path={match + "/upcoming"} exact component={ props => <Upcoming.Screen {...props}/> } />
+			<Route path={match + "/past"} exact component={ props => <Past.Screen {...props}/> } />
+			<Route path={match + "/draft"} exact component={ props => <Draft.Screen {...props}/> } />
 
+			<Route component={ props => <Error404.Screen {...props}/> } />
+		</Switch>;
+	}
+}
+
+export default class List extends React.PureComponent<any>
+{
 	componentDidMount()
 	{
-		this.Routes =  Dependencies.of("store").get<any>("routes");
 		Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "My Bookings");
-		this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 	}
 
 
 	render() {
-        let match = this.props.match.url;
-
 		return <Container className="h-100">
 			<Row className="h-100">
 				<Column sm={12} md={6} className="fill-area">
 					<Tabs />
-					<Switch>
-						<Redirect path={match + "/"} exact to={match + "/upcoming"} />
-
-						<Route path={match + "/upcoming"} exact component={ props => <Upcoming.Screen {...props}/> } />
-						<Route path={match + "/past"} exact component={ props => <Past.Screen {...props}/> } />
-						<Route path={match + "/draft"} exact component={ props => <Draft.Screen {...props}/> } />
-
-						<Route component={ props => <Error404.Screen {...props}/> } />
-					</Switch>
+					<Routes {...this.props} />
 				</Column>
 				<Column sm={12} md={6} className="full-center d-none d-lg-inline-flex">
 					<img className="p-0 m-0" src={require("../../../../../assets/images/bookings-bg.png")} />

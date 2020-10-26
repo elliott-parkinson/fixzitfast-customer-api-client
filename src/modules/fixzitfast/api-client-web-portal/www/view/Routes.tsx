@@ -19,7 +19,6 @@ import NotificationRoutes from "./stories/notifications";
 
 
 @withRouter
-@observer
 export class Routes extends React.Component<any>
 {
 	componentDidMount()
@@ -27,18 +26,21 @@ export class Routes extends React.Component<any>
 		Dependencies.of("store").has("routes") && Dependencies.of("store").get<any>("routes").SetHistory(this.props.history);
 	}
 
+	shouldComponentUpdate(oldProps)
+	{
+		return !(this.props.location.pathname.indexOf( oldProps.location.pathname.slice(0, 4) === 0));
+	}
+
 	render() {
 		return <Switch>
-			<Route path={"/"} exact component={ props => <Landing.Screen {...props}/> } />
+			<Route path={"/"} exact component={ props => <Landing.Screen /> } />
 
-			<Route path={"/account"} component={ props => <Account.Screen {...props}/> } />
-			<Route path={"/auth"} component={ props => <AuthRoutes {...props}/> } />
-			<Route path={"/booking"} component={ props => <BookingRoutes {...props}/> } />
-			<Route path={"/contact"} component={ props => <Contact.Screen {...props}/> } />
-			<Route path={"/terms"} component={ props => <TermsRoutes {...props}/> } />
-			<Route path={"/notifications"} component={ props => <NotificationRoutes {...props}/> } />
-
-			<Route component={ props => <Error404.Screen {...props}/> } />
+			<Route path={"/account"} component={ props => <Account.Screen /> } />
+			<Route path={"/auth"} component={ props => <AuthRoutes /> } />
+			<Route path={"/booking"} component={ props => <BookingRoutes /> } />
+			<Route path={"/contact"} component={ props => <Contact.Screen /> } />
+			<Route path={"/terms"} component={ props => <TermsRoutes /> } />
+			<Route path={"/notifications"} component={ props => <NotificationRoutes /> } />
 		</Switch>;
 	}
 }
