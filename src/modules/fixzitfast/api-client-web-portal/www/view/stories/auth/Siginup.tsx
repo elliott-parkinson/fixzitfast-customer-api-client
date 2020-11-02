@@ -34,27 +34,32 @@ export namespace Siginup
 
         @action async Submit()
         {
-            const authStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
-
-            if (this.Password !== this.PasswordConfirm)
+            let success = false;
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
             {
-                this.Error = "Passwords do not match";
-                return;
+                const authStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+                if (this.Password !== this.PasswordConfirm)
+                {
+                    this.Error = "Passwords do not match";
+                    return;
+                }
+    
+                success = await authStore.Signup(
+                    this.Name,
+                    this.Email,
+                    this.Password,
+                    this.Phone
+                );
+                
+                this.Error = authStore.Error;
             }
 
-            let success = await authStore.Signup(
-                this.Name,
-                this.Email,
-                this.Password,
-                this.Phone
-            );
 
             if (success == true)
             {
                 this.Finished = true;
             }
 
-            this.Error = authStore.Error;
         }
 
         @action async SignupWithGoogle()
@@ -82,7 +87,10 @@ export namespace Siginup
 
         componentDidMount()
         {
-            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
+            {
+                this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            }
             this.Routes =  Dependencies.of("store").get<any>("routes");
         }
     

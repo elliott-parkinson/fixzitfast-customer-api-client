@@ -71,11 +71,6 @@ export namespace CreateBookingStepper
                                     onClick: e => this.Router.Go("/booking/create/details")
                                 },
                                 {
-                                    title: 'Location',
-                                    href: "#",
-                                    onClick: e => this.Router.Go("/booking/create/location")
-                                },
-                                {
                                     title: 'Time',
                                     href: "#",
                                     onClick: e => this.Router.Go("/booking/create/times")

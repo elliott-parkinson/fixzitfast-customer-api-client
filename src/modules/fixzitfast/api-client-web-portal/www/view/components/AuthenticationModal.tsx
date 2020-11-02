@@ -26,18 +26,20 @@ export namespace AuthenticationModal
 
         @action async Submit()
         {
-            
-            const authStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
-            const routeStore = Dependencies.of("store").get<any>("routes");
-
-            let success = await authStore.Login(this.Email, this.Password);
-            if (success == true)
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
             {
-                return;
-            }
-            else
-            {
-                this.Error = authStore.Error;
+                const authStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+                const routeStore = Dependencies.of("store").get<any>("routes");
+    
+                let success = await authStore.Login(this.Email, this.Password);
+                if (success == true)
+                {
+                    return;
+                }
+                else
+                {
+                    this.Error = authStore.Error;
+                }
             }
         }
     }
@@ -57,20 +59,24 @@ export namespace AuthenticationModal
 
         @action async Submit()
         {
-            const authStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
-
-            if (this.Password !== this.PasswordConfirm)
+            let success = false;
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
             {
-                this.Error = "Passwords do not match";
-                return;
+                const authStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+    
+                if (this.Password !== this.PasswordConfirm)
+                {
+                    this.Error = "Passwords do not match";
+                    return;
+                }
+    
+                success = await authStore.Signup(
+                    this.Name,
+                    this.Email,
+                    this.Password,
+                    this.Phone
+                );
             }
-
-            let success = await authStore.Signup(
-                this.Name,
-                this.Email,
-                this.Password,
-                this.Phone
-            );
 
             if (success == true)
             {

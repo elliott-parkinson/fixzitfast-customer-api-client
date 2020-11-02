@@ -51,8 +51,10 @@ export namespace Footer
 
         componentDidMount()
         {
-            this.Account = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
-            this.Auth = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
+            {
+                this.Auth = this.Account = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            }
             
             this.Routes = Dependencies.of("store").get<any>("routes");
         }

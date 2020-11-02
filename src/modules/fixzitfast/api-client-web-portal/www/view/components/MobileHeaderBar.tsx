@@ -27,7 +27,6 @@ export namespace MobileHeaderBar
 
         componentDidMount()
         {
-            this.Account = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
             Dependencies.of("store").has("site") && (this.Site = Dependencies.of("store").get<any>("site"));
             
             this.Routes = Dependencies.of("store").get<any>("routes");

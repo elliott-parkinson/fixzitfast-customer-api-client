@@ -27,8 +27,12 @@ export namespace RequireAuthentication
 
         @action componentDidMount()
         {
-            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
-            if (this.Store.LoggedIn == false)
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
+            {
+                this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            }
+
+            if (this.Store?.LoggedIn == false)
             {
                 this.ModalOpen = true;
             }
@@ -36,7 +40,7 @@ export namespace RequireAuthentication
 
         @action Close()
         {
-            if (this.Store.LoggedIn == true)
+            if (this.Store?.LoggedIn == true)
             {
                 this.ModalOpen = false;
             }

@@ -31,7 +31,7 @@
 		{
 			"name": "New Booking",
 			"description": "Create a new booking",
-			"icons": [{ "src": "../../assets/images/shortcuts/booking.svg"}],
+			"icons": [{ "src": "../../assets/images/shortcuts/booking.svg" }],
 			"url": "/booking/create"
 		},
 		{

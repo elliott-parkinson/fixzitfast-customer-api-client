@@ -56,7 +56,10 @@ export namespace ForgotPassword
 
         componentDidMount()
         {
-            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
+            {
+                this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            }
             this.Routes =  Dependencies.of("store").get<any>("routes");
         }
     

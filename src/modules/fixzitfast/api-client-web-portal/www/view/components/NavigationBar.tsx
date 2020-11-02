@@ -25,7 +25,10 @@ export namespace NavigationBar
 
         componentDidMount()
         {
-            this.Account = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
+            {
+                this.Account = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            }
             
             this.Routes = Dependencies.of("store").get<any>("routes");
         }
@@ -69,7 +72,7 @@ export namespace NavigationBar
                             </NavLink>
                             
                             <NavItem className="highlighted">
-                                <NavLink href="/auth/logout" onClick={ e => { e.preventDefault(); this.Account.Logout(); return false; }}>
+                                <NavLink href="/auth/logout" onClick={ e => { e.preventDefault(); this.Account?.Logout(); return false; }}>
                                     Sign out
                                 </NavLink>
                             </NavItem>

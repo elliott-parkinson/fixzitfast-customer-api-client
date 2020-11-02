@@ -26,8 +26,6 @@ export namespace MobileNavigationBar
 
         componentDidMount()
         {
-            this.Account = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
-            
             this.Routes = Dependencies.of("store").get<any>("routes");
         }
     

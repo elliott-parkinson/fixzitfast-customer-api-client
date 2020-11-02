@@ -64,9 +64,11 @@ export namespace Account
         {
             this.Routes = Dependencies.of("store").get<any>("routes");
             Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "My Account");
-            this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
-
-            let accountStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            
+            if (Dependencies.of("fixzitfast-customer-data-store").has<any>("account"))
+            {
+                this.Store = Dependencies.of("fixzitfast-customer-data-store").get<any>("account");
+            }
         }
     
         render() {

@@ -25,6 +25,7 @@ import { observable, computed, action } from "mobx";
 import { PaymentStatus } from "../../../../../../react-components";
 import { OrderSummary } from "./components/OrderSummary";
 import { CreateBookingStepper } from "./components/CreateBookingStepper";
+import { DateSelector } from "./components/DateSelector";
 
 export namespace DateAndTime
 {
@@ -137,7 +138,8 @@ export namespace DateAndTime
                 <Form className="fixzitfast-form animate__animated animate__fadeIn animate__delay-02s" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
                     <Header size="sm">Select a date and time</Header>
                     <NewLine />
-                    <BookingSelector
+                    <DateSelector.Component />
+                    {/*<BookingSelector
                         selection={[this.Form.Date]}
                         blocked={this.BlockedDates}
                         numDays={7}
@@ -145,7 +147,7 @@ export namespace DateAndTime
                         maxTime={18}
                         onChange={e => this.Form.SetTimeslot(e)}
                         renderDateCell={(time: Date, selected: boolean, refSetter: Function) => this.renderDateCell(time, selected, refSetter)}
-                    />
+                    />*/}
 
                     { this.Form.Date && <Fragment>
                         <NewLine />
