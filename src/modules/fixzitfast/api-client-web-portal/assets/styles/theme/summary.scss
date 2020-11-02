@@ -1,6 +1,9 @@
 
 
 .summary-area {
+    display: inline-flex;
+    width: 100%;
+
     h5 {
         font-family: 'muli-bold', 'Open Sans', sans-serif !important;
         margin-top: 1rem;
@@ -30,6 +33,11 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+    }
+
+    .card {
+        width: 100%;
+        border: 0px;
     }
 }
 
