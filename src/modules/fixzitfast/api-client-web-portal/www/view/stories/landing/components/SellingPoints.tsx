@@ -25,42 +25,48 @@ export namespace SellingPoints
                 <Container>
                     <Row>
                         <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-00s">
-                            <img src ={require("../../../../../assets/images/selling-points/professionals.png")} />
-                            <br />
-                            <br />
-                            <Header size="md">Trusted tradespeople</Header>
-                            <Paragraph>
-                                Our fixers work for us, so we can guarantee they are reliable and fully certified.
-                            </Paragraph>
+                            <div className="content">
+                                <div className="icon-container">
+                                    <img src={require("../../../../../assets/images/icons/selling-point1.svg")} />
+                                </div>
+                                <Header size="md">Trusted tradespeople</Header>
+                                <Paragraph>
+                                    Our fixers work for us, so we can guarantee they are reliable and fully certified.
+                                </Paragraph>
+                            </div>
 
                             { this.props.showButtons &&
-                                <Button color="primary" onClick={this.props.onClick}>Book now</Button>
+                                <Button color="primary" onClick={this.props.onClick}>Book</Button>
                             }
                         </Column>
                         <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-01s">
-                            <img src ={require("../../../../../assets/images/selling-points/schedule.png")} />
-                            <br />
-                            <br />
-                            <Header size="md">Same-day service</Header>
-                            <Paragraph>
-                                Emergency? Schedule a same-day visit anywhere in Edinburgh and we’ll be there.
-                            </Paragraph>
+                            <div className="content">
+                                <div className="icon-container">
+                                    <img src={require("../../../../../assets/images/icons/selling-point2.svg")} />
+                                </div>
+                                <Header size="md">Same-day service</Header>
+                                <Paragraph>
+                                    Emergency? Schedule a same-day visit anywhere in Edinburgh and we’ll be there.
+                                </Paragraph>
+                            </div>
 
                             { this.props.showButtons &&
-                                <Button color="primary" onClick={this.props.onClick}>Book now</Button>
+                                <Button color="primary" onClick={this.props.onClick}>Book</Button>
                             }
                         </Column>
                         <Column md={4} xs={12} className="selling-point animate__animated animate__fadeIn animate__delay-02s">
-                            <img src ={require("../../../../../assets/images/selling-points/speed.png")} />
-                            <br />
-                            <br />
-                            <Header size="md">Make it snappy</Header>
-                            <Paragraph>
-                                Kick off with a one-hour time slot to identify / fix the problem.
-                            </Paragraph>
+                            <div className="content">
+                                <div className="icon-container">
+                                    <img src={require("../../../../../assets/images/icons/selling-point3.svg")} />
+                                </div>
+                                <Header size="md">Make it snappy</Header>
+                                <Paragraph>
+                                    Kick off with a one-hour time slot to identify / fix the problem.
+                                </Paragraph>
+                            </div>
 
                             { this.props.showButtons &&
-                                <Button color="primary" onClick={this.props.onClick}>Book now</Button>
+                                <Button color="primary" onClick={this.props.onClick}>Book</Button>
                             }
                         </Column>
                     </Row>

@@ -49,7 +49,7 @@
     padding-right: 53px;
 
     border-radius: 5px;
-    border: 1px solid transparent;
+    border: 1px solid #ff9505;
 
     background-color: transparent;
     color: #ff9505;
@@ -57,5 +57,9 @@
     &:hover {
         background-color: #ff9505 !important;
         color: white !important;
+    }
+
+    &.back {
+        border : 1px solid transparent;
     }
 }

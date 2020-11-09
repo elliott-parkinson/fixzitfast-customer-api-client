@@ -66,8 +66,11 @@ export namespace SelectService
 
         @action BookService(service: any, category: any)
         {
-            this.BookingStore?.Create(service.Id, service.Name, category.Id, category.Name);
+            this.BookingStore?.Create(category.Id, category.Name, category.Type);
+            this.BookingStore?.InProgress.Service.Set(service.Id, service.Name);
             this.BookingStore?.InProgress.Store();
+            this.BookingStore?.InProgress.Load();
+
             this.Router.Go("/booking/create/details");
         }
 

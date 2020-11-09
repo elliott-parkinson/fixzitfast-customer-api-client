@@ -85,9 +85,9 @@ export namespace NavigationBar
                             >
                                 Services
                             </NavLink>
-                            <NavLink href="/booking/create"
+                            <NavLink href="/booking/list"
                                 active={((this.Routes?.Location?.indexOf( "/booking" ) !== -1) && this.Routes?.Location?.indexOf( "/booking/create/services" ) === -1) ? true : undefined}
-                                onClick={ e => { e.preventDefault(); this.Routes.Go("/booking/create"); return false; }}
+                                onClick={ e => { e.preventDefault(); this.Routes.Go("/booking/list"); return false; }}
                             >
                                 Bookings
                             </NavLink>

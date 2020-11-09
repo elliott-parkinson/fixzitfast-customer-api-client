@@ -53,13 +53,20 @@ export namespace TestimonialsBanner
         }
 
         render() {
-            return <Container>
+            return <Container className="background-white">
                 <Row>
                     <Column lg={6} className="banner-jumbo">
                         <Header size="lg">Taking care of our customers</Header>
                         <Paragraph>From background checking all our tradespeople, to using electric vans, we’re determined to bring you the fastest, greenest and best home-repair service in the city.</Paragraph>
                     </Column>
                     <Column lg={6} className="vertical-center p-0">
+                        
+                        <Row>
+                            <Column xs={12} className="full-center p-3">
+                                <img title="How it works" src={require("../../../../../assets/images/landing/reviews.png")} />
+                            </Column>
+                        </Row>
+                        {/*
                         <Row className="testimonials-block w-100">
                             {this.TestimonialsList?.map( testimonial => <Column md={4} sm={12} xs={12} key={testimonial.Id} className="p-1">
                                 <Card className="testimonial-card">
@@ -88,6 +95,7 @@ export namespace TestimonialsBanner
                                 </Card>
                             </Column>)}
                         </Row>
+                        */}
                     </Column>
                 </Row>
             </Container>;

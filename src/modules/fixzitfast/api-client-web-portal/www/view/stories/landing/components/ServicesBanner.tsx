@@ -68,26 +68,16 @@ export namespace ServicesBanner
         }
 
         render() {
-            return <Container className="jumbo-container">
+            return <Container className="jumbo-container background-white">
                 <Row>
                     <Column lg={6} className="banner-jumbo">
                         <Header size="lg">Services</Header>
                         <Paragraph>Know what you need? Search our services to find the right person for the job. From tiling and painting to repairing boilers and rewiring, we’ll FixzitFast.</Paragraph>
                         
-                        <Button color="primary" block onClick={e => this.props.onView() }>See all Services</Button>
+                        <Button color="primary" size="lg" onClick={e => this.props.onView() }>See all Services</Button>
                     </Column>
                     <Column lg={6} className="vertical-center p-0">
-                        <Row className="featured-services-block w-100">
-                            {this.FeaturedServicesList?.slice(0, 4).map( service => <Column md={6} sm={6} xs={12} key={service.Id} className="p-1">
-                                <ServiceCard.Component
-                                    name={service.Name}
-                                    description={service.Description}
-                                    src={service.ImageUrl}
-
-                                    onClick={e => this.props.onBook(service, undefined)}
-                                />
-                            </Column>)}
-                        </Row>
+                        
                     </Column>
                 </Row>
             </Container>;

@@ -185,7 +185,7 @@ export default [
         ImageUrl: require("../../api-client-web-portal/assets/images/icons/hand.png"),
     },
     {
-        Id: "serv-51",
+        Id: "serv-71",
         CategoryId: "cat-6",
         Name: "General service",
         Featured: false,

@@ -26,6 +26,8 @@ export namespace SetDetails
 {
     export class DetailsForm
     {
+        @observable ServiceName = "";
+        @observable ServiceId = "";
         @observable CategoryName = "";
         @observable CategoryType = "";
         @observable Details = "";
@@ -74,6 +76,7 @@ export namespace SetDetails
         {
             let bookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
             bookingStore.InProgress.Details.Set(this.Details);
+            bookingStore.InProgress.Service.Set(this.ServiceId, this.ServiceName);
             bookingStore?.InProgress.Store();
 
             let router = Dependencies.of("store").get<any>("routes");
@@ -87,6 +90,8 @@ export namespace SetDetails
         @observable Router: any;
         @observable BookingStore: any;
         @observable ServicesStore: any;
+
+        @observable Services: any = [];
         @observable Categories: any = [];
 
         @observable Form = new DetailsForm;
@@ -96,24 +101,36 @@ export namespace SetDetails
             this.Router =  Dependencies.of("store").get<any>("routes");
             Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Booking Details");
             this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+            this.BookingStore.InProgress.Load();
 
-            
             if (Dependencies.of("fixzitfast-customer-data-store").has<any>("services"))
             {
                 this.ServicesStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("services");
             }
 
-            let details = this.BookingStore.InProgress.Details.Get();
-            let service = this.BookingStore.InProgress.Service;
-            this.Form.Details = details.Description;
-            this.Form.CategoryName = service.CategoryName;
-            this.Form.CategoryType = service.CategoryType;
             this.UpdateServiceData();
         }
 
         @action async UpdateServiceData()
         {
+            this.Services = await this.ServicesStore.Services.ForCategory(this.BookingStore?.InProgress?.Service.CategoryId);
             this.Categories = await this.ServicesStore.Categories.List;
+
+            
+            let details = this.BookingStore.InProgress.Details.Get();
+            let service = this.BookingStore.InProgress.Service;
+
+            this.Form.Details = details.Description;
+            this.Form.CategoryName = service.CategoryName;
+            this.Form.ServiceId = service.Id;
+            this.Form.ServiceName = service.Name;
+
+            console.log(this.Form, details);
+        }
+
+        @computed get ServiceList()
+        {
+            return this.Services.map()
         }
 
         
@@ -127,10 +144,24 @@ export namespace SetDetails
                 <Form className="fixzitfast-form animate__animated animate__fadeIn animate__delay-02s" onSubmit={e => { e.preventDefault(); this.Form.Submit(); return false; }}>
                     <Header size="sm"><ServiceCategoryIcon.Component src={this.GetCategory(this.BookingStore?.InProgress?.Service.CategoryId)?.IconUrl} />  &nbsp; Booking, {this.BookingStore?.InProgress?.Service.CategoryType}</Header>
                     <NewLine />
-                    <Header size="md">How can we help you?</Header>
+
                     
+                    <Header size="md">How can we help you?</Header>
                     <FormGroup tag="fieldset">
-                        <Input type="textarea" rows={6} required placeholder="Type in the details of the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
+                        <Label>What can we help you with?</Label>
+                        <Input type="select" required placeholder="What service are you after?" value={this.Form.ServiceId} onChange={ e => {
+                            this.Form.ServiceId = e.target.value;
+                            this.Form.ServiceName = this.Services.find(service => service.Id == e.target.value).Name;
+                        } } >
+                            { this.Services.map(service =>
+                                <option key={service.Id} value={service.Id}>{ service.Name }</option>
+                            ) }
+                        </Input>
+                    </FormGroup>
+
+
+                    <FormGroup tag="fieldset">
+                        <Input type="textarea" rows={4} required placeholder="Tell us a little about the job" value={this.Form.Details} onChange={ e => this.Form.Details = e.target.value } />{' '}
                     </FormGroup>
 
                     <FormGroup tag="fieldset">

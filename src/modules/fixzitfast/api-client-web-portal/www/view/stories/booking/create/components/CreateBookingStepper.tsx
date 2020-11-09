@@ -38,7 +38,7 @@ export namespace CreateBookingStepper
             return <div className={this.props.className}>
                 <Row className="booking-form-stepper">
                     <Column lg={2} md={3} className="text-center p-0 d-none d-md-flex">
-                        <Button color="primary" className="text-center p-3" outline onClick={this.props.onBack}>
+                        <Button color="primary" className="text-center p-3 back" outline onClick={this.props.onBack}>
                             <i className="fas fa-arrow-left" /> &nbsp;
                             Back
                         </Button>
@@ -50,12 +50,12 @@ export namespace CreateBookingStepper
                             titleTop={-58}
                             titleFontSize={14}
                             circleFontSize={0}
-                            defaultColor="#e6e9f0"
-                            defaultTitleColor="#e6e9f0"
-                            defaultBorderColor="#e6e9f0"
-                            activeBorderColor="#e6e9f0"
-                            completeBorderColor="#e6e9f0"
-                            defaultBarColor="#e6e9f0"
+                            defaultColor="#D3D9E4"
+                            defaultTitleColor="#D3D9E4"
+                            defaultBorderColor="#D3D9E4"
+                            activeBorderColor="#D3D9E4"
+                            completeBorderColor="#D3D9E4"
+                            defaultBarColor="#D3D9E4"
                             activeStep={this.props.position}
                             activeColor="#ff9505"
                             activeTitleColor="#ff9505"

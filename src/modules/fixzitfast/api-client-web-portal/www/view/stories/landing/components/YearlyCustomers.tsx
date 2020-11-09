@@ -80,14 +80,16 @@ export namespace YearlyCustomers
                         <Column lg={6} className="vertical-center">
                             <Block>
                                 <Header size="lg" className="main-text">
-                                    Customers this year
+                                    { /* Customers this year */}
+                                    <i className="fas fa-head-side-mask" /> &nbsp; All our visits are covid safe.
                                 </Header>
                             </Block>
                         </Column>
                         <Column lg={6} className="vertical-center">
                             <Block>
-                                <Header size="lg" className="details-text">
-                                    { this.TotalNumbers }
+                                <Header size="xl" >
+                                    {/* this.TotalNumbers */}
+                                    
                                 </Header>
                             </Block>
                         </Column>

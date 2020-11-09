@@ -33,6 +33,11 @@ export class ServicesList
 	{
 		return this.List.filter(item => item.Popular == true);
 	}
+
+	ForCategory(categoryId: string)
+	{
+		return this.List.filter(item => item.CategoryId == categoryId);
+	}
 }
 
 export class CategoriesList

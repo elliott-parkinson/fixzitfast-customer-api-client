@@ -1,9 +1,5 @@
-import Dependencies, { Service } from "typedi";
-
 import * as React from "react";
 
-import { observer } from "mobx-react";
-import { observable, computed, action } from "mobx";
 import { 
     Fragment,
     Button,
@@ -50,14 +46,14 @@ export namespace TimePricePicker
                     </Column>
                 </Row>
 
-                {this.props.value.getTime()}
-
+                { this.props.value.getTime() } &nbsp; { this.props.value.getHours() } &nbsp; {this.props.value.getDate() }
+                { this.props.hours.map( hour => <div>{ (hour.time.getHours() == this.props.value.getHours()).toString() }</div> ) }
                 { this.props.hours.map( hour =>
                     <PriceRow
                         key={hour.time}
                         time={moment(hour.time).format('HH:mm')}
                         value={hour.price}
-                        selected={hour.time.getTime() == this.props.value.getTime()}
+                        selected={ hour.time.getHours() == this.props.value.getHours() }
                         onClick={e => this.props.onChange(hour.time)}
                     />
                 )}

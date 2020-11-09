@@ -4,7 +4,7 @@ import { observable, action } from "mobx";
 export class Service
 {
 	@observable Id = "";
-	@observable ParentId = "";
+	@observable CategoryId = "";
 
 	@observable Name = "";
 	@observable ImageUrl = "";

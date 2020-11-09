@@ -19,7 +19,7 @@ export namespace SatisfactionBanner
     export class Component extends React.Component<IViewProps>
     {
         render() {
-            return <Container className="jumbo-container">
+            return <Container className="jumbo-container background-white">
                 <Row>
                     <Column lg={6} className="banner-jumbo">
                         <Header size="lg">Your satisfaction, guaranteed</Header>

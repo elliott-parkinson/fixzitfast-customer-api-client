@@ -49,7 +49,7 @@ export namespace OrderSummary
                     <CardBody>
                         <Header size="xs">Your Order Summary</Header>
 
-                        { this.Booking?.Service.Name != "" && <Fragment>
+                        { this.Booking?.Service.CategoryName != "" && <Fragment>
                             <Row className="summary-header">
                                 <Column xs={7}>
                                     <Header>
@@ -62,7 +62,7 @@ export namespace OrderSummary
                                     </Button>
                                 </Column>
                             </Row>
-                            <Paragraph>{this.Booking?.Service.CategoryName}, {this.Booking?.Service.Name}</Paragraph>
+                            <Paragraph>{this.Booking?.Service.CategoryName} { this.Booking?.Service.Name != "" ? ", " + this.Booking?.Service.Name : ""}</Paragraph>
                             <Paragraph className="note">Please be aware that you will be charged until the job is completed.</Paragraph>
                             <NewLine />
                             <NewLine />
@@ -145,15 +145,15 @@ export namespace OrderSummary
                         { true && this.Booking?.Time.TimeSlotText != "" && <Fragment>
                             <hr />
                             <Row className="summary-header">
-                                <Column xs={7}>
-                                    <Paragraph>
+                                <Column xs={12}>
+                                    <Header size="md">
                                         Total Amount
-                                    </Paragraph>
+                                    </Header>
                                 </Column>
-                                <Column xs={5} className="text-right">
-                                    <Paragraph className="text-right" style={{ color: "#ff9505" }}>
+                                <Column xs={12} className="text-left">
+                                    <Header size="sm" className="text-left" style={{ color: "#ff9505" }}>
                                         £100
-                                    </Paragraph>
+                                    </Header>
                                 </Column>
                             </Row>
                         </Fragment> }

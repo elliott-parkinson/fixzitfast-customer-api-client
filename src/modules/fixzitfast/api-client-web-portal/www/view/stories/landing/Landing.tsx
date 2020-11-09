@@ -105,7 +105,7 @@ export namespace Landing
         
     
         render() {
-            return <Fragment>
+            return <div className="landing">
                 <Navbar color="light" className="topnav-mobile animate__animated animate__fadeInDown d-flex d-sm-none text-center">
                     <Container className="text-center">
                         <NavbarBrand className="m-auto" href="/" onClick={ e => { e.preventDefault(); this.Router.Go("/"); return false; }}>
@@ -113,11 +113,14 @@ export namespace Landing
                         </NavbarBrand>
                     </Container>
                 </Navbar>
-                <div className="main-hero">
+                <Container className="main-hero background-white">
                     <Row> 
-                        <Column lg={2} xs={1} />
-                        <Column lg={6} xs={10} className="vertical-center animate__animated animate__fadeIn">
-                            <Header>When it comes to your home, Fixzitfast</Header>
+                        <Column lg={6} className="vertical-center animate__animated animate__fadeIn">
+                            <Header>
+                                <span>When it comes </span>
+                                <span>to your home, </span>
+                                <span className="orange">Fixzitfast</span>
+                            </Header>
                             <Paragraph>The smart home-repair service that frees up your time for the important things in life.</Paragraph>
 
                             { this.ServicesStore &&
@@ -135,11 +138,11 @@ export namespace Landing
                                 </Form>
                             }
                         </Column>
-                        <Column lg={4} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex van-image-container">
+                        <Column lg={6} className="full-center animate__animated animate__fadeInRight animate__faster d-none d-lg-inline-flex van-image-container">
                             <div className="van-image"></div>
                         </Column>
                     </Row>
-                </div>
+                </Container>
                 
                 { this.ServicesStore &&
                     <FeaturedServicesBar.Component onClick={() => this.ViewServices()} />
@@ -167,7 +170,7 @@ export namespace Landing
                 }
 
                 <AppBanner.Component />
-            </Fragment>;
+            </div>;
         }
     }
 }

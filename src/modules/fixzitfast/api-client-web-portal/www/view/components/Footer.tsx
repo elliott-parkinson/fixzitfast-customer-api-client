@@ -76,6 +76,7 @@ export namespace Footer
             <Container>
                 <Row>
                     <Column md={3} sm={6} xs={12} className="p-3 logo">
+                        <Header size="md">When it comes to your home,</Header>
                         <Header size="sm">FixzitFast</Header>
                         
                     </Column>
@@ -107,18 +108,24 @@ export namespace Footer
                     </Column>
                 </Row>
                 <Row>
-                    <Column md={6} sm={6} xs={12} className="p-3">
+                    <Column md={9} sm={6} xs={12} className="p-3">
                         <Paragraph>It only gets faster with our app.</Paragraph>
                         <Row>
                             <Column lg={5} md={6} sm={6} className="p-1 text-center">
-                                <img className="appstore-icon" onClick={e=> this.ViewPlayStore()} title="Get it on Google Play" src={require("../../../assets/images/apps/android_store.png")} />
+                                <Button outline block color="primary" onClick={e=> this.ViewPlayStore()} className="p-3">
+                                    <i className="fab fa-android" /> &nbsp; 
+                                    Google Play
+                                </Button>
                             </Column>
                             <Column lg={5} md={5} sm={6} className="p-1 text-center">
-                                <img className="appstore-icon" onClick={e=> this.ViewAppStore()} title="Download on the App Store" src={require("../../../assets/images/apps/ios_store.png")} />
+                                <Button outline block color="primary" onClick={e=> this.ViewAppStore()} className="p-3">
+                                    <i className="fab fa-apple" /> &nbsp; 
+                                    App Store
+                                </Button>
                             </Column>
                         </Row> 
                     </Column>
-                    <Column md={6} sm={6} xs={12} className="social-links">
+                    <Column md={3} sm={6} xs={12} className="social-links">
                         <a className="social-link" href={config.social.facebook} style={{ background: "white", display: "inline-flex", borderRadius: "7px" }}>
                             <i className="fab fa-facebook-square" style={{ color: "rgb(56, 86, 148)", marginTop: "-4px", marginBottom: "-4px", marginLeft: "-1px", marginRight: "-1px" }} />
                         </a>
@@ -147,11 +154,6 @@ export namespace Footer
                         </NavItem>
                         <NavItem>
                             <NavLink href="/terms/cancellation-policy" onClick={ e => { e.preventDefault(); this.Routes.Go("/terms/cancellation-policy"); return false; }}>Cancellation Policy</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <Sentence>
-                                CO2 408.71 ppm
-                            </Sentence>
                         </NavItem>
                     </Nav>
                 </Navbar>

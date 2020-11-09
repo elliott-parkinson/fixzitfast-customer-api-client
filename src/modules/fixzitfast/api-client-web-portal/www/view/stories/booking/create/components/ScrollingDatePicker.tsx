@@ -77,7 +77,7 @@ export namespace ScrollingDatePicker
         { props.text }
     </Badge>;
 
-    export class Component extends React.Component<IViewProps>
+    export class Component extends React.PureComponent<IViewProps>
     {
         Weekdays: Date[];
 

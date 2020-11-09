@@ -37,15 +37,21 @@ export namespace AppBanner
                         <div className="apps-image" />
                     </Column>
                     <Column lg={6} className="banner-jumbo">
-                        <Header size="lg">IOS and Android ready!</Header>
+                        <Header size="lg">Manage your home from your pocket!</Header>
                         <Paragraph>Just download the app, set up an account and you’re ready to go. You can find and book common repair jobs, or request something different. You’ll get notifications about the location of your tradesperson and you can pay for the repair, straight from your phone.</Paragraph>
                         
                         <Row>
                             <Column lg={5} md={6} sm={6} className="p-1 text-center">
-                                <img className="appstore-icon" onClick={e=> this.ViewPlayStore()} title="Get it on Google Play" src={require("../../../../../assets/images/apps/android_store.png")} />
+                                <Button outline color="primary" onClick={e=> this.ViewPlayStore()}>
+                                    <i className="fab fa-android" /> &nbsp; 
+                                    Google Play
+                                </Button>
                             </Column>
                             <Column lg={5} md={5} sm={6} className="p-1 text-center">
-                                <img className="appstore-icon" onClick={e=> this.ViewAppStore()} title="Download on the App Store" src={require("../../../../../assets/images/apps/ios_store.png")} />
+                                <Button outline color="primary" onClick={e=> this.ViewAppStore()}>
+                                    <i className="fab fa-apple" /> &nbsp; 
+                                    App Store
+                                </Button>
                             </Column>
                         </Row>
                     </Column>

@@ -38,6 +38,11 @@ form.fixzitfast-form {
             }
         }
 
+        textarea {
+            border: 1px solid #c7ccd6 !important;
+            border-radius: 4px;
+        }
+
         &.text-right, &.text-center, &.text-left {
             display: inline-block;
         }

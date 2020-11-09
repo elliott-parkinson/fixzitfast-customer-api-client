@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="98.381" height="91.704" viewBox="0 0 98.381 91.704">
+    <defs>
+        <clipPath id="clip-path">
+            <path id="Rectangle_774" fill="none" d="M0 0H98.381V91.704H0z"/>
+        </clipPath>
+        <style>
+            .cls-4{fill:#2f3848}
+        </style>
+    </defs>
+    <g id="Group_6158">
+        <path id="Rectangle_977" fill="#ff9505" d="M0 0H85V61H0z" transform="translate(6.5 28.074)"/>
+        <g id="Group_6089">
+            <g id="Group_6088">
+                <g id="Group_6087" clip-path="url(#clip-path)">
+                    <path id="Path_737" d="M105.649 132.368H32.871a7.926 7.926 0 0 1-8.079-7.745V57.731a7.926 7.926 0 0 1 8.079-7.744h72.778a7.926 7.926 0 0 1 8.079 7.744v66.892a7.926 7.926 0 0 1-8.079 7.745M32.871 54.836a3.021 3.021 0 0 0-3.126 2.9v66.892a3.021 3.021 0 0 0 3.126 2.9h72.778a3.021 3.021 0 0 0 3.126-2.9V57.731a3.021 3.021 0 0 0-3.126-2.9z" class="cls-4" transform="translate(-20.07 -40.664)"/>
+                    <path id="Path_738" d="M104.729 220.1h-16.95v-18.945h16.95zm-12-4.849h7.045V206h-7.043z" class="cls-4" transform="translate(-71.059 -163.639)"/>
+                    <path id="Path_739" d="M230.7 220.1h-16.95v-18.945h16.95zm-12-4.849h7.045V206H218.7z" class="cls-4" transform="translate(-173.037 -163.639)"/>
+                    <path id="Path_740" d="M356.675 220.1h-16.95v-18.945h16.95zm-12-4.849h7.045V206h-7.045z" class="cls-4" transform="translate(-275.015 -163.639)"/>
+                    <path id="Path_741" d="M104.729 346.074h-16.95v-18.946h16.95zm-12-4.849h7.045v-9.248h-7.043z" class="cls-4" transform="translate(-71.059 -266.117)"/>
+                    <path id="Path_742" d="M230.7 346.074h-16.95v-18.946h16.95zm-12-4.849h7.045v-9.248H218.7z" class="cls-4" transform="translate(-173.037 -266.117)"/>
+                    <path id="Rectangle_770" fill="#ed6b19" d="M0 0H11.998V14.097H0z" transform="translate(67.187 63.435)"/>
+                    <path id="Path_743" fill="#fff" d="M356.675 346.074h-16.95v-18.946h16.95zm-12-4.849h7.045v-9.248h-7.045z" transform="translate(-275.015 -266.117)"/>
+                    <path id="Rectangle_771" d="M0 0H83.983V4.849H0z" class="cls-4" transform="translate(7.199 25.769)"/>
+                    <path id="Rectangle_772" d="M0 0H11.429V23.495H0z" class="cls-4" transform="translate(25.479)"/>
+                    <path id="Rectangle_773" d="M0 0H11.429V21.145H0z" class="cls-4" transform="translate(61.472 2.349)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

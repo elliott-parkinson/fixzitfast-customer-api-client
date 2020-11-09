@@ -63,6 +63,8 @@ export namespace Upcoming
                         { this.ServicesStore != undefined && 
                             <Button block color="primary" onClick={e => this.MakeABooking()}>Make a booking</Button>
                         }
+
+                        {/* if not logged in, login to create booking */}
                     </CardBody>
                 </Card>
             </Fragment>;
