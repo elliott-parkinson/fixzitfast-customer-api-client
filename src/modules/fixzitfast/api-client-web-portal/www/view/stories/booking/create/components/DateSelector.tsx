@@ -26,7 +26,7 @@ export namespace DateSelector
         value: Date;
         onChange?: Function;
     }
-
+    @observer
     export class Component extends React.Component<IViewProps>
     {
         Day: string;
@@ -46,13 +46,13 @@ export namespace DateSelector
         {
             this.Day = moment(this.props.value).format('Do');
             this.Month = moment(this.props.value).format('MMMM');
-            this.Year = moment(this.props.value).format('YYYY');
+            this.Year = moment(this.props.value).format('YYYY')
         }
 
         createTime(date: Date, hour: number, price: string)
         {
             let time = {
-                time: new Date((new Date()).setHours(hour, 0, 0, 0)),
+                time: new Date((new Date(date)).setHours(hour, 0, 0, 0)),
                 price: price,
                 selected: false
             };
@@ -62,23 +62,23 @@ export namespace DateSelector
             return time;
         }
 
-        hours()
+        @computed get Hours()
         {
             let time = this.props.value;
 
             return [
                 this.createTime(time, 7, "£100"),
-                this.createTime(time, 8, "£100"),
+                // this.createTime(time, 8, "£100"),
                 this.createTime(time, 9, "£100"),
-                this.createTime(time, 10, "£100"),
+                // this.createTime(time, 10, "£100"),
                 this.createTime(time, 11, "£100"),
-                this.createTime(time, 12, "£100"),
+                // this.createTime(time, 12, "£100"),
                 this.createTime(time, 13, "£100"),
-                this.createTime(time, 14, "£100"),
+                // this.createTime(time, 14, "£100"),
                 this.createTime(time, 15, "£100"),
-                this.createTime(time, 16, "£100"),
+                // this.createTime(time, 16, "£100"),
                 this.createTime(time, 17, "£100"),
-                this.createTime(time, 18, "£100"),
+                // this.createTime(time, 18, "£100"),
                 this.createTime(time, 19, "£100"),
             ];
         }
@@ -92,7 +92,7 @@ export namespace DateSelector
                 <NewLine />
                 <NewLine />
 
-                <TimePricePicker.Component value={this.props.value} hours={this.hours()} onChange={date => this.props.onChange(date)} />
+                <TimePricePicker.Component value={this.props.value} hours={this.Hours} onChange={date => this.props.onChange(date)} />
             </Fragment>;
         }
     }

@@ -73,11 +73,10 @@ export namespace DateAndTime
             this.BookingStore.InProgress.Load();
 
             let time = this.BookingStore.InProgress?.Time.Date;
-            console.warn(toJS(this.BookingStore.InProgress?.Time));
             if (!time)
             {
                 time = new Date;
-                time.setHours(8, 0, 0);
+                time.setHours(7, 0, 0);
             }
             this.Form.Date = time;
         }

@@ -26,7 +26,10 @@ export namespace ScrollingDatePicker
             var day = date.getDay(),
                 diff = date.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
 
-            date.setHours(8, 0, 0);
+            if (date.getHours() < 7 || date.getHours() > 19)
+            {
+                date.setHours(7, 0, 0);
+            }
 
             return new Date(date.setDate(diff));
         }
@@ -84,9 +87,12 @@ export namespace ScrollingDatePicker
         { props.text }
     </Badge>;
 
+    @observer
     export class Component extends React.Component<IViewProps>
     {
         Weekdays: Date[];
+        @observable CurrentScroll: number = 0;
+        @observable ScrollWidth: number = 1;
 
         constructor(props)
         {
@@ -95,9 +101,15 @@ export namespace ScrollingDatePicker
             this.Weekdays = Dates.getWeek(props.value);
         }
 
-        scrollDatesLeft()
+        componentDidUpdate()
+        {
+            this.Weekdays = Dates.getWeek(this.props.value);
+        }
+
+        @action scrollDatesLeft()
         {
             let list = document.getElementById("dates-list");
+            this.CurrentScroll = list.scrollLeft - 144.90;
             list.scroll({
                 left: list.scrollLeft - 144.90,
                 top: list.scrollTop,
@@ -105,21 +117,23 @@ export namespace ScrollingDatePicker
             });
         }
         
-        scrollDatesRight()
+        @action scrollDatesRight()
         {
             let list = document.getElementById("dates-list");
+            this.CurrentScroll = list.scrollLeft + 144.90;
             list.scroll({
                 left: list.scrollLeft + 144.90,
                 top: list.scrollTop,
                 behavior: "smooth"
             });
+            this.ScrollWidth = list.scrollWidth - list.getBoundingClientRect().width;
         }
         
         render() {
             return <div className="d-inline-flex flex-row justify-content-between w-100">
                 <div className="d-flex h-100 align-self-center p-2">
-                    <Button className="align-self-center p-2" type="button" color="light" onClick={e => this.scrollDatesLeft() }>
-                        <i className="fas fa-arrow-left" />
+                    <Button className="align-self-center p-2" type="button" color="light" onClick={e => this.scrollDatesLeft() } disabled={this.CurrentScroll <= 0 ? true : undefined}>
+                        <i className="fas fa-chevron-left" />
                     </Button>
                 </div>
 
@@ -135,8 +149,8 @@ export namespace ScrollingDatePicker
                 </div>
 
                 <div className="d-flex h-100 align-self-center p-2">
-                    <Button className="align-self-center p-2" type="button" color="light" onClick={e => this.scrollDatesRight() }>
-                        <i className="fas fa-arrow-right" />
+                    <Button className="align-self-center p-2" type="button" color="light" onClick={e => this.scrollDatesRight() } disabled={this.CurrentScroll >= this.ScrollWidth ? true : undefined}>
+                        <i className="fas fa-chevron-right" />
                     </Button>
                 </div>
             </div>;
