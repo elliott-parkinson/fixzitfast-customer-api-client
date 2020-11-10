@@ -111,13 +111,13 @@ export namespace Footer
                     <Column md={9} sm={6} xs={12} className="p-3">
                         <Paragraph>It only gets faster with our app.</Paragraph>
                         <Row>
-                            <Column lg={5} md={6} sm={6} className="p-1 text-center">
+                            <Column lg={3} md={4} sm={8} className="p-1 text-right">
                                 <Button outline block color="primary" onClick={e=> this.ViewPlayStore()} className="p-3">
                                     <i className="fab fa-android" /> &nbsp; 
                                     Google Play
                                 </Button>
                             </Column>
-                            <Column lg={5} md={5} sm={6} className="p-1 text-center">
+                            <Column lg={3} md={4} sm={8} className="p-1 text-left">
                                 <Button outline block color="primary" onClick={e=> this.ViewAppStore()} className="p-3">
                                     <i className="fab fa-apple" /> &nbsp; 
                                     App Store
