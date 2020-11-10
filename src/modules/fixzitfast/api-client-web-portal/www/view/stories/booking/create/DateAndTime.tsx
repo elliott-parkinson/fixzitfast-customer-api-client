@@ -102,7 +102,7 @@ export namespace DateAndTime
                         </Label>
                     </FormGroup>
 
-                    <Button color="primary" block>Confirm Time</Button>
+                    <Button color="primary" block size="lg">Confirm Time</Button>
                 </Form>
             </Fragment>;
         }

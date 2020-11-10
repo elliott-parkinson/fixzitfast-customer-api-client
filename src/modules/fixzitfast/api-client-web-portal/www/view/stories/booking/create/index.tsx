@@ -120,11 +120,19 @@ export default class Routes extends React.Component<any>
 	render() {
 		return <Fragment>
 			<Container>
+				
 				<Row>
-					<Column md={this.ShowSummary ? 8 : 12} xs={12} className="wizard-main">
+					<Column md={this.ShowSummary ? 10 : 12} xs={12} className="wizard-main">
 						<div className={"wizard-steps " + (this.ShowStepper ? "" : "d-none")}>
 							<CreateBookingStepper.Component className="animate__animated animate__fadeInDown animate__faster" position={this.StepperPosition} onBack={e => this.Router.Back()}/>
 						</div>
+					</Column>
+					<Column md={this.ShowSummary ? 4 : 12} xs={12} className={"wizard-sidebar animate__animated animate__fadeInRight animate__faster d-none d-md-block " + (this.ShowSummary ? "" : "w-0 h-0")}>
+					</Column>
+				</Row>
+				
+				<Row>
+					<Column md={this.ShowSummary ? 8 : 12} xs={12} className="wizard-main">
 
 						{ this.ShowCard ? 
 							<Card className="">
@@ -138,9 +146,7 @@ export default class Routes extends React.Component<any>
 						<NewLine />
 					</Column>
 					<Column md={this.ShowSummary ? 4 : 12} xs={12} className={"wizard-sidebar animate__animated animate__fadeInRight animate__faster d-none d-md-block " + (this.ShowSummary ? "" : "w-0 h-0")}>
-						<OrderSummary.Component 
-							
-						/>
+						<OrderSummary.Component  />
 					</Column>
 				</Row>
 			</Container>

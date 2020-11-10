@@ -96,11 +96,11 @@ export namespace Payment
                             }
                             { this.Status == "failed" &&
                                 <Fragment>
-                                    <Button onClick={e => this.EditPaymentDetails()}>Edit Payment Details</Button>
+                                    <Button size="lg" onClick={e => this.EditPaymentDetails()}>Edit Payment Details</Button>
                                     &nbsp;
                                 </Fragment>
                             }
-                            <Button color="primary" onClick={e => this.ProcessPayment()}>Process Payment</Button>
+                            <Button color="primary" size="lg" onClick={e => this.ProcessPayment()}>Process Payment</Button>
                         </Block>
                     </Block>
                 }

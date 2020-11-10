@@ -3,6 +3,7 @@
 .summary-area {
     display: inline-flex;
     width: 100%;
+    overflow-y: hidden;
 
     h5 {
         font-family: 'muli-bold', 'Open Sans', sans-serif !important;

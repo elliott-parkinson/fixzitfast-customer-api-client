@@ -156,7 +156,7 @@ export namespace SetContact
                     <NewLine />
                     <NewLine />
 
-                    <Button color="primary" block>Go to Payment</Button>
+                    <Button color="primary" block size="lg">Go to Payment</Button>
                 </Form>
             </Fragment>;
         }

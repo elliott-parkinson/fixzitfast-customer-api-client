@@ -124,8 +124,6 @@ export namespace SetDetails
             this.Form.CategoryName = service.CategoryName;
             this.Form.ServiceId = service.Id;
             this.Form.ServiceName = service.Name;
-
-            console.log(this.Form, details);
         }
 
         @computed get ServiceList()
@@ -185,7 +183,7 @@ export namespace SetDetails
                         </Dropzone>
                     </FormGroup>
 
-                    <Button color="primary" block>Confirm Details</Button>
+                    <Button color="primary" block size="lg">Confirm Details</Button>
                 </Form>
             </Fragment>;
         }

@@ -116,15 +116,18 @@ span.orange {
     color: #ff9505;
 }
 
-.row {
+.prices {
     .selectable {
         &.selected {
-            background-color: #eeeeee;
+            background-color: #ff9505;
+            color: white;
         }
 
         &:hover {
             background-color: #dddddd;
         }
+    }
+    .row {
     }
 }
 

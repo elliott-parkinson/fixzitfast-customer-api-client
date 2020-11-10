@@ -47,7 +47,7 @@ export namespace OrderSummary
             return <div className="summary-area">
                 <Card>
                     <CardBody>
-                        <Header size="xs">Your Order Summary</Header>
+                        <Header size="xs">Your order summary</Header>
 
                         { this.Booking?.Service.CategoryName != "" && <Fragment>
                             <Row className="summary-header">

@@ -14,16 +14,17 @@ import moment from "moment";
 
 export namespace TimePricePicker
 {
-    let PriceRow = props => <Row className={"p-2 m-1 selectable" + (props.selected ? " selected" : "")} onClick={props.onClick} >
-        <Column>
-            <Header size="sm"><small>{ props.time }</small></Header>
-        </Column>
-        <Column>
-            <Button type="button" color={props.selected ? "primary" : "light"}  block disabled={props.value != "" ? undefined : true}>
-                { props.value ? props.value : "Fully Booked" }
-            </Button>
-        </Column>
-    </Row>;
+    let PriceRow = props => <Badge className={"w-100 m-1 selectable" + (props.selected ? " selected" : "")} color={props.selected ? "primary" : "light"}>
+        <Row className="p-2" onClick={props.onClick} >
+            <Column className="text-left pl-4">
+                <Header size="sm"><small>{ props.time }</small></Header>
+            </Column>
+            <Column className="text-center">
+                <Header size="sm">{ props.value ? props.value : "Fully Booked" }</Header>
+                
+            </Column>
+        </Row>
+    </Badge>;
 
     export interface IViewProps
     {
@@ -37,7 +38,7 @@ export namespace TimePricePicker
     {
         render() {
             return <Fragment>
-                <Row>
+                <Row className="mb-3 ml-1 mr-1 mt-4">
                     <Column className="text-left">
                         <Header size="sm"><small>{ moment(this.props.value).format('MMMM, Do YYYY') }</small></Header>
                     </Column>
@@ -46,15 +47,17 @@ export namespace TimePricePicker
                     </Column>
                 </Row>
 
-                { this.props.hours.map( hour =>
-                    <PriceRow
-                        key={hour.time}
-                        time={moment(hour.time).format('HH:mm')}
-                        value={hour.price}
-                        selected={ hour.selected }
-                        onClick={e => this.props.onChange(hour.time)}
-                    />
-                )}
+                <div className="prices">
+                    { this.props.hours.map( hour =>
+                        <PriceRow
+                            key={hour.time}
+                            time={moment(hour.time).format('HH:mm')}
+                            value={hour.price}
+                            selected={ hour.selected }
+                            onClick={e => this.props.onChange(hour.time)}
+                        />
+                    )}
+                </div>
             </Fragment>;
         }
     }
