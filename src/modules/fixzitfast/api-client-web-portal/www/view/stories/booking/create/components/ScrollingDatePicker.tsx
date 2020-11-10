@@ -57,6 +57,13 @@ export namespace ScrollingDatePicker
                 sunday
             ];
         }
+
+        static sameDay(date1: Date, date2: Date)
+        {
+            return date1.getFullYear() === date2.getFullYear() &&
+                date1.getMonth() === date2.getMonth() &&
+                date1.getDate() === date2.getDate();
+        }
     }
 
     export interface IViewProps
@@ -77,7 +84,7 @@ export namespace ScrollingDatePicker
         { props.text }
     </Badge>;
 
-    export class Component extends React.PureComponent<IViewProps>
+    export class Component extends React.Component<IViewProps>
     {
         Weekdays: Date[];
 
@@ -121,7 +128,7 @@ export namespace ScrollingDatePicker
                         <DateButton key={day}
                             date={day}
                             text="n/a" 
-                            selected={ day.getTime() == this.props.value.getTime() }
+                            selected={ Dates.sameDay(day, this.props.value) }
                             onClick={ e => this.props.onChange(day) }
                         /> 
                     )}

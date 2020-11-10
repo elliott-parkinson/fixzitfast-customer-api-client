@@ -21,10 +21,7 @@ import {
 import moment from "moment";
 
 import { observer } from "mobx-react";
-import { observable, computed, action } from "mobx";
-import { PaymentStatus } from "../../../../../../react-components";
-import { OrderSummary } from "./components/OrderSummary";
-import { CreateBookingStepper } from "./components/CreateBookingStepper";
+import { observable, computed, action, toJS } from "mobx";
 import { DateSelector } from "./components/DateSelector";
 
 export namespace DateAndTime
@@ -40,8 +37,6 @@ export namespace DateAndTime
         @action SetTimeslot(date: any)
         {
             this.Date = date;
-
-            console.log(date.length, date, this.Date);
         }
         
         @action async Submit()
@@ -74,8 +69,16 @@ export namespace DateAndTime
             this.Router =  Dependencies.of("store").get<any>("routes");
             Dependencies.of("store").has("site") && (Dependencies.of("store").get<any>("site").Title = "Date and Time");
 
-            let time = new Date;
-            time.setHours(8, 0, 0);
+            this.BookingStore = Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+            this.BookingStore.InProgress.Load();
+
+            let time = this.BookingStore.InProgress?.Time.Date;
+            console.warn(toJS(this.BookingStore.InProgress?.Time));
+            if (!time)
+            {
+                time = new Date;
+                time.setHours(8, 0, 0);
+            }
             this.Form.Date = time;
         }
 

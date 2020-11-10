@@ -27,7 +27,7 @@ export namespace DateSelector
         onChange?: Function;
     }
 
-    export class Component extends React.PureComponent<IViewProps>
+    export class Component extends React.Component<IViewProps>
     {
         Day: string;
         Month: string;
@@ -37,35 +37,53 @@ export namespace DateSelector
         {
             super(props);
             
-            let date = new Date();
-            date.setHours(8, 0, 0);
-
-            this.Day = moment(date).format('Do');
-            this.Month = moment(date).format('MMMM');
-            this.Year = moment(date).format('YYYY');
+            this.Day = moment(this.props.value).format('Do');
+            this.Month = moment(this.props.value).format('MMMM');
+            this.Year = moment(this.props.value).format('YYYY');
         }
 
-        get hours()
+        componentDidUpdate()
+        {
+            this.Day = moment(this.props.value).format('Do');
+            this.Month = moment(this.props.value).format('MMMM');
+            this.Year = moment(this.props.value).format('YYYY');
+        }
+
+        createTime(date: Date, hour: number, price: string)
+        {
+            let time = {
+                time: new Date((new Date()).setHours(hour, 0, 0, 0)),
+                price: price,
+                selected: false
+            };
+
+            time.selected = (time.time.getHours() == this.props.value.getHours());
+
+            return time;
+        }
+
+        hours()
         {
             let time = this.props.value;
 
             return [
-                { time: new Date(time.setHours(8, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(9, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(10, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(11, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(12, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(13, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(14, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(15, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(16, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(17, 0, 0, 0) ), price: "£100" },
-                { time: new Date(time.setHours(18, 0, 0, 0) ), price: "£100" },
+                this.createTime(time, 7, "£100"),
+                this.createTime(time, 8, "£100"),
+                this.createTime(time, 9, "£100"),
+                this.createTime(time, 10, "£100"),
+                this.createTime(time, 11, "£100"),
+                this.createTime(time, 12, "£100"),
+                this.createTime(time, 13, "£100"),
+                this.createTime(time, 14, "£100"),
+                this.createTime(time, 15, "£100"),
+                this.createTime(time, 16, "£100"),
+                this.createTime(time, 17, "£100"),
+                this.createTime(time, 18, "£100"),
+                this.createTime(time, 19, "£100"),
             ];
         }
         
         render() {
-            console.warn("render date selector", this.props.value)
             return <Fragment>
                 <Paragraph><i className="fas fa-calendar" /> &nbsp; { this.Month }</Paragraph>
 
@@ -74,7 +92,7 @@ export namespace DateSelector
                 <NewLine />
                 <NewLine />
 
-                <TimePricePicker.Component value={this.props.value} hours={this.hours} onChange={date => this.props.onChange(date)} />
+                <TimePricePicker.Component value={this.props.value} hours={this.hours()} onChange={date => this.props.onChange(date)} />
             </Fragment>;
         }
     }

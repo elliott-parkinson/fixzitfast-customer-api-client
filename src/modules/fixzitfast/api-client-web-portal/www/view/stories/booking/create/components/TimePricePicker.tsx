@@ -46,14 +46,12 @@ export namespace TimePricePicker
                     </Column>
                 </Row>
 
-                { this.props.value.getTime() } &nbsp; { this.props.value.getHours() } &nbsp; {this.props.value.getDate() }
-                { this.props.hours.map( hour => <div>{ (hour.time.getHours() == this.props.value.getHours()).toString() }</div> ) }
                 { this.props.hours.map( hour =>
                     <PriceRow
                         key={hour.time}
                         time={moment(hour.time).format('HH:mm')}
                         value={hour.price}
-                        selected={ hour.time.getHours() == this.props.value.getHours() }
+                        selected={ hour.selected }
                         onClick={e => this.props.onChange(hour.time)}
                     />
                 )}
