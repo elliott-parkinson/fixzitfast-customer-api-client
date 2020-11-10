@@ -116,6 +116,18 @@ span.orange {
     color: #ff9505;
 }
 
+.row {
+    .selectable {
+        &.selected {
+            background-color: #eeeeee;
+        }
+
+        &:hover {
+            background-color: #dddddd;
+        }
+    }
+}
+
 .mobile-header-bar {
     background-color: #ff9505;
     color: white;

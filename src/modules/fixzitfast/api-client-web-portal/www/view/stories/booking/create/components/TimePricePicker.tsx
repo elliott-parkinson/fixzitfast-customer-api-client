@@ -14,7 +14,7 @@ import moment from "moment";
 
 export namespace TimePricePicker
 {
-    let PriceRow = props => <Row className="p-2 m-1 selectable" onClick={props.onClick} >
+    let PriceRow = props => <Row className={"p-2 m-1 selectable" + (props.selected ? " selected" : "")} onClick={props.onClick} >
         <Column>
             <Header size="sm"><small>{ props.time }</small></Header>
         </Column>

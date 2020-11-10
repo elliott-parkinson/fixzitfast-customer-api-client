@@ -76,11 +76,11 @@ export namespace ScrollingDatePicker
         value: Date;
     }
 
-    let DateButton = props => <Badge color={props.selected ? "primary" : "light"} className="p-4 m-2 clickable" onClick={props.onClick}>
+    let DateButton = props => <Badge color={props.selected ? "warning" : "light"} className="p-4 m-2 clickable" onClick={props.onClick}>
         { moment(props.date).format('ddd') }
         <NewLine />
         <Header size="xs">
-            { moment(props.date).format('Do') }
+            <strong>{ moment(props.date).format('Do') }</strong>
         </Header>
         <NewLine />
         <NewLine />
