@@ -85,12 +85,6 @@ export namespace NavigationBar
                             >
                                 Services
                             </NavLink>
-                            <NavLink href="/booking/list"
-                                active={((this.Routes?.Location?.indexOf( "/booking" ) !== -1) && this.Routes?.Location?.indexOf( "/booking/create/services" ) === -1) ? true : undefined}
-                                onClick={ e => { e.preventDefault(); this.Routes.Go("/booking/list"); return false; }}
-                            >
-                                Bookings
-                            </NavLink>
 
                             <NavItem>
                                 <NavLink href="/auth/login" onClick={ e => { e.preventDefault(); this.Routes.Go("/auth/login"); return false; }}>Sign in</NavLink>

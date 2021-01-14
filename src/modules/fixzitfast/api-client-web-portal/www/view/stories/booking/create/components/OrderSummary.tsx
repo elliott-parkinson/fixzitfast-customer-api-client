@@ -32,15 +32,18 @@ export namespace OrderSummary
     {
         @observable Router: any;
         @observable BookingStore: any;
-        @observable Booking: any;
+
+        constructor(props) {
+            super(props);
+
+            this.Router = Dependencies.of("store").get<any>("routes");
+            this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
+        }
 
         componentDidMount()
         {
-            this.Router = Dependencies.of("store").get<any>("routes");
-            this.BookingStore =  Dependencies.of("fixzitfast-customer-data-store").get<any>("bookings");
 
             this.BookingStore.InProgress.Load();
-            this.Booking = this.BookingStore.InProgress;
         }
 
         render() {
@@ -49,7 +52,7 @@ export namespace OrderSummary
                     <CardBody>
                         <Header size="xs">Your order summary</Header>
 
-                        { this.Booking?.Service.CategoryName != "" && <Fragment>
+                        { this.BookingStore?.InProgress?.Service.CategoryName != "" && <Fragment>
                             <Row className="summary-header">
                                 <Column xs={7}>
                                     <Header>
@@ -62,13 +65,13 @@ export namespace OrderSummary
                                     </Button>
                                 </Column>
                             </Row>
-                            <Paragraph>{this.Booking?.Service.CategoryName} { this.Booking?.Service.Name != "" ? ", " + this.Booking?.Service.Name : ""}</Paragraph>
+                            <Paragraph>{this.BookingStore?.InProgress?.Service.CategoryName} { this.BookingStore?.InProgress?.Service.Name != "" ? ", " + this.BookingStore?.InProgress?.Service.Name : ""}</Paragraph>
                             <Paragraph className="note">Please be aware that you will be charged until the job is completed.</Paragraph>
                             <NewLine />
                             <NewLine />
                         </Fragment> }
                         
-                        { this.Booking?.Details.Description != "" && <Fragment>
+                        { this.BookingStore?.InProgress?.Details.Description != "" && <Fragment>
                             <Row className="summary-header">
                                 <Column xs={7}>
                                     <Header>
@@ -81,12 +84,12 @@ export namespace OrderSummary
                                     </Button>
                                 </Column>
                             </Row>
-                            <Paragraph>{this.Booking?.Details.Description}</Paragraph>
+                            <Paragraph>{this.BookingStore?.InProgress?.Details.Description}</Paragraph>
                             <NewLine />
                             <NewLine />
                         </Fragment> }
 
-                        { this.Booking?.Location.Line1 != "" && <Fragment>
+                        { this.BookingStore?.InProgress?.Location.Line1 != "" && <Fragment>
                             <Row className="summary-header">
                                 <Column xs={7}>
                                     <Header>
@@ -99,12 +102,12 @@ export namespace OrderSummary
                                     </Button>
                                 </Column>
                             </Row>
-                            <Paragraph><i className="fas fa-map-marker-alt" style={{ color: "#ff9505" }}/> &nbsp; { [this.Booking?.Location.Line1, this.Booking?.Location.Line2, this.Booking?.Location.Line3, this.Booking?.Location.Town, this.Booking?.Location.County, this.Booking?.Location.Postcode].filter(n => n).join(", ") }</Paragraph>
+                            <Paragraph><i className="fas fa-map-marker-alt" style={{ color: "#ff9505" }}/> &nbsp; { [this.BookingStore?.InProgress?.Location.Line1, this.BookingStore?.InProgress?.Location.Line2, this.BookingStore?.InProgress?.Location.Line3, this.BookingStore?.InProgress?.Location.Town, this.BookingStore?.InProgress?.Location.County, this.BookingStore?.InProgress?.Location.Postcode].filter(n => n).join(", ") }</Paragraph>
                             <NewLine />
                             <NewLine />
                         </Fragment> }
 
-                        { this.Booking?.Time.Date && this.Booking?.Time.TimeSlotText != "" && <Fragment>
+                        { this.BookingStore?.InProgress?.Time.Date && this.BookingStore?.InProgress?.Time.TimeSlotText != "" && <Fragment>
                             <Row className="summary-header">
                                 <Column xs={7}>
                                     <Header>
@@ -117,12 +120,12 @@ export namespace OrderSummary
                                     </Button>
                                 </Column>
                             </Row>
-                            <Paragraph><i className="fas fa-calendar-alt" style={{ color: "#ff9505" }}/> &nbsp; { this.Booking?.Time.TimeSlotText }</Paragraph>
+                            <Paragraph><i className="fas fa-calendar-alt" style={{ color: "#ff9505" }}/> &nbsp; { this.BookingStore?.InProgress?.Time.TimeSlotText }</Paragraph>
                             <NewLine />
                             <NewLine />
                         </Fragment> }
 
-                        { this.Booking?.Contact.Name != "" && <Fragment>
+                        { this.BookingStore?.InProgress?.Contact.Name != "" && <Fragment>
                             <Row className="summary-header">
                                 <Column xs={7}>
                                     <Header>
@@ -135,14 +138,14 @@ export namespace OrderSummary
                                     </Button>
                                 </Column>
                             </Row>
-                            <Paragraph><i className="fas fa-user" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Name}</Paragraph>
-                            <Paragraph><i className="fas fa-envelope" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.Email}</Paragraph>
-                            <Paragraph><i className="fas fa-phone" style={{ color: "#ff9505" }}/> &nbsp; {this.Booking?.Contact.PhoneNumber}</Paragraph>
+                            <Paragraph><i className="fas fa-user" style={{ color: "#ff9505" }}/> &nbsp; {this.BookingStore?.InProgress?.Contact.Name}</Paragraph>
+                            <Paragraph><i className="fas fa-envelope" style={{ color: "#ff9505" }}/> &nbsp; {this.BookingStore?.InProgress?.Contact.Email}</Paragraph>
+                            <Paragraph><i className="fas fa-phone" style={{ color: "#ff9505" }}/> &nbsp; {this.BookingStore?.InProgress?.Contact.PhoneNumber}</Paragraph>
                             <NewLine />
                             <NewLine />
                         </Fragment> }
 
-                        { true && this.Booking?.Time.TimeSlotText != "" && <Fragment>
+                        { true && this.BookingStore?.InProgress?.Time.TimeSlotText != "" && <Fragment>
                             <hr />
                             <Row className="summary-header">
                                 <Column xs={12}>

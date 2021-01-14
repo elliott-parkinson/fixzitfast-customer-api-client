@@ -128,3 +128,13 @@ pwa-install {
 	}
 }
 
+
+
+.alert {
+	border-radius: 5px;
+
+	&.alert-primary {
+		background-color: #6c655d;
+		color: white;
+	}
+}
